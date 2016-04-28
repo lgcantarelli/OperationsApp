@@ -13,6 +13,7 @@ import java.util.List;
 public class User {
     private List<Operation> operations;
     private int last_id;
+    private double balance;
     
     /**
      * Initialize the User with a empty list of operations and call the method to populate it.
@@ -47,7 +48,7 @@ public class User {
      * Add a revenue  in the list of operations in the date order, update the last id.
      * @param r, a Revenue object.
      */
-    private void add_revenue(Revenue r){
+    public void add_revenue(Revenue r){
         
     }
     
@@ -56,7 +57,7 @@ public class User {
      * @param value, the value of the revenue.
      * @param datetime, the date of the revenue.
      */
-    private void add_revenue(double value, Date datetime){
+    public void add_revenue(double value, Date datetime){
         
     }
     
@@ -64,7 +65,7 @@ public class User {
      * Add a charge  in the list of operations in the date order, update the last id.
      * @param r, a Charge object.
      */
-    private void add_charge(Charge c){
+    public void add_charge(Charge c){
         
     }
     
@@ -73,7 +74,7 @@ public class User {
      * @param value, the value of the charge.
      * @param datetime, the date of the charge.
      */
-    private void add_charge(double value, Date datetime){
+    public void add_charge(double value, Date datetime){
         
     }
     
@@ -81,7 +82,7 @@ public class User {
      * Return the csv file to the user.
      * @return file, a file to be handled by the GUI.
      */
-    private File export_file(){
+    public File export_file(){
         return new File("");
     }
 
@@ -90,7 +91,7 @@ public class User {
      * @param position, the position in the array.
      * @return Operation object.
      */
-    private Operation get_operation(int position){
+    public Operation get_operation(int position){
         return operations.get(position);
     }
     
@@ -99,7 +100,7 @@ public class User {
      * @param position, the id of the operation.
      * @return Operation object.
      */
-    private Operation get_operation_by_id(int id){
+    public Operation get_operation_by_id(int id){
         return operations.get(id);
     }
     
@@ -109,7 +110,7 @@ public class User {
      * @param value, the new value of the operation.
      * @param datetime, the new date of the operation.
      */
-    private void edit_operation(int id, double value, Date datetime){
+    public void edit_operation(int id, double value, Date datetime){
         
     }
     
@@ -118,7 +119,7 @@ public class User {
      * Delete a Operation by position.
      * @param position, the position in the array.
      */
-    private void del_operation(int position){
+    public void del_operation(int position){
         operations.remove(position);
     }
     
@@ -126,22 +127,38 @@ public class User {
      * Delete a Operation by id.
      * @param id, the id of the operation.
      */
-    private void del_operation_by_id(int id){
+    public void del_operation_by_id(int id){
         operations.remove(id);
     }
     
     /**
      * Return the data to populate the report.
      */
-    private void return_bar_data(){
+    public void return_bar_data(){
         
     }
     
     /**
      * Return the data to populate the report.
      */
-    private void return_pizza_data(){
+    public void return_pizza_data(){
         
+    }
+    
+    /**
+     * Return the last_id.
+     * @return last_id.
+     */
+    public int get_last_id(){
+        return last_id;
+    }
+    
+    /**
+     * Return the actual balance.
+     * @return balance.
+     */
+    public double get_balance(){
+        return balance;
     }
     
 }
