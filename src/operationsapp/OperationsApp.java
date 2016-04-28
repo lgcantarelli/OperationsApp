@@ -5,10 +5,6 @@
  */
 package operationsapp;
 
-/**
- *
- * @author lgcantarelli
- */
 public class OperationsApp {
 
     /**
