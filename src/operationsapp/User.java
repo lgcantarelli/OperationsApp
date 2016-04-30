@@ -9,11 +9,19 @@ import java.io.File;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
+import java.io.FileWriter;
+import java.io.IOException;
+
 
 public class User {
     private List<Operation> operations;
     private int last_id;
     private double balance;
+    
+    private static final String COMMA_DELIMITER = ",";
+    private static final String NEW_LINE_SEPARATOR = "\n";
+    private static final String FILE_HEADER = "id,type,value,category,description";
+    private static final String fileName = System.getProperty("user.home")+"/operations.csv";
     
     /**
      * Initialize the User with a empty list of operations and call the method to populate it.
@@ -49,7 +57,8 @@ public class User {
      * @param r, a Revenue object.
      */
     public void add_revenue(Revenue r){
-        
+        operations.add(r);
+        rewrite_csv();
     }
     
     /**
@@ -159,6 +168,72 @@ public class User {
      */
     public double get_balance(){
         return balance;
+    }
+    
+    private void rewrite_csv(){
+        FileWriter fileWriter = null;
+        
+        try {
+            fileWriter = new FileWriter(fileName);
+
+            fileWriter.append(FILE_HEADER.toString());
+
+            fileWriter.append(NEW_LINE_SEPARATOR);
+
+            for (Operation operation : operations) {
+                String category = "";
+                String type = "";
+                if(operation.getType() == 1){
+                    Revenue op = (Revenue) operation;
+                    category = op.getCategory().getName();
+                    type = "Revenue";
+                }else{
+                    Charge op = (Charge) operation;
+                    category = op.getCategory().getName();
+                    type = "Charge";
+                }
+                fileWriter.append(String.valueOf(operation.getId()));
+
+                fileWriter.append(COMMA_DELIMITER);
+
+                fileWriter.append(type);
+
+                fileWriter.append(COMMA_DELIMITER);
+
+                fileWriter.append(String.valueOf(operation.getValue()));
+
+                fileWriter.append(COMMA_DELIMITER);
+
+                fileWriter.append(category);
+
+                fileWriter.append(COMMA_DELIMITER);
+
+                fileWriter.append(String.valueOf(operation.getDescription()));
+
+                fileWriter.append(NEW_LINE_SEPARATOR);
+
+            }
+
+               System.out.println("CSV file was created successfully !!!");
+        } catch (Exception e) {
+            System.out.println("Error in CsvFileWriter !!!");
+            e.printStackTrace();
+        } finally {
+            try {
+
+                fileWriter.flush();
+
+                fileWriter.close();
+
+            } catch (IOException e) {
+
+                System.out.println("Error while flushing/closing fileWriter !!!");
+
+                e.printStackTrace();
+
+            }
+        }
+
     }
     
 }

@@ -10,7 +10,9 @@ import java.util.Date;
 public class Operation {
     private int id;
     private double value;
+    private String description;
     private Date datetime;
+    private int type; //1 - Revenue, 2 - Charge
 
     /**
      * Empty constructor for Operation.
@@ -19,6 +21,7 @@ public class Operation {
         id = 0;
         value = 0;
         datetime = null;
+        type = 1;
     }
     
     /**
@@ -26,11 +29,14 @@ public class Operation {
      * @param id
      * @param value
      * @param datetime 
+     * @param description
      */
-    public Operation(int id, double value, Date datetime){
+    public Operation(int id, double value, String description, Date datetime, int type){
         this.id = id;
         this.value = value;
         this.datetime = datetime;
+        this.description = description;
+        this.type = type;
     }
     
     /**
@@ -41,6 +47,8 @@ public class Operation {
         this.id = o.getId();
         this.value = o.getValue();
         this.datetime = o.getDatetime();
+        this.description = o.getDescription();
+        this.type = o.getType();
     }
     /**
      * @return the id
@@ -61,6 +69,20 @@ public class Operation {
      */
     public double getValue() {
         return value;
+    }
+    
+    /**
+     * @return the description
+     */
+    public String getDescription(){
+        return description;
+    }
+    
+    /**
+     * @param value the value to set
+     */
+    public void setDescription(String description) {
+        this.description = description;
     }
 
     /**
@@ -89,9 +111,24 @@ public class Operation {
      * @param v
      * @param d 
      */
-    public void edit_operation(double v, Date d){
+    public void edit_operation(double v, String de, Date d){
         value = v;
         datetime = d;
+        description = de;
+    }
+
+    /**
+     * @return the type
+     */
+    public int getType() {
+        return type;
+    }
+
+    /**
+     * @param type the type to set
+     */
+    public void setType(int type) {
+        this.type = type;
     }
     
 }
