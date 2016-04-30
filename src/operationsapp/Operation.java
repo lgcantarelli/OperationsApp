@@ -131,4 +131,16 @@ public class Operation {
         this.type = type;
     }
     
+    public String toString(){
+        System.out.print("Id: "+id+" value: "+value+" description: "+description+" data: "+datetime+" type: "+type);
+        if(this instanceof Revenue){
+            Revenue r = (Revenue) this;
+            System.out.println(" category: "+r.getCategory().getName());
+        }else{
+            Charge c = (Charge) this;
+            System.out.println(" category: "+c.getCategory().getName());
+        }
+        return "";
+    }
+    
 }

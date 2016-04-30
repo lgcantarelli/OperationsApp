@@ -56,4 +56,6 @@ public class Revenue extends Operation {
     public void setCategory(RevenueCategory category) {
         this.category = category;
     }
+
+    
 }

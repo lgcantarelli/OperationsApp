@@ -57,8 +57,38 @@ public class User {
      * @param r, a Revenue object.
      */
     public void add_revenue(Revenue r){
-        operations.add(r);
-        rewrite_csv();
+        int i = 0;
+                
+        if(operations.size() == 0){
+           operations.add(r);
+        }else{
+            for(; i < operations.size(); i++){
+                if(r.getDatetime().before(operations.get(i).getDatetime())){
+                    break;
+                }
+            }
+            if(i == operations.size()){
+                operations.add(r);
+            }else{
+                Operation aux;
+                Operation aux1;
+                aux = operations.get(i);
+                operations.set(i, r);
+                i++;
+
+                for(; i < operations.size(); i++){
+                   aux1 = operations.get(i);
+                   operations.set(i,aux);
+                   aux = aux1;
+                }
+
+                operations.add(aux);
+            }
+           
+        }
+        balance = balance + r.getValue();
+        last_id++;
+        //rewrite_csv();
     }
     
     /**
@@ -66,8 +96,9 @@ public class User {
      * @param value, the value of the revenue.
      * @param datetime, the date of the revenue.
      */
-    public void add_revenue(double value, Date datetime){
-        
+    public void add_revenue(double value,String description, Date datetime,RevenueCategory category){
+        Revenue revenue=new Revenue(last_id,value,description,datetime,category);
+        operations.add(revenue);
     }
     
     /**
@@ -75,7 +106,38 @@ public class User {
      * @param r, a Charge object.
      */
     public void add_charge(Charge c){
-        
+        int i = 0;
+                
+        if(operations.size() == 0){
+           operations.add(c);
+        }else{
+            for(; i < operations.size(); i++){
+                if(c.getDatetime().before(operations.get(i).getDatetime())){
+                    System.out.println(i);
+                    break;
+                }
+            }
+            if(i == operations.size()){
+                operations.add(c);
+            }else{
+                Operation aux;
+                Operation aux1;
+                aux = operations.get(i);
+                operations.set(i, c);
+                i++;
+
+                for(; i < operations.size(); i++){
+                   aux1 = operations.get(i);
+                   operations.set(i,aux);
+                   aux = aux1;
+                }
+
+                operations.add(aux);
+            }
+           
+        }
+        balance = balance - c.getValue();
+        last_id++;
     }
     
     /**
@@ -83,8 +145,9 @@ public class User {
      * @param value, the value of the charge.
      * @param datetime, the date of the charge.
      */
-    public void add_charge(double value, Date datetime){
-        
+    public void add_charge(double value, String description, Date datetime,ChargeCategory category){
+        Charge charge=new Charge(last_id,value,description,datetime,category);
+        operations.add(charge);
     }
     
     /**
@@ -110,7 +173,14 @@ public class User {
      * @return Operation object.
      */
     public Operation get_operation_by_id(int id){
-        return operations.get(id);
+        for(int i=0;i<operations.size();i++){
+           if (id==operations.get(i).getId()){
+               return operations.get(i);
+                
+            }
+            
+        }
+        return null;
     }
     
     /**
@@ -119,8 +189,25 @@ public class User {
      * @param value, the new value of the operation.
      * @param datetime, the new date of the operation.
      */
-    public void edit_operation(int id, double value, Date datetime){
-        
+     public void edit_operation(int id, double value, String description, Date datetime, RevenueCategory category, ChargeCategory category1){
+        for(int i=0;i<operations.size();i++){
+            if(id==operations.get(i).getId()){
+                if(operations.get(i) instanceof Revenue){
+                    Revenue r = (Revenue) operations.get(i);
+                    r.setCategory(category);
+                    balance = balance - operations.get(i).getValue() + value;
+                }else{
+                    Charge c = (Charge) operations.get(i);
+                    c.setCategory(category1);
+                    balance = balance + operations.get(i).getValue() - value;
+                }
+                operations.get(i).edit_operation(value, description, datetime);
+                
+                rewrite_csv();
+                
+            }
+            
+        }
     }
     
     
@@ -129,7 +216,15 @@ public class User {
      * @param position, the position in the array.
      */
     public void del_operation(int position){
+        if(operations.get(position) instanceof Revenue){
+            Revenue r = (Revenue) operations.get(position);
+            balance = balance - operations.get(position).getValue();
+        }else{
+            Charge c = (Charge) operations.get(position);
+            balance = balance + operations.get(position).getValue();
+        }
         operations.remove(position);
+        rewrite_csv();
     }
     
     /**
@@ -137,7 +232,12 @@ public class User {
      * @param id, the id of the operation.
      */
     public void del_operation_by_id(int id){
-        operations.remove(id);
+        for(int i=0;i<operations.size();i++){
+            if(id==operations.get(i).getId()){
+                del_operation(i);
+                rewrite_csv();
+            }
+        }
     }
     
     /**
@@ -234,6 +334,12 @@ public class User {
             }
         }
 
+    }
+    
+    public void print_operations(){
+        for(int i = 0; i < operations.size(); i++){
+            operations.get(i).toString();
+        }
     }
     
 }

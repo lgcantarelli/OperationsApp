@@ -31,7 +31,37 @@ public class OperationsApp {
         revenueCategories[3] = new RevenueCategory("Outros");
         
         User user = new User();
-        user.add_revenue(new Revenue(1, 2, "Teste", new Date(), revenueCategories[1]));
+        user.add_revenue(new Revenue(user.get_last_id(), 3, "Teste R", new Date(new Date().getTime() + (1000 * 60 * 60 * 24)), revenueCategories[1]));
+        user.add_revenue(new Revenue(user.get_last_id(), 4, "Teste R 1", new Date(new Date().getTime() + (1000 * 60 * 60 * 24)), revenueCategories[2]));
+        user.add_revenue(new Revenue(user.get_last_id(), 2, "Teste R 2 ", new Date(), revenueCategories[3]));
+        user.add_revenue(new Revenue(user.get_last_id(), 5, "Teste R 3", new Date(new Date().getTime() - (1000 * 60 * 60 * 24)), revenueCategories[1]));
+        
+        System.out.println(user.get_balance());
+        
+        user.add_charge(new Charge(user.get_last_id(), 3, "Teste C", new Date(new Date().getTime() + (1000 * 60 * 60 * 24)), chargeCategories[1]));
+        user.add_charge(new Charge(user.get_last_id(), 4, "Teste C 1", new Date(new Date().getTime() + (1000 * 60 * 60 * 24)), chargeCategories[2]));
+        user.add_charge(new Charge(user.get_last_id(), 2, "Teste C 2 ", new Date(), chargeCategories[3]));
+        user.add_charge(new Charge(user.get_last_id(), 5, "Teste C 3", new Date(new Date().getTime() - (1000 * 60 * 60 * 24)), chargeCategories[1]));
+        user.print_operations();
+        
+        System.out.println(user.get_balance());
+        
+        user.del_operation(2);
+        
+        user.print_operations();
+        System.out.println(user.get_balance());
+        
+        user.del_operation_by_id(4);
+        user.print_operations();
+        System.out.println(user.get_balance());
+        
+        user.edit_operation(3, 10, "Teste R Editada", new Date(new Date().getTime() + (1000 * 60 * 60 * 24)), revenueCategories[3], null);
+        user.print_operations();
+        System.out.println(user.get_balance());
+        
+        user.edit_operation(7, 10, "Teste C Editada", new Date(new Date().getTime() + (1000 * 60 * 60 * 24)), null, chargeCategories[1]);
+        user.print_operations();
+        System.out.println(user.get_balance());
     }
     
 }
