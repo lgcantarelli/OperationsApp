@@ -4,14 +4,11 @@
  * and open the template in the editor.
  */
 package GUI;
+import java.io.File;
 import operationsapp.*;
-import java.text.ParseException;
-import java.util.logging.Level;
-import java.util.logging.Logger;
-import javax.swing.JFormattedTextField;
+import javax.swing.JFileChooser;
 import javax.swing.JOptionPane;
 import javax.swing.JTextField;
-import javax.swing.text.MaskFormatter;
 
 /**
  *
@@ -102,6 +99,7 @@ public class GUIHome extends javax.swing.JFrame {
         categoryAdd = new javax.swing.JComboBox<>();
         labelCategory = new javax.swing.JLabel();
         addValue = new javax.swing.JTextField();
+        buttonExp = new javax.swing.JButton();
 
         confirmAddChar.setDefaultCloseOperation(javax.swing.WindowConstants.DO_NOTHING_ON_CLOSE);
         confirmAddChar.setAlwaysOnTop(true);
@@ -501,6 +499,7 @@ public class GUIHome extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setBackground(new java.awt.Color(255, 255, 255));
+        setPreferredSize(new java.awt.Dimension(507, 340));
         setResizable(false);
 
         labelChaRev.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
@@ -560,7 +559,7 @@ public class GUIHome extends javax.swing.JFrame {
         );
         panelReportLayout.setVerticalGroup(
             panelReportLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 307, Short.MAX_VALUE)
+            .addGap(0, 312, Short.MAX_VALUE)
         );
 
         panelInf.addTab("Relatorios", panelReport);
@@ -617,6 +616,13 @@ public class GUIHome extends javax.swing.JFrame {
             }
         });
 
+        buttonExp.setText("Exportar");
+        buttonExp.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                buttonExpActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout panelAddLayout = new javax.swing.GroupLayout(panelAdd);
         panelAdd.setLayout(panelAddLayout);
         panelAddLayout.setHorizontalGroup(
@@ -628,15 +634,19 @@ public class GUIHome extends javax.swing.JFrame {
                     .addGroup(panelAddLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                         .addGroup(panelAddLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
                             .addComponent(categoryAdd, javax.swing.GroupLayout.Alignment.LEADING, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(addDate, javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(labelValue, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addGroup(javax.swing.GroupLayout.Alignment.LEADING, panelAddLayout.createSequentialGroup()
                                 .addComponent(buttonAddCharge, javax.swing.GroupLayout.PREFERRED_SIZE, 88, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(buttonAddRevenue, javax.swing.GroupLayout.PREFERRED_SIZE, 88, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addComponent(addDate, javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(labelValue, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addComponent(buttonAddRevenue, javax.swing.GroupLayout.PREFERRED_SIZE, 88, javax.swing.GroupLayout.PREFERRED_SIZE)))
                         .addComponent(buttonMoreInformation)
                         .addComponent(labelCategory)))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panelAddLayout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(buttonExp)
+                .addGap(63, 63, 63))
             .addGroup(panelAddLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addGroup(panelAddLayout.createSequentialGroup()
                     .addContainerGap()
@@ -662,7 +672,9 @@ public class GUIHome extends javax.swing.JFrame {
                 .addGroup(panelAddLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(buttonAddCharge, javax.swing.GroupLayout.PREFERRED_SIZE, 55, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(buttonAddRevenue, javax.swing.GroupLayout.PREFERRED_SIZE, 55, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(43, 43, 43))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(buttonExp)
+                .addGap(9, 9, 9))
             .addGroup(panelAddLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addGroup(panelAddLayout.createSequentialGroup()
                     .addContainerGap()
@@ -707,7 +719,7 @@ public class GUIHome extends javax.swing.JFrame {
             .addGap(0, 0, Short.MAX_VALUE))
     );
 
-    setSize(new java.awt.Dimension(523, 374));
+    setSize(new java.awt.Dimension(523, 385));
     setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
@@ -829,6 +841,16 @@ public class GUIHome extends javax.swing.JFrame {
         viewInf.setVisible(true);
     }//GEN-LAST:event_buttonCancelEditInfActionPerformed
 
+    private void buttonExpActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonExpActionPerformed
+        // TODO add your handling code here:
+        int returnVal = expFilExp.showSaveDialog(this);
+        if(returnVal == JFileChooser.APPROVE_OPTION){
+        File file = expFilExp.getSelectedFile();
+        } else{
+            System.out.println("File access cancelled by user.");
+        }
+    }//GEN-LAST:event_buttonExpActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -891,6 +913,7 @@ public JTextField maskValue(int tamanho,String caracteres) {
     private javax.swing.JButton buttonConfirmAddChar;
     private javax.swing.JButton buttonConfrmAddRev;
     private javax.swing.JButton buttonEditInf;
+    private javax.swing.JButton buttonExp;
     private javax.swing.ButtonGroup buttonGroupMoreInf;
     private javax.swing.JButton buttonMoreAdd1;
     private javax.swing.JButton buttonMoreCancel;
