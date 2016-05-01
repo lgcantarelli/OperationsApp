@@ -93,13 +93,6 @@ public class GUIHome extends javax.swing.JFrame {
         valueBalance = new javax.swing.JLabel();
         panelReport = new javax.swing.JPanel();
         panelAdd = new javax.swing.JPanel();
-        try {
-            addValue =(javax.swing.JTextField)java.beans.Beans.instantiate(getClass().getClassLoader(), "GUI.GUIHome_addValue");
-        } catch (ClassNotFoundException e) {
-            e.printStackTrace();
-        } catch (java.io.IOException e) {
-            e.printStackTrace();
-        }
         labelDate = new javax.swing.JLabel();
         labelValue = new javax.swing.JLabel();
         buttonAddCharge = new javax.swing.JButton();
@@ -108,8 +101,12 @@ public class GUIHome extends javax.swing.JFrame {
         buttonMoreInformation = new javax.swing.JButton();
         categoryAdd = new javax.swing.JComboBox<>();
         labelCategory = new javax.swing.JLabel();
+        addValue = new javax.swing.JTextField();
 
+        confirmAddChar.setDefaultCloseOperation(javax.swing.WindowConstants.DO_NOTHING_ON_CLOSE);
+        confirmAddChar.setAlwaysOnTop(true);
         confirmAddChar.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
+        confirmAddChar.setModal(true);
         confirmAddChar.setResizable(false);
         confirmAddChar.setType(java.awt.Window.Type.UTILITY);
 
@@ -121,6 +118,11 @@ public class GUIHome extends javax.swing.JFrame {
         });
 
         buttonCancelAddChar.setText("Cancelar");
+        buttonCancelAddChar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                buttonCancelAddCharActionPerformed(evt);
+            }
+        });
 
         textChargeConfirm.setText("jLabel6");
 
@@ -150,10 +152,18 @@ public class GUIHome extends javax.swing.JFrame {
                 .addContainerGap())
         );
 
+        confirmAddRev.setDefaultCloseOperation(javax.swing.WindowConstants.DO_NOTHING_ON_CLOSE);
+        confirmAddRev.setAlwaysOnTop(true);
+        confirmAddRev.setModal(true);
         confirmAddRev.setResizable(false);
         confirmAddRev.setType(java.awt.Window.Type.UTILITY);
 
         buttonConfrmAddRev.setText("Salvar");
+        buttonConfrmAddRev.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                buttonConfrmAddRevActionPerformed(evt);
+            }
+        });
 
         buttonCancelAddRev.setText("Cancelar");
         buttonCancelAddRev.addActionListener(new java.awt.event.ActionListener() {
@@ -191,6 +201,13 @@ public class GUIHome extends javax.swing.JFrame {
                 .addContainerGap())
         );
 
+        moreInformation.setDefaultCloseOperation(javax.swing.WindowConstants.DO_NOTHING_ON_CLOSE);
+        moreInformation.setAlwaysOnTop(true);
+        moreInformation.setLocation(new java.awt.Point(200, 200));
+        moreInformation.setLocationByPlatform(true);
+        moreInformation.setModal(true);
+        moreInformation.setResizable(false);
+
         labelMoreAddValue.setText("Valor");
 
         moreAddValue.setText("jTextField1");
@@ -210,8 +227,18 @@ public class GUIHome extends javax.swing.JFrame {
         textMoreDesc.setViewportView(jTextArea1);
 
         buttonMoreAdd1.setText("Salvar");
+        buttonMoreAdd1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                buttonMoreAdd1ActionPerformed(evt);
+            }
+        });
 
         buttonMoreCancel.setText("Cancelar");
+        buttonMoreCancel.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                buttonMoreCancelActionPerformed(evt);
+            }
+        });
 
         buttonGroupMoreInf.add(radioButtonMoreChar);
         radioButtonMoreChar.setText("Despesa");
@@ -283,6 +310,11 @@ public class GUIHome extends javax.swing.JFrame {
         expFilExp.setAcceptAllFileFilterUsed(false);
         expFilExp.setDialogType(javax.swing.JFileChooser.SAVE_DIALOG);
 
+        viewInf.setDefaultCloseOperation(javax.swing.WindowConstants.DO_NOTHING_ON_CLOSE);
+        viewInf.setAlwaysOnTop(true);
+        viewInf.setModal(true);
+        viewInf.setResizable(false);
+
         labeValueInf.setText("Valor");
 
         labelDateInf.setText("Data");
@@ -309,6 +341,11 @@ public class GUIHome extends javax.swing.JFrame {
         texCategInf.setMargin(new java.awt.Insets(0, 0, 0, 0));
 
         buttonOkInf.setText("OK");
+        buttonOkInf.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                buttonOkInfActionPerformed(evt);
+            }
+        });
 
         buttonEditInf.setText("Editar");
         buttonEditInf.addActionListener(new java.awt.event.ActionListener() {
@@ -374,6 +411,10 @@ public class GUIHome extends javax.swing.JFrame {
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
+        editInf.setDefaultCloseOperation(javax.swing.WindowConstants.DO_NOTHING_ON_CLOSE);
+        editInf.setAlwaysOnTop(true);
+        editInf.setModal(true);
+
         labelValueEdiInf.setText("Valor");
 
         texValueEditInf.setText("jTextField4");
@@ -393,8 +434,18 @@ public class GUIHome extends javax.swing.JFrame {
         texDescEditInf.setViewportView(jTextArea3);
 
         buttonSaveEditInf.setText("Salvar");
+        buttonSaveEditInf.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                buttonSaveEditInfActionPerformed(evt);
+            }
+        });
 
         buttonCancelEditInf.setText("Cancelar");
+        buttonCancelEditInf.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                buttonCancelEditInfActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout editInfLayout = new javax.swing.GroupLayout(editInf.getContentPane());
         editInf.getContentPane().setLayout(editInfLayout);
@@ -460,6 +511,7 @@ public class GUIHome extends javax.swing.JFrame {
             public int getSize() { return strings.length; }
             public String getElementAt(int i) { return strings[i]; }
         });
+        jList2.setSelectionMode(javax.swing.ListSelectionModel.SINGLE_INTERVAL_SELECTION);
         listExtract.setViewportView(jList2);
 
         labelBalance.setFont(new java.awt.Font("Tahoma", 0, 24)); // NOI18N
@@ -476,7 +528,7 @@ public class GUIHome extends javax.swing.JFrame {
                 .addContainerGap()
                 .addGroup(panelExtractLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addComponent(valueBalance, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(labelChaRev, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 224, Short.MAX_VALUE)
+                    .addComponent(labelChaRev, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 252, Short.MAX_VALUE)
                     .addComponent(listExtract, javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(separatorExtract, javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(labelBalance, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
@@ -504,7 +556,7 @@ public class GUIHome extends javax.swing.JFrame {
         panelReport.setLayout(panelReportLayout);
         panelReportLayout.setHorizontalGroup(
             panelReportLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 244, Short.MAX_VALUE)
+            .addGap(0, 272, Short.MAX_VALUE)
         );
         panelReportLayout.setVerticalGroup(
             panelReportLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -512,12 +564,6 @@ public class GUIHome extends javax.swing.JFrame {
         );
 
         panelInf.addTab("Relatorios", panelReport);
-
-        addValue.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                addValueActionPerformed(evt);
-            }
-        });
 
         labelDate.setText("Data");
 
@@ -543,6 +589,11 @@ public class GUIHome extends javax.swing.JFrame {
         buttonAddRevenue.setText("Adicionar Receita");
         buttonAddRevenue.setBorder(null);
         buttonAddRevenue.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
+        buttonAddRevenue.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                buttonAddRevenueActionPerformed(evt);
+            }
+        });
 
         buttonMoreInformation.setForeground(new java.awt.Color(0, 0, 204));
         buttonMoreInformation.setText("Mais Informações");
@@ -560,30 +611,37 @@ public class GUIHome extends javax.swing.JFrame {
 
         labelCategory.setText("Categoria");
 
+        addValue.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                addValueActionPerformed1(evt);
+            }
+        });
+
         javax.swing.GroupLayout panelAddLayout = new javax.swing.GroupLayout(panelAdd);
         panelAdd.setLayout(panelAddLayout);
         panelAddLayout.setHorizontalGroup(
             panelAddLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(panelAddLayout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(panelAddLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(panelAddLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                        .addComponent(categoryAdd, javax.swing.GroupLayout.Alignment.LEADING, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addGroup(javax.swing.GroupLayout.Alignment.LEADING, panelAddLayout.createSequentialGroup()
-                            .addComponent(buttonAddCharge, javax.swing.GroupLayout.PREFERRED_SIZE, 88, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                            .addComponent(buttonAddRevenue, javax.swing.GroupLayout.PREFERRED_SIZE, 88, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addComponent(addDate, javax.swing.GroupLayout.Alignment.LEADING)
-                        .addComponent(labelValue, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(addValue, javax.swing.GroupLayout.Alignment.LEADING))
-                    .addComponent(buttonMoreInformation)
-                    .addComponent(labelCategory))
-                .addContainerGap(46, Short.MAX_VALUE))
+                .addGroup(panelAddLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                    .addComponent(addValue)
+                    .addGroup(panelAddLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addGroup(panelAddLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                            .addComponent(categoryAdd, javax.swing.GroupLayout.Alignment.LEADING, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addGroup(javax.swing.GroupLayout.Alignment.LEADING, panelAddLayout.createSequentialGroup()
+                                .addComponent(buttonAddCharge, javax.swing.GroupLayout.PREFERRED_SIZE, 88, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(buttonAddRevenue, javax.swing.GroupLayout.PREFERRED_SIZE, 88, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(addDate, javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(labelValue, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addComponent(buttonMoreInformation)
+                        .addComponent(labelCategory)))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
             .addGroup(panelAddLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addGroup(panelAddLayout.createSequentialGroup()
                     .addContainerGap()
                     .addComponent(labelDate)
-                    .addContainerGap(205, Short.MAX_VALUE)))
+                    .addContainerGap(169, Short.MAX_VALUE)))
         );
         panelAddLayout.setVerticalGroup(
             panelAddLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -612,25 +670,24 @@ public class GUIHome extends javax.swing.JFrame {
                     .addContainerGap(310, Short.MAX_VALUE)))
         );
 
-        addValue= maskValue(60,  "0,1,2,3,4,5,6,7,8,9");
         try {
             javax.swing.text.MaskFormatter data= new javax.swing.text.MaskFormatter("##/##/####");
             addDate = new javax.swing.JFormattedTextField(data); }
         catch (Exception e) {
             JOptionPane.showMessageDialog(null,"Ocorreu um erro");//mensagem se acontecer erro }
     }
-    buttonAddRevenue.addActionListener(new java.awt.event.ActionListener() {
-        public void actionPerformed(java.awt.event.ActionEvent evt) {
-            confirmAddRev.setSize(300,150);
-            confirmAddRev.setVisible(true);
-        }
-    });
     buttonMoreInformation.addActionListener(new java.awt.event.ActionListener() {
         public void actionPerformed(java.awt.event.ActionEvent evt) {
             moreInformation.setSize(350,380);
             moreInformation.setVisible(true);
         }
     });
+    try {
+        javax.swing.text.MaskFormatter data= new javax.swing.text.MaskFormatter("##/##/####");
+        addDate = new javax.swing.JFormattedTextField(data); }
+    catch (Exception e) {
+        JOptionPane.showMessageDialog(null,"Ocorreu um erro");//mensagem se acontecer erro }
+    }
 
     javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
     getContentPane().setLayout(layout);
@@ -638,7 +695,7 @@ public class GUIHome extends javax.swing.JFrame {
         layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
         .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
             .addComponent(panelAdd, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+            .addGap(18, 18, 18)
             .addComponent(panelInf)
             .addContainerGap())
     );
@@ -656,6 +713,7 @@ public class GUIHome extends javax.swing.JFrame {
 
     private void buttonCancelAddRevActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonCancelAddRevActionPerformed
         // TODO add your handling code here:
+        confirmAddRev.setVisible(false);
     }//GEN-LAST:event_buttonCancelAddRevActionPerformed
    
     private void addDateActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_addDateActionPerformed
@@ -674,27 +732,102 @@ public class GUIHome extends javax.swing.JFrame {
         // TODO add your handling code here:
         if(addValue.getText().trim().equals("")){
             JOptionPane.showMessageDialog(null, "Campo Valor vazio");
-        }else if(addDate.getText().equals("")){
-            JOptionPane.showMessageDialog(null, "Campo Data vazio");
-        }else{
-            buttonAddCharge.addActionListener(new java.awt.event.ActionListener() {
-                @Override
-                public void actionPerformed(java.awt.event.ActionEvent evt) {
-                    confirmAddChar.setSize(300,150);     
-                    confirmAddChar.setVisible(true);
-                }
-            });
+        }else {
+            if(addDate.getText().trim().equals("")){
+                JOptionPane.showMessageDialog(null, "Campo Data vazio");
+            }else{
+                buttonAddCharge.addActionListener(new java.awt.event.ActionListener() {
+                    @Override
+                    public void actionPerformed(java.awt.event.ActionEvent evt) {
+                        confirmAddChar.setSize(300,150);     
+                        confirmAddChar.setVisible(true);
+                    }
+                });
+            }
         }
     }//GEN-LAST:event_buttonAddChargeActionPerformed
 
     private void buttonConfirmAddCharActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonConfirmAddCharActionPerformed
         // TODO add your handling code here:
         Charge charge = new Charge();
+        confirmAddChar.setVisible(false);
     }//GEN-LAST:event_buttonConfirmAddCharActionPerformed
 
     private void buttonEditInfActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonEditInfActionPerformed
         // TODO add your handling code here:
+        viewInf.setVisible(false);
+        editInf.setSize(300, 350);
+        editInf.setVisible(true);
     }//GEN-LAST:event_buttonEditInfActionPerformed
+
+    private void addValueActionPerformed1(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_addValueActionPerformed1
+        // TODO add your handling code here:
+    }//GEN-LAST:event_addValueActionPerformed1
+
+    private void buttonAddRevenueActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonAddRevenueActionPerformed
+        // TODO add your handling code here:
+        if(addValue.getText().trim().equals("")){
+            JOptionPane.showMessageDialog(null, "Campo Valor vazio");
+        }else if(addDate.getText().trim().equals("")){
+            JOptionPane.showMessageDialog(null, "Campo Data vazio");
+        }else{
+            buttonAddRevenue.addActionListener(new java.awt.event.ActionListener() {
+                @Override
+                public void actionPerformed(java.awt.event.ActionEvent evt) {
+                    confirmAddRev.setSize(300,150);     
+                    confirmAddRev.setVisible(true);
+                }
+            });
+        }
+    }//GEN-LAST:event_buttonAddRevenueActionPerformed
+
+    private void buttonCancelAddCharActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonCancelAddCharActionPerformed
+        // TODO add your handling code here:
+        confirmAddChar.setVisible(false);
+    }//GEN-LAST:event_buttonCancelAddCharActionPerformed
+
+    private void buttonConfrmAddRevActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonConfrmAddRevActionPerformed
+        // TODO add your handling code here:
+        //
+        // Programar para salvar
+        //
+        confirmAddRev.setVisible(false);
+    }//GEN-LAST:event_buttonConfrmAddRevActionPerformed
+
+    private void buttonMoreCancelActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonMoreCancelActionPerformed
+        // TODO add your handling code here:
+        moreInformation.setVisible(false);
+    }//GEN-LAST:event_buttonMoreCancelActionPerformed
+
+    private void buttonMoreAdd1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonMoreAdd1ActionPerformed
+        // TODO add your handling code here:
+        //
+        // Programar para salvar
+        //
+        moreInformation.setVisible(false);
+    }//GEN-LAST:event_buttonMoreAdd1ActionPerformed
+
+    private void buttonOkInfActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonOkInfActionPerformed
+        // TODO add your handling code here:
+        viewInf.setVisible(false);
+    }//GEN-LAST:event_buttonOkInfActionPerformed
+
+    private void buttonSaveEditInfActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonSaveEditInfActionPerformed
+        // TODO add your handling code here:
+        editInf.setVisible(false);
+        //
+        //Salvar
+        //
+        viewInf.setSize(300, 350);
+        viewInf.setVisible(true);
+    }//GEN-LAST:event_buttonSaveEditInfActionPerformed
+
+    private void buttonCancelEditInfActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonCancelEditInfActionPerformed
+        // TODO add your handling code here:
+        editInf.setVisible(false);
+        viewInf.setSize(300, 350);
+        viewInf.setVisible(true);
+    }//GEN-LAST:event_buttonCancelEditInfActionPerformed
 
     /**
      * @param args the command line arguments
