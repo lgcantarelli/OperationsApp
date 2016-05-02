@@ -5,9 +5,16 @@
  */
 package GUI;
 import java.io.File;
+import java.text.DateFormat;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import operationsapp.*;
 import javax.swing.JFileChooser;
 import javax.swing.JOptionPane;
+import static javax.swing.JOptionPane.OK_CANCEL_OPTION;
 import javax.swing.JTextField;
 
 /**
@@ -40,34 +47,6 @@ public class GUIHome extends javax.swing.JFrame {
         buttonConfrmAddRev = new javax.swing.JButton();
         buttonCancelAddRev = new javax.swing.JButton();
         textRevenueConfirm = new javax.swing.JLabel();
-        moreInformation = new javax.swing.JDialog();
-        labelMoreAddValue = new javax.swing.JLabel();
-        moreAddValue = new javax.swing.JTextField();
-        labeMoreAddDate = new javax.swing.JLabel();
-        moreAddDate = new javax.swing.JTextField();
-        labelMoreCateg = new javax.swing.JLabel();
-        selectMoreCategory = new javax.swing.JComboBox<>();
-        labelMoreDesc = new javax.swing.JLabel();
-        textMoreDesc = new javax.swing.JScrollPane();
-        jTextArea1 = new javax.swing.JTextArea();
-        buttonMoreAdd1 = new javax.swing.JButton();
-        buttonMoreCancel = new javax.swing.JButton();
-        radioButtonMoreChar = new javax.swing.JRadioButton();
-        radioButtonMoreRev = new javax.swing.JRadioButton();
-        buttonGroupMoreInf = new javax.swing.ButtonGroup();
-        expFilExp = new javax.swing.JFileChooser();
-        viewInf = new javax.swing.JDialog();
-        labeValueInf = new javax.swing.JLabel();
-        labelDateInf = new javax.swing.JLabel();
-        labelCategoryInf = new javax.swing.JLabel();
-        labelDescInf = new javax.swing.JLabel();
-        texDesInf = new javax.swing.JScrollPane();
-        jTextArea2 = new javax.swing.JTextArea();
-        texDataInf = new javax.swing.JTextField();
-        texValueInf = new javax.swing.JTextField();
-        texCategInf = new javax.swing.JTextField();
-        buttonOkInf = new javax.swing.JButton();
-        buttonEditInf = new javax.swing.JButton();
         editInf = new javax.swing.JDialog();
         labelValueEdiInf = new javax.swing.JLabel();
         texValueEditInf = new javax.swing.JTextField();
@@ -80,6 +59,34 @@ public class GUIHome extends javax.swing.JFrame {
         jTextArea3 = new javax.swing.JTextArea();
         buttonSaveEditInf = new javax.swing.JButton();
         buttonCancelEditInf = new javax.swing.JButton();
+        moreInformation = new javax.swing.JDialog();
+        labelMoreAddValue = new javax.swing.JLabel();
+        moreAddValue = new javax.swing.JTextField();
+        labeMoreAddDate = new javax.swing.JLabel();
+        moreAddDate = new javax.swing.JTextField();
+        labelMoreCateg = new javax.swing.JLabel();
+        selectMoreCategory = new javax.swing.JComboBox<>();
+        labelMoreDesc = new javax.swing.JLabel();
+        textMoreDesc = new javax.swing.JScrollPane();
+        jTextArea1 = new javax.swing.JTextArea();
+        buttonMoreConfirm = new javax.swing.JButton();
+        buttonMoreCancel = new javax.swing.JButton();
+        radioButtonMoreChar = new javax.swing.JRadioButton();
+        radioButtonMoreRev = new javax.swing.JRadioButton();
+        buttonGroupMoreInf = new javax.swing.ButtonGroup();
+        expFilExp = new javax.swing.JFileChooser();
+        viewInf = new javax.swing.JDialog();
+        labeValueInf = new javax.swing.JLabel();
+        labelDateInf = new javax.swing.JLabel();
+        labelCategoryInf = new javax.swing.JLabel();
+        labelDescInf = new javax.swing.JLabel();
+        texDesInf = new javax.swing.JScrollPane();
+        jTextArea2 = new javax.swing.JTextArea();
+        texDateInf = new javax.swing.JTextField();
+        texValueInf = new javax.swing.JTextField();
+        buttonOkInf = new javax.swing.JButton();
+        buttonEditInf = new javax.swing.JButton();
+        texCategInf = new javax.swing.JComboBox<>();
         panelInf = new javax.swing.JTabbedPane();
         panelExtract = new javax.swing.JPanel();
         labelChaRev = new javax.swing.JLabel();
@@ -96,8 +103,6 @@ public class GUIHome extends javax.swing.JFrame {
         addDate = new javax.swing.JTextField();
         buttonAddRevenue = new javax.swing.JButton();
         buttonMoreInformation = new javax.swing.JButton();
-        categoryAdd = new javax.swing.JComboBox<>();
-        labelCategory = new javax.swing.JLabel();
         addValue = new javax.swing.JTextField();
         buttonExp = new javax.swing.JButton();
 
@@ -122,21 +127,20 @@ public class GUIHome extends javax.swing.JFrame {
             }
         });
 
-        textChargeConfirm.setText("jLabel6");
+        textChargeConfirm.setText("salvar DESPESA");
 
         javax.swing.GroupLayout confirmAddCharLayout = new javax.swing.GroupLayout(confirmAddChar.getContentPane());
         confirmAddChar.getContentPane().setLayout(confirmAddCharLayout);
         confirmAddCharLayout.setHorizontalGroup(
             confirmAddCharLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(confirmAddCharLayout.createSequentialGroup()
-                .addContainerGap()
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, confirmAddCharLayout.createSequentialGroup()
+                .addContainerGap(81, Short.MAX_VALUE)
                 .addGroup(confirmAddCharLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, confirmAddCharLayout.createSequentialGroup()
-                        .addGap(0, 71, Short.MAX_VALUE)
+                    .addComponent(textChargeConfirm, javax.swing.GroupLayout.PREFERRED_SIZE, 89, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(confirmAddCharLayout.createSequentialGroup()
                         .addComponent(buttonCancelAddChar)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(buttonConfirmAddChar))
-                    .addComponent(textChargeConfirm, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addComponent(buttonConfirmAddChar)))
                 .addContainerGap())
         );
         confirmAddCharLayout.setVerticalGroup(
@@ -170,243 +174,31 @@ public class GUIHome extends javax.swing.JFrame {
             }
         });
 
-        textRevenueConfirm.setText("jLabel7");
+        textRevenueConfirm.setText("salvar RECEITA");
 
         javax.swing.GroupLayout confirmAddRevLayout = new javax.swing.GroupLayout(confirmAddRev.getContentPane());
         confirmAddRev.getContentPane().setLayout(confirmAddRevLayout);
         confirmAddRevLayout.setHorizontalGroup(
             confirmAddRevLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(confirmAddRevLayout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(confirmAddRevLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(textRevenueConfirm, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, confirmAddRevLayout.createSequentialGroup()
-                        .addGap(0, 54, Short.MAX_VALUE)
-                        .addComponent(buttonCancelAddRev)
-                        .addGap(5, 5, 5)
-                        .addComponent(buttonConfrmAddRev)))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, confirmAddRevLayout.createSequentialGroup()
+                .addContainerGap(64, Short.MAX_VALUE)
+                .addGroup(confirmAddRevLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(textRevenueConfirm)
+                    .addComponent(buttonCancelAddRev))
+                .addGap(5, 5, 5)
+                .addComponent(buttonConfrmAddRev)
                 .addContainerGap())
         );
         confirmAddRevLayout.setVerticalGroup(
             confirmAddRevLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, confirmAddRevLayout.createSequentialGroup()
-                .addContainerGap()
+                .addGap(20, 20, 20)
                 .addComponent(textRevenueConfirm, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addGap(36, 36, 36)
+                .addGap(27, 27, 27)
                 .addGroup(confirmAddRevLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(buttonCancelAddRev)
                     .addComponent(buttonConfrmAddRev))
                 .addContainerGap())
-        );
-
-        moreInformation.setDefaultCloseOperation(javax.swing.WindowConstants.DO_NOTHING_ON_CLOSE);
-        moreInformation.setAlwaysOnTop(true);
-        moreInformation.setLocation(new java.awt.Point(200, 200));
-        moreInformation.setLocationByPlatform(true);
-        moreInformation.setModal(true);
-        moreInformation.setResizable(false);
-
-        labelMoreAddValue.setText("Valor");
-
-        moreAddValue.setText("jTextField1");
-
-        labeMoreAddDate.setText("Data");
-
-        moreAddDate.setText("jTextField1");
-
-        labelMoreCateg.setText("Categoria");
-
-        selectMoreCategory.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
-
-        labelMoreDesc.setText("Descrição");
-
-        jTextArea1.setColumns(20);
-        jTextArea1.setRows(5);
-        textMoreDesc.setViewportView(jTextArea1);
-
-        buttonMoreAdd1.setText("Salvar");
-        buttonMoreAdd1.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                buttonMoreAdd1ActionPerformed(evt);
-            }
-        });
-
-        buttonMoreCancel.setText("Cancelar");
-        buttonMoreCancel.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                buttonMoreCancelActionPerformed(evt);
-            }
-        });
-
-        buttonGroupMoreInf.add(radioButtonMoreChar);
-        radioButtonMoreChar.setText("Despesa");
-
-        buttonGroupMoreInf.add(radioButtonMoreRev);
-        radioButtonMoreRev.setText("Receita");
-
-        javax.swing.GroupLayout moreInformationLayout = new javax.swing.GroupLayout(moreInformation.getContentPane());
-        moreInformation.getContentPane().setLayout(moreInformationLayout);
-        moreInformationLayout.setHorizontalGroup(
-            moreInformationLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(moreInformationLayout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(moreInformationLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(selectMoreCategory, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(textMoreDesc)
-                    .addGroup(moreInformationLayout.createSequentialGroup()
-                        .addGap(0, 0, Short.MAX_VALUE)
-                        .addComponent(buttonMoreCancel, javax.swing.GroupLayout.PREFERRED_SIZE, 88, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(18, 18, 18)
-                        .addComponent(buttonMoreAdd1, javax.swing.GroupLayout.PREFERRED_SIZE, 92, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(moreInformationLayout.createSequentialGroup()
-                        .addGroup(moreInformationLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(moreInformationLayout.createSequentialGroup()
-                                .addComponent(labelMoreAddValue)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(moreAddValue, javax.swing.GroupLayout.PREFERRED_SIZE, 113, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(18, 18, 18)
-                                .addComponent(labeMoreAddDate)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(moreAddDate, javax.swing.GroupLayout.PREFERRED_SIZE, 114, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addComponent(labelMoreCateg)
-                            .addComponent(labelMoreDesc)
-                            .addGroup(moreInformationLayout.createSequentialGroup()
-                                .addComponent(radioButtonMoreChar)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(radioButtonMoreRev)))
-                        .addGap(0, 5, Short.MAX_VALUE)))
-                .addContainerGap())
-        );
-        moreInformationLayout.setVerticalGroup(
-            moreInformationLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(moreInformationLayout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(moreInformationLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(labelMoreAddValue)
-                    .addComponent(moreAddValue, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(labeMoreAddDate)
-                    .addComponent(moreAddDate, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(moreInformationLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(radioButtonMoreChar)
-                    .addComponent(radioButtonMoreRev))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(labelMoreCateg)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(selectMoreCategory, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(labelMoreDesc)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(textMoreDesc, javax.swing.GroupLayout.PREFERRED_SIZE, 109, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
-                .addGroup(moreInformationLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(buttonMoreAdd1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(buttonMoreCancel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addContainerGap())
-        );
-
-        expFilExp.setAcceptAllFileFilterUsed(false);
-        expFilExp.setDialogType(javax.swing.JFileChooser.SAVE_DIALOG);
-
-        viewInf.setDefaultCloseOperation(javax.swing.WindowConstants.DO_NOTHING_ON_CLOSE);
-        viewInf.setAlwaysOnTop(true);
-        viewInf.setModal(true);
-        viewInf.setResizable(false);
-
-        labeValueInf.setText("Valor");
-
-        labelDateInf.setText("Data");
-
-        labelCategoryInf.setText("Categoria");
-
-        labelDescInf.setText("Descrição");
-
-        jTextArea2.setEditable(false);
-        jTextArea2.setColumns(20);
-        jTextArea2.setRows(5);
-        texDesInf.setViewportView(jTextArea2);
-
-        texDataInf.setEditable(false);
-        texDataInf.setText("jTextField1");
-        texDataInf.setMargin(new java.awt.Insets(0, 0, 0, 0));
-
-        texValueInf.setEditable(false);
-        texValueInf.setText("jTextField1");
-        texValueInf.setMargin(new java.awt.Insets(0, 0, 0, 0));
-
-        texCategInf.setEditable(false);
-        texCategInf.setText("jTextField1");
-        texCategInf.setMargin(new java.awt.Insets(0, 0, 0, 0));
-
-        buttonOkInf.setText("OK");
-        buttonOkInf.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                buttonOkInfActionPerformed(evt);
-            }
-        });
-
-        buttonEditInf.setText("Editar");
-        buttonEditInf.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                buttonEditInfActionPerformed(evt);
-            }
-        });
-
-        javax.swing.GroupLayout viewInfLayout = new javax.swing.GroupLayout(viewInf.getContentPane());
-        viewInf.getContentPane().setLayout(viewInfLayout);
-        viewInfLayout.setHorizontalGroup(
-            viewInfLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(viewInfLayout.createSequentialGroup()
-                .addGroup(viewInfLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(viewInfLayout.createSequentialGroup()
-                        .addGap(18, 18, 18)
-                        .addGroup(viewInfLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(texDesInf)
-                            .addGroup(viewInfLayout.createSequentialGroup()
-                                .addGroup(viewInfLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                    .addComponent(labelDescInf)
-                                    .addGroup(viewInfLayout.createSequentialGroup()
-                                        .addComponent(labelCategoryInf)
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                        .addComponent(texCategInf))
-                                    .addGroup(viewInfLayout.createSequentialGroup()
-                                        .addComponent(labeValueInf)
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                        .addComponent(texValueInf, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addGap(51, 51, 51)
-                                        .addComponent(labelDateInf)
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                        .addComponent(texDataInf, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                                .addGap(0, 0, Short.MAX_VALUE))))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, viewInfLayout.createSequentialGroup()
-                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(buttonEditInf)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(buttonOkInf)))
-                .addContainerGap())
-        );
-        viewInfLayout.setVerticalGroup(
-            viewInfLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(viewInfLayout.createSequentialGroup()
-                .addGap(27, 27, 27)
-                .addGroup(viewInfLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(labeValueInf)
-                    .addComponent(labelDateInf)
-                    .addComponent(texDataInf, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(texValueInf, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(viewInfLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(labelCategoryInf)
-                    .addComponent(texCategInf, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(labelDescInf)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(texDesInf, javax.swing.GroupLayout.PREFERRED_SIZE, 134, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
-                .addGroup(viewInfLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(buttonOkInf)
-                    .addComponent(buttonEditInf))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         editInf.setDefaultCloseOperation(javax.swing.WindowConstants.DO_NOTHING_ON_CLOSE);
@@ -497,9 +289,289 @@ public class GUIHome extends javax.swing.JFrame {
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
+        moreInformation.setDefaultCloseOperation(javax.swing.WindowConstants.DO_NOTHING_ON_CLOSE);
+        moreInformation.setAlwaysOnTop(true);
+        moreInformation.setLocation(new java.awt.Point(200, 200));
+        moreInformation.setModal(true);
+        moreInformation.setResizable(false);
+
+        labelMoreAddValue.setText("Valor");
+
+        moreAddValue.setText("jTextField1");
+
+        labeMoreAddDate.setText("Data");
+
+        moreAddDate.setText("jTextField1");
+
+        labelMoreCateg.setText("Categoria");
+
+        selectMoreCategory.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        selectMoreCategory.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                selectMoreCategoryActionPerformed(evt);
+            }
+        });
+
+        labelMoreDesc.setText("Descrição");
+
+        jTextArea1.setColumns(20);
+        jTextArea1.setRows(5);
+        textMoreDesc.setViewportView(jTextArea1);
+
+        buttonMoreConfirm.setText("Salvar");
+
+        buttonMoreCancel.setText("Cancelar");
+        buttonMoreCancel.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                buttonMoreCancelActionPerformed(evt);
+            }
+        });
+
+        buttonGroupMoreInf.add(radioButtonMoreChar);
+        radioButtonMoreChar.setText("Despesa");
+        radioButtonMoreChar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                radioButtonMoreCharActionPerformed(evt);
+            }
+        });
+
+        buttonGroupMoreInf.add(radioButtonMoreRev);
+        radioButtonMoreRev.setText("Receita");
+        radioButtonMoreRev.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                radioButtonMoreRevActionPerformed(evt);
+            }
+        });
+
+        javax.swing.GroupLayout moreInformationLayout = new javax.swing.GroupLayout(moreInformation.getContentPane());
+        moreInformation.getContentPane().setLayout(moreInformationLayout);
+        moreInformationLayout.setHorizontalGroup(
+            moreInformationLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(moreInformationLayout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(moreInformationLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(selectMoreCategory, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(textMoreDesc)
+                    .addGroup(moreInformationLayout.createSequentialGroup()
+                        .addGap(0, 0, Short.MAX_VALUE)
+                        .addComponent(buttonMoreCancel, javax.swing.GroupLayout.PREFERRED_SIZE, 88, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(18, 18, 18)
+                        .addComponent(buttonMoreConfirm, javax.swing.GroupLayout.PREFERRED_SIZE, 92, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(moreInformationLayout.createSequentialGroup()
+                        .addGroup(moreInformationLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(moreInformationLayout.createSequentialGroup()
+                                .addComponent(labelMoreAddValue)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(moreAddValue, javax.swing.GroupLayout.PREFERRED_SIZE, 113, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(18, 18, 18)
+                                .addComponent(labeMoreAddDate)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(moreAddDate, javax.swing.GroupLayout.PREFERRED_SIZE, 114, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(labelMoreCateg)
+                            .addComponent(labelMoreDesc)
+                            .addGroup(moreInformationLayout.createSequentialGroup()
+                                .addComponent(radioButtonMoreChar)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addComponent(radioButtonMoreRev)))
+                        .addGap(0, 5, Short.MAX_VALUE)))
+                .addContainerGap())
+        );
+        moreInformationLayout.setVerticalGroup(
+            moreInformationLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(moreInformationLayout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(moreInformationLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(labelMoreAddValue)
+                    .addComponent(moreAddValue, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(labeMoreAddDate)
+                    .addComponent(moreAddDate, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(moreInformationLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(radioButtonMoreChar)
+                    .addComponent(radioButtonMoreRev))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(labelMoreCateg)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(selectMoreCategory, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(labelMoreDesc)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(textMoreDesc, javax.swing.GroupLayout.PREFERRED_SIZE, 109, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
+                .addGroup(moreInformationLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(buttonMoreConfirm, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(buttonMoreCancel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap())
+        );
+
+        selectMoreCategory.setEnabled(false);
+        buttonMoreConfirm.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                if(moreAddValue.getText().trim().equals("")){
+                    JOptionPane.showMessageDialog(null, "Campo Valor vazio");
+                }else if(moreAddDate.getText().trim().equals("")){
+                    JOptionPane.showMessageDialog(null, "Campo Data vazio");
+                }else{
+                    if(radioButtonMoreChar.isSelected() ==true){
+                        int confirmBox = JOptionPane.showConfirmDialog(null, "salvar Despesa",null,OK_CANCEL_OPTION);
+                        if(confirmBox == JOptionPane.OK_OPTION){
+                            buttonConfirmAddRev();
+                        }
+                    }
+                    else if(radioButtonMoreRev.isSelected()== true){
+                        int confirmBox = JOptionPane.showConfirmDialog(null, "salvar RECEITA",null,OK_CANCEL_OPTION);
+                        if(confirmBox == JOptionPane.OK_OPTION){
+                            buttonConfirmAddRev();
+                        }
+                    }
+                    else{
+                        JOptionPane.showMessageDialog(null, "Selecione o tipo de transação");
+                    }
+                }
+            }
+        });
+
+        expFilExp.setAcceptAllFileFilterUsed(false);
+        expFilExp.setDialogType(javax.swing.JFileChooser.SAVE_DIALOG);
+
+        viewInf.setDefaultCloseOperation(javax.swing.WindowConstants.DO_NOTHING_ON_CLOSE);
+        viewInf.setAlwaysOnTop(true);
+        viewInf.setModal(true);
+        viewInf.setResizable(false);
+
+        labeValueInf.setText("Valor");
+
+        labelDateInf.setText("Data");
+
+        labelCategoryInf.setText("Categoria");
+
+        labelDescInf.setText("Descrição");
+
+        jTextArea2.setColumns(20);
+        jTextArea2.setRows(5);
+        jTextArea2.setEnabled(false);
+        texDesInf.setViewportView(jTextArea2);
+
+        texDateInf.setEditable(false);
+        texDateInf.setText("jTextField1");
+        texDateInf.setEnabled(false);
+        texDateInf.setMargin(new java.awt.Insets(0, 0, 0, 0));
+
+        texValueInf.setEditable(false);
+        texValueInf.setText("jTextField1");
+        texValueInf.setEnabled(false);
+        texValueInf.setMargin(new java.awt.Insets(0, 0, 0, 0));
+
+        buttonOkInf.setText("OK");
+
+        buttonEditInf.setText("Editar");
+
+        texCategInf.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        texCategInf.setEnabled(false);
+
+        javax.swing.GroupLayout viewInfLayout = new javax.swing.GroupLayout(viewInf.getContentPane());
+        viewInf.getContentPane().setLayout(viewInfLayout);
+        viewInfLayout.setHorizontalGroup(
+            viewInfLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(viewInfLayout.createSequentialGroup()
+                .addGroup(viewInfLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(viewInfLayout.createSequentialGroup()
+                        .addGap(18, 18, 18)
+                        .addGroup(viewInfLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(texDesInf)
+                            .addGroup(viewInfLayout.createSequentialGroup()
+                                .addGroup(viewInfLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                    .addComponent(labelDescInf)
+                                    .addGroup(viewInfLayout.createSequentialGroup()
+                                        .addComponent(labelCategoryInf)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                        .addComponent(texCategInf, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                                    .addGroup(viewInfLayout.createSequentialGroup()
+                                        .addComponent(labeValueInf)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                        .addComponent(texValueInf, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addGap(51, 51, 51)
+                                        .addComponent(labelDateInf)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                        .addComponent(texDateInf, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                                .addGap(0, 0, Short.MAX_VALUE))))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, viewInfLayout.createSequentialGroup()
+                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(buttonEditInf)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(buttonOkInf)))
+                .addContainerGap())
+        );
+        viewInfLayout.setVerticalGroup(
+            viewInfLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(viewInfLayout.createSequentialGroup()
+                .addGap(27, 27, 27)
+                .addGroup(viewInfLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(labeValueInf)
+                    .addComponent(labelDateInf)
+                    .addComponent(texDateInf, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(texValueInf, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(viewInfLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(labelCategoryInf)
+                    .addComponent(texCategInf, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(labelDescInf)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(texDesInf, javax.swing.GroupLayout.PREFERRED_SIZE, 134, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
+                .addGroup(viewInfLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(buttonOkInf)
+                    .addComponent(buttonEditInf))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+        );
+
+        buttonOkInf.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                if(buttonOkInf.getText().equals("OK")){
+                    viewInf.setVisible(false);
+                }
+            }
+        });
+        buttonEditInf.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                texDateInf.setEditable(true);
+                texDateInf.setEnabled(true);
+                texValueInf.setEditable(true);
+                texValueInf.setEnabled(true);
+                texCategInf.setEnabled(true);
+                jTextArea2.setEditable(true);
+                jTextArea2.setEnabled(true);
+                buttonOkInf.setText("Salvar");
+                buttonEditInf.setText("Cancelar");
+                buttonOkInf.addActionListener(new java.awt.event.ActionListener() {
+                    public void actionPerformed(java.awt.event.ActionEvent evt) {
+                        //salvar edição
+                        texDateInf.setEditable(false);
+                        texValueInf.setEditable(false);
+                        texCategInf.setEnabled(false);
+                        jTextArea2.setEditable(false);
+                        texDesInf.setEnabled(false);
+                        buttonOkInf.setText("OK");
+                        buttonEditInf.setText("Editar");
+                    }
+                });
+                buttonEditInf.addActionListener(new java.awt.event.ActionListener() {
+                    public void actionPerformed(java.awt.event.ActionEvent evt) {
+                        texDateInf.setEditable(false);
+                        texValueInf.setEditable(false);
+                        texCategInf.setEnabled(false);
+                        jTextArea2.setEditable(false);
+                        texDesInf.setEnabled(false);
+                        buttonOkInf.setText("OK");
+                        buttonEditInf.setText("Editar");
+                    }
+                });
+            }
+        });
+
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setBackground(new java.awt.Color(255, 255, 255));
-        setPreferredSize(new java.awt.Dimension(507, 340));
         setResizable(false);
 
         labelChaRev.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
@@ -510,7 +582,12 @@ public class GUIHome extends javax.swing.JFrame {
             public int getSize() { return strings.length; }
             public String getElementAt(int i) { return strings[i]; }
         });
-        jList2.setSelectionMode(javax.swing.ListSelectionModel.SINGLE_INTERVAL_SELECTION);
+        jList2.setSelectionMode(javax.swing.ListSelectionModel.SINGLE_SELECTION);
+        jList2.addListSelectionListener(new javax.swing.event.ListSelectionListener() {
+            public void valueChanged(javax.swing.event.ListSelectionEvent evt) {
+                jList2ValueChanged(evt);
+            }
+        });
         listExtract.setViewportView(jList2);
 
         labelBalance.setFont(new java.awt.Font("Tahoma", 0, 24)); // NOI18N
@@ -523,14 +600,19 @@ public class GUIHome extends javax.swing.JFrame {
         panelExtract.setLayout(panelExtractLayout);
         panelExtractLayout.setHorizontalGroup(
             panelExtractLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panelExtractLayout.createSequentialGroup()
+            .addGroup(panelExtractLayout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(panelExtractLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(valueBalance, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(labelChaRev, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 252, Short.MAX_VALUE)
-                    .addComponent(listExtract, javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(separatorExtract, javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(labelBalance, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addGroup(panelExtractLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(labelChaRev, javax.swing.GroupLayout.DEFAULT_SIZE, 677, Short.MAX_VALUE)
+                    .addComponent(listExtract)
+                    .addComponent(separatorExtract)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panelExtractLayout.createSequentialGroup()
+                        .addGap(0, 0, Short.MAX_VALUE)
+                        .addGroup(panelExtractLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panelExtractLayout.createSequentialGroup()
+                                .addComponent(labelBalance)
+                                .addGap(167, 167, 167))
+                            .addComponent(valueBalance, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 224, javax.swing.GroupLayout.PREFERRED_SIZE))))
                 .addContainerGap())
         );
         panelExtractLayout.setVerticalGroup(
@@ -539,14 +621,14 @@ public class GUIHome extends javax.swing.JFrame {
                 .addContainerGap()
                 .addComponent(labelChaRev, javax.swing.GroupLayout.PREFERRED_SIZE, 26, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(listExtract, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(listExtract, javax.swing.GroupLayout.DEFAULT_SIZE, 466, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(separatorExtract, javax.swing.GroupLayout.PREFERRED_SIZE, 10, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGap(1, 1, 1)
                 .addComponent(labelBalance, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(valueBalance, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addContainerGap())
+                .addComponent(valueBalance)
+                .addGap(16, 16, 16))
         );
 
         panelInf.addTab("Extrato", panelExtract);
@@ -555,11 +637,11 @@ public class GUIHome extends javax.swing.JFrame {
         panelReport.setLayout(panelReportLayout);
         panelReportLayout.setHorizontalGroup(
             panelReportLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 272, Short.MAX_VALUE)
+            .addGap(0, 697, Short.MAX_VALUE)
         );
         panelReportLayout.setVerticalGroup(
             panelReportLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 312, Short.MAX_VALUE)
+            .addGap(0, 627, Short.MAX_VALUE)
         );
 
         panelInf.addTab("Relatorios", panelReport);
@@ -572,11 +654,6 @@ public class GUIHome extends javax.swing.JFrame {
         buttonAddCharge.setText("Adicionar Custo");
         buttonAddCharge.setBorder(null);
         buttonAddCharge.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
-        buttonAddCharge.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                buttonAddChargeActionPerformed(evt);
-            }
-        });
 
         addDate.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -588,11 +665,6 @@ public class GUIHome extends javax.swing.JFrame {
         buttonAddRevenue.setText("Adicionar Receita");
         buttonAddRevenue.setBorder(null);
         buttonAddRevenue.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
-        buttonAddRevenue.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                buttonAddRevenueActionPerformed(evt);
-            }
-        });
 
         buttonMoreInformation.setForeground(new java.awt.Color(0, 0, 204));
         buttonMoreInformation.setText("Mais Informações");
@@ -600,15 +672,11 @@ public class GUIHome extends javax.swing.JFrame {
         buttonMoreInformation.setContentAreaFilled(false);
         buttonMoreInformation.setFocusPainted(false);
         buttonMoreInformation.setMargin(new java.awt.Insets(0, 0, 0, 0));
-
-        categoryAdd.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
-        categoryAdd.addActionListener(new java.awt.event.ActionListener() {
+        buttonMoreInformation.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                categoryAddActionPerformed(evt);
+                buttonMoreInformationActionPerformed(evt);
             }
         });
-
-        labelCategory.setText("Categoria");
 
         addValue.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -629,24 +697,23 @@ public class GUIHome extends javax.swing.JFrame {
             panelAddLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(panelAddLayout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(panelAddLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                    .addComponent(addValue)
-                    .addGroup(panelAddLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                        .addGroup(panelAddLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                            .addComponent(categoryAdd, javax.swing.GroupLayout.Alignment.LEADING, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(addDate, javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(labelValue, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addGroup(javax.swing.GroupLayout.Alignment.LEADING, panelAddLayout.createSequentialGroup()
-                                .addComponent(buttonAddCharge, javax.swing.GroupLayout.PREFERRED_SIZE, 88, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(buttonAddRevenue, javax.swing.GroupLayout.PREFERRED_SIZE, 88, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                        .addComponent(buttonMoreInformation)
-                        .addComponent(labelCategory)))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panelAddLayout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(buttonExp)
-                .addGap(63, 63, 63))
+                .addGroup(panelAddLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panelAddLayout.createSequentialGroup()
+                        .addGap(0, 0, Short.MAX_VALUE)
+                        .addComponent(buttonExp)
+                        .addGap(63, 63, 63))
+                    .addGroup(panelAddLayout.createSequentialGroup()
+                        .addGroup(panelAddLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(panelAddLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                                .addComponent(addDate, javax.swing.GroupLayout.Alignment.LEADING)
+                                .addComponent(labelValue, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGroup(javax.swing.GroupLayout.Alignment.LEADING, panelAddLayout.createSequentialGroup()
+                                    .addComponent(buttonAddCharge, javax.swing.GroupLayout.PREFERRED_SIZE, 88, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                    .addComponent(buttonAddRevenue, javax.swing.GroupLayout.PREFERRED_SIZE, 88, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                            .addComponent(buttonMoreInformation)
+                            .addComponent(addValue, javax.swing.GroupLayout.PREFERRED_SIZE, 182, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
             .addGroup(panelAddLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addGroup(panelAddLayout.createSequentialGroup()
                     .addContainerGap()
@@ -658,23 +725,19 @@ public class GUIHome extends javax.swing.JFrame {
             .addGroup(panelAddLayout.createSequentialGroup()
                 .addGap(31, 31, 31)
                 .addComponent(addDate, javax.swing.GroupLayout.PREFERRED_SIZE, 46, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGap(18, 18, 18)
                 .addComponent(labelValue)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGap(11, 11, 11)
                 .addComponent(addValue, javax.swing.GroupLayout.PREFERRED_SIZE, 46, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(13, 13, 13)
-                .addComponent(labelCategory)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(categoryAdd, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(buttonMoreInformation)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGap(18, 18, 18)
                 .addGroup(panelAddLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(buttonAddCharge, javax.swing.GroupLayout.PREFERRED_SIZE, 55, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(buttonAddRevenue, javax.swing.GroupLayout.PREFERRED_SIZE, 55, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 38, Short.MAX_VALUE)
                 .addComponent(buttonExp)
-                .addGap(9, 9, 9))
+                .addContainerGap())
             .addGroup(panelAddLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addGroup(panelAddLayout.createSequentialGroup()
                     .addContainerGap()
@@ -682,14 +745,50 @@ public class GUIHome extends javax.swing.JFrame {
                     .addContainerGap(310, Short.MAX_VALUE)))
         );
 
+        buttonAddCharge.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                if(addValue.getText().trim().equals("")){
+                    JOptionPane.showMessageDialog(null, "Campo Valor vazio");
+                }else if(addDate.getText().trim().equals("")){
+                    JOptionPane.showMessageDialog(null, "Campo Data vazio");
+                }else{//confirmAddRev.setSize(300,150);
+                    //confirmAddRev.setVisible(true);
+                    int confirmBox = JOptionPane.showConfirmDialog(null, "salvar DESPESA",null,OK_CANCEL_OPTION);
+                    if(confirmBox == JOptionPane.OK_OPTION){
+                        buttonConfirmAddChar();
+                    }
+                }
+            }
+        });
         try {
             javax.swing.text.MaskFormatter data= new javax.swing.text.MaskFormatter("##/##/####");
             addDate = new javax.swing.JFormattedTextField(data); }
         catch (Exception e) {
             JOptionPane.showMessageDialog(null,"Ocorreu um erro");//mensagem se acontecer erro }
     }
+    buttonAddRevenue.addActionListener(new java.awt.event.ActionListener() {
+        public void actionPerformed(java.awt.event.ActionEvent evt) {
+            if(addValue.getText().trim().equals("")){
+                JOptionPane.showMessageDialog(null, "Campo Valor vazio");
+            }else if(addDate.getText().trim().equals("")){
+                JOptionPane.showMessageDialog(null, "Campo Data vazio");
+            }else{//confirmAddRev.setSize(300,150);
+                //confirmAddRev.setVisible(true);
+                int confirmBox = JOptionPane.showConfirmDialog(null, "salvar RECEITA",null,OK_CANCEL_OPTION);
+                if(confirmBox == JOptionPane.OK_OPTION){
+                    buttonConfirmAddRev();
+                }
+            }
+        }
+    });
     buttonMoreInformation.addActionListener(new java.awt.event.ActionListener() {
         public void actionPerformed(java.awt.event.ActionEvent evt) {
+            if(!addValue.getText().equals("")){
+                moreAddValue.setText(addValue.getText());
+            }
+            if(!addDate.getText().equals("")){
+                moreAddDate.setText(addDate.getText());
+            }
             moreInformation.setSize(350,380);
             moreInformation.setVisible(true);
         }
@@ -719,7 +818,7 @@ public class GUIHome extends javax.swing.JFrame {
             .addGap(0, 0, Short.MAX_VALUE))
     );
 
-    setSize(new java.awt.Dimension(523, 385));
+    setSize(new java.awt.Dimension(948, 694));
     setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
@@ -736,62 +835,28 @@ public class GUIHome extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_addValueActionPerformed
 
-    private void categoryAddActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_categoryAddActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_categoryAddActionPerformed
-
-    private void buttonAddChargeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonAddChargeActionPerformed
-        // TODO add your handling code here:
-        if(addValue.getText().trim().equals("")){
-            JOptionPane.showMessageDialog(null, "Campo Valor vazio");
-        }else {
-            if(addDate.getText().trim().equals("")){
-                JOptionPane.showMessageDialog(null, "Campo Data vazio");
-            }else{
-                buttonAddCharge.addActionListener(new java.awt.event.ActionListener() {
-                    @Override
-                    public void actionPerformed(java.awt.event.ActionEvent evt) {
-                        confirmAddChar.setSize(300,150);     
-                        confirmAddChar.setVisible(true);
-                    }
-                });
-            }
-        }
-    }//GEN-LAST:event_buttonAddChargeActionPerformed
-
     private void buttonConfirmAddCharActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonConfirmAddCharActionPerformed
-        // TODO add your handling code here:
-        Charge charge = new Charge();
+        try {
+            // TODO add your handling code here:
+            DateFormat format = new SimpleDateFormat("dd/mm/yy");
+            int id = 1;
+            double value = Double.parseDouble(addValue.getText());
+            Date date = format.parse(addDate.getText());
+            String descrip=("");
+            ChargeCategory category = null;
+            Charge charge = new Charge(id,value,descrip,date,category);
+            addValue.setText(null);
+            addDate.setText(null);
+            confirmAddChar.setVisible(false);
+        } catch (ParseException ex) {
+            Logger.getLogger(GUIHome.class.getName()).log(Level.SEVERE, null, ex);
+        }
         confirmAddChar.setVisible(false);
     }//GEN-LAST:event_buttonConfirmAddCharActionPerformed
-
-    private void buttonEditInfActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonEditInfActionPerformed
-        // TODO add your handling code here:
-        viewInf.setVisible(false);
-        editInf.setSize(300, 350);
-        editInf.setVisible(true);
-    }//GEN-LAST:event_buttonEditInfActionPerformed
 
     private void addValueActionPerformed1(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_addValueActionPerformed1
         // TODO add your handling code here:
     }//GEN-LAST:event_addValueActionPerformed1
-
-    private void buttonAddRevenueActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonAddRevenueActionPerformed
-        // TODO add your handling code here:
-        if(addValue.getText().trim().equals("")){
-            JOptionPane.showMessageDialog(null, "Campo Valor vazio");
-        }else if(addDate.getText().trim().equals("")){
-            JOptionPane.showMessageDialog(null, "Campo Data vazio");
-        }else{
-            buttonAddRevenue.addActionListener(new java.awt.event.ActionListener() {
-                @Override
-                public void actionPerformed(java.awt.event.ActionEvent evt) {
-                    confirmAddRev.setSize(300,150);     
-                    confirmAddRev.setVisible(true);
-                }
-            });
-        }
-    }//GEN-LAST:event_buttonAddRevenueActionPerformed
 
     private void buttonCancelAddCharActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonCancelAddCharActionPerformed
         // TODO add your handling code here:
@@ -803,26 +868,64 @@ public class GUIHome extends javax.swing.JFrame {
         //
         // Programar para salvar
         //
+         try {
+            // TODO add your handling code here:
+            DateFormat format = new SimpleDateFormat("dd/mm/yy");
+            int id = 1;
+            double value = Double.parseDouble(addValue.getText());
+            Date date = format.parse(addDate.getText());
+            String descrip=("");
+            RevenueCategory category = null;
+            Revenue charge = new Revenue(id,value,descrip,date,category);
+            addValue.setText(null);
+            addDate.setText(null);
+            confirmAddRev.setVisible(false);
+        } catch (ParseException ex) {
+            Logger.getLogger(GUIHome.class.getName()).log(Level.SEVERE, null, ex);
+        }
         confirmAddRev.setVisible(false);
     }//GEN-LAST:event_buttonConfrmAddRevActionPerformed
-
+    private void buttonConfirmAddRev(){
+         try {
+            // TODO add your handling code here:
+            DateFormat format = new SimpleDateFormat("dd/mm/yy");
+            int id = 1;
+            double value = Double.parseDouble(addValue.getText());
+            Date date = format.parse(addDate.getText());
+            String descrip=("");
+            RevenueCategory category = null;
+            Revenue charge = new Revenue(id,value,descrip,date,category);
+            addValue.setText(null);
+            addDate.setText(null);
+            confirmAddRev.setVisible(false);
+        } catch (ParseException ex) {
+            Logger.getLogger(GUIHome.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        confirmAddRev.setVisible(false);
+    }
+                
+    private void buttonConfirmAddChar(){
+         try {
+            // TODO add your handling code here:
+            DateFormat format = new SimpleDateFormat("dd/mm/yy");
+            int id = 1;
+            double value = Double.parseDouble(addValue.getText());
+            Date date = format.parse(addDate.getText());
+            String descrip=("");
+            RevenueCategory category = null;
+            Revenue charge = new Revenue(id,value,descrip,date,category);
+            addValue.setText(null);
+            addDate.setText(null);
+            confirmAddRev.setVisible(false);
+        } catch (ParseException ex) {
+            Logger.getLogger(GUIHome.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        confirmAddRev.setVisible(false);
+    }
     private void buttonMoreCancelActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonMoreCancelActionPerformed
         // TODO add your handling code here:
         moreInformation.setVisible(false);
     }//GEN-LAST:event_buttonMoreCancelActionPerformed
-
-    private void buttonMoreAdd1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonMoreAdd1ActionPerformed
-        // TODO add your handling code here:
-        //
-        // Programar para salvar
-        //
-        moreInformation.setVisible(false);
-    }//GEN-LAST:event_buttonMoreAdd1ActionPerformed
-
-    private void buttonOkInfActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonOkInfActionPerformed
-        // TODO add your handling code here:
-        viewInf.setVisible(false);
-    }//GEN-LAST:event_buttonOkInfActionPerformed
 
     private void buttonSaveEditInfActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonSaveEditInfActionPerformed
         // TODO add your handling code here:
@@ -850,6 +953,34 @@ public class GUIHome extends javax.swing.JFrame {
             System.out.println("File access cancelled by user.");
         }
     }//GEN-LAST:event_buttonExpActionPerformed
+
+    private void radioButtonMoreRevActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_radioButtonMoreRevActionPerformed
+        // TODO add your handling code here:
+        System.out.print("Rev");
+        
+        selectMoreCategory.setEnabled(true);
+    }//GEN-LAST:event_radioButtonMoreRevActionPerformed
+
+    private void radioButtonMoreCharActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_radioButtonMoreCharActionPerformed
+        // TODO add your handling code here:
+        System.out.print("char");
+        
+        selectMoreCategory.setEnabled(true);
+    }//GEN-LAST:event_radioButtonMoreCharActionPerformed
+
+    private void buttonMoreInformationActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonMoreInformationActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_buttonMoreInformationActionPerformed
+
+    private void selectMoreCategoryActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_selectMoreCategoryActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_selectMoreCategoryActionPerformed
+
+    private void jList2ValueChanged(javax.swing.event.ListSelectionEvent evt) {//GEN-FIRST:event_jList2ValueChanged
+        // TODO add your handling code here:
+        viewInf.setSize(300,350);
+        viewInf.setVisible(true);
+    }//GEN-LAST:event_jList2ValueChanged
 
     /**
      * @param args the command line arguments
@@ -915,12 +1046,11 @@ public JTextField maskValue(int tamanho,String caracteres) {
     private javax.swing.JButton buttonEditInf;
     private javax.swing.JButton buttonExp;
     private javax.swing.ButtonGroup buttonGroupMoreInf;
-    private javax.swing.JButton buttonMoreAdd1;
     private javax.swing.JButton buttonMoreCancel;
+    private javax.swing.JButton buttonMoreConfirm;
     private javax.swing.JButton buttonMoreInformation;
     private javax.swing.JButton buttonOkInf;
     private javax.swing.JButton buttonSaveEditInf;
-    private javax.swing.JComboBox<String> categoryAdd;
     private javax.swing.JComboBox<String> combCategEditInf;
     private javax.swing.JDialog confirmAddChar;
     private javax.swing.JDialog confirmAddRev;
@@ -934,7 +1064,6 @@ public JTextField maskValue(int tamanho,String caracteres) {
     private javax.swing.JLabel labeValueInf;
     private javax.swing.JLabel labelBalance;
     private javax.swing.JLabel labelCategEditInf;
-    private javax.swing.JLabel labelCategory;
     private javax.swing.JLabel labelCategoryInf;
     private javax.swing.JLabel labelChaRev;
     private javax.swing.JLabel labelDate;
@@ -959,9 +1088,9 @@ public JTextField maskValue(int tamanho,String caracteres) {
     private javax.swing.JRadioButton radioButtonMoreRev;
     private javax.swing.JComboBox<String> selectMoreCategory;
     private javax.swing.JSeparator separatorExtract;
-    private javax.swing.JTextField texCategInf;
-    private javax.swing.JTextField texDataInf;
+    private javax.swing.JComboBox<String> texCategInf;
     private javax.swing.JTextField texDateEditInf;
+    private javax.swing.JTextField texDateInf;
     private javax.swing.JScrollPane texDesInf;
     private javax.swing.JScrollPane texDescEditInf;
     private javax.swing.JTextField texValueEditInf;
