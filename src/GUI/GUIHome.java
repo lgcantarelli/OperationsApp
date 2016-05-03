@@ -2,6 +2,8 @@
  * To change this license header, choose License Headers in Project Properties.
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
+ *
+ * @author Matheus Soares
  */
 package GUI;
 import java.awt.Color;
@@ -137,11 +139,11 @@ public class GUIHome extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(checDateExtFilt)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(texDateFromExtFilt, javax.swing.GroupLayout.PREFERRED_SIZE, 55, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(texDateFromExtFilt, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(labeDateSepExtFilt)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(texDateUntilExtFilt, javax.swing.GroupLayout.PREFERRED_SIZE, 55, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(texDateUntilExtFilt, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(buttonSelecExtFilt)
                 .addContainerGap())
@@ -183,28 +185,28 @@ public class GUIHome extends javax.swing.JFrame {
                 if(checkCharExtFilt.isSelected()){
                     if(chekRevExtFilt.isSelected()){
                         if(checDateExtFilt.isSelected()){
-                            filtChargRevDate();
+                            filtExtChargRevDate();
                         }
                         else{
-                            filtChargRev();
+                            filtExtChargRev();
                         }
                     }else{
                         if(checDateExtFilt.isSelected()){
-                            filtChargDate();
+                            filtExtChargDate();
                         }else{
-                            filtCharg();
+                            filtExtCharg();
                         }
                     }
                 }else{
                     if(chekRevExtFilt.isSelected()){
                         if(checDateExtFilt.isSelected()){
-                            filtRevDate();
+                            filtExtRevDate();
                         }else{
-                            filtRev();
+                            filtExtRev();
                         }
                     }else{
                         if(checDateExtFilt.isSelected()){
-                            filtDate();
+                            filtExtDate();
                         }else{
                             JOptionPane.showMessageDialog(null, "Selecione um filtro!");
                         }
@@ -304,11 +306,11 @@ public class GUIHome extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(checDateGraFilt)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(texDateFromGraFilt, javax.swing.GroupLayout.PREFERRED_SIZE, 55, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(texDateFromGraFilt, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(labeDateSepGraFilt)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(texDateUntilGraFilt, javax.swing.GroupLayout.PREFERRED_SIZE, 55, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(texDateUntilGraFilt, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(buttonSelecGraFilt)
                 .addContainerGap())
@@ -342,6 +344,40 @@ public class GUIHome extends javax.swing.JFrame {
                 else{
                     texDateFromGraFilt.setEnabled(false);
                     texDateUntilGraFilt.setEnabled(false);
+                }
+            }
+        });
+        buttonSelecGraFilt.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                if(checkCharGraFilt.isSelected()){
+                    if(chekRevGraFilt.isSelected()){
+                        if(checDateGraFilt.isSelected()){
+                            filtGraChargRevDate();
+                        }
+                        else{
+                            filtGraChargRev();
+                        }
+                    }else{
+                        if(checDateGraFilt.isSelected()){
+                            filtGraChargDate();
+                        }else{
+                            filtGraCharg();
+                        }
+                    }
+                }else{
+                    if(chekRevGraFilt.isSelected()){
+                        if(checDateGraFilt.isSelected()){
+                            filtGraRevDate();
+                        }else{
+                            filtGraRev();
+                        }
+                    }else{
+                        if(checDateGraFilt.isSelected()){
+                            filtGraDate();
+                        }else{
+                            JOptionPane.showMessageDialog(null, "Selecione um filtro!");
+                        }
+                    }
                 }
             }
         });
@@ -556,6 +592,10 @@ public class GUIHome extends javax.swing.JFrame {
     private void addValueActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_addValueActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_addValueActionPerformed
+    
+    /**
+     * Adicionar nova Receita
+     */
     private void buttonConfirmAddRev(){
          try {
             // TODO add your handling code here:
@@ -579,7 +619,10 @@ public class GUIHome extends javax.swing.JFrame {
             Logger.getLogger(GUIHome.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
-                
+    
+    /**
+     * Adicionar nova Despesa
+     */
     private void buttonConfirmAddChar(){
          try {
             // TODO add your handling code here:
@@ -604,6 +647,10 @@ public class GUIHome extends javax.swing.JFrame {
             Logger.getLogger(GUIHome.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
+    /**
+     * Ação para salvar csv grado
+     * @param evt 
+     */
     private void buttonExpActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonExpActionPerformed
         // TODO add your handling code here:
         int returnVal = expFilExp.showSaveDialog(this);
@@ -649,26 +696,116 @@ public class GUIHome extends javax.swing.JFrame {
         });
     }
 
-
-public void balanceUpdate(){
-    balance = user.get_balance();
-    valueBalance.setText("R$ " + balance);
-    if(balance<0){
-        valueBalance.setForeground(Color.red);
-    }else if(balance>0){
-        valueBalance.setForeground(Color.green);
-    }else{
-        valueBalance.setForeground(Color.BLACK);
+    /**
+     * Atualização do valor do Saldo 
+     */
+    public void balanceUpdate(){
+        balance = user.get_balance();
+        valueBalance.setText("R$ " + balance);
+        if(balance<0){
+            valueBalance.setForeground(Color.red);
+        }else if(balance>0){
+            valueBalance.setForeground(Color.green);
+        }else{
+            valueBalance.setForeground(Color.BLACK);
+        }
     }
-}
 
-public void filtChargRevDate(){}
-public void filtChargRev(){}
-public void filtChargDate(){}
-public void filtCharg(){}
-public void filtRevDate(){}
-public void filtRev(){};
-public void filtDate(){}
+    /**
+     * Chamada de filtro para extrato de Despesa Receita e Data
+     */
+    public void filtExtChargRevDate(){
+        if(texDateFromExtFilt.getText().trim().equals("") || texDateUntilExtFilt.getText().trim().equals("")){
+            JOptionPane.showMessageDialog(null, "Preencha o campo de data!");
+        }
+    }
+
+    /**
+     * Chamada de filtro para extrato de Despesa e Receita
+     */
+    public void filtExtChargRev(){}
+
+    /**
+     * Chamada de filtro para extrato de Despesa e Data
+     */
+    public void filtExtChargDate(){
+        if(texDateFromExtFilt.getText().trim().equals("") || texDateUntilExtFilt.getText().trim().equals("")){
+            JOptionPane.showMessageDialog(null, "Preencha o campo de data!");
+        }
+    }
+
+    /**
+     * Chamada de filtro para extrato de Despesa
+     */
+    public void filtExtCharg(){}
+    public void filtExtRevDate(){
+        if(texDateFromExtFilt.getText().trim().equals("") || texDateUntilExtFilt.getText().trim().equals("")){
+            JOptionPane.showMessageDialog(null, "Preencha o campo de data!");
+        }
+    }
+    /**
+     * Chamada de filtro para extrato de Receita
+     */
+    public void filtExtRev(){};
+
+    /**
+     * Chamada de filtro para extrato de Data
+     */
+    public void filtExtDate(){
+        if(texDateFromExtFilt.getText().trim().equals("") || texDateUntilExtFilt.getText().trim().equals("")){
+            JOptionPane.showMessageDialog(null, "Preencha o campo de data!");
+        }
+    }
+    /**
+     * Chamada de filtros para graficos com Despesa Receita e data
+     */
+    public void filtGraChargRevDate(){
+        if(texDateFromExtFilt.getText().trim().equals("") || texDateUntilExtFilt.getText().trim().equals("")){
+            JOptionPane.showMessageDialog(null, "Preencha o campo de data!");
+        }
+    }
+
+    /**
+     * Chamada de filtros para graficos com Despesa e Receita
+     */
+    public void filtGraChargRev(){}
+
+    /**
+     * Chamada de filtro para grafico com Despesa e data
+     */
+    public void filtGraChargDate(){
+        if(texDateFromExtFilt.getText().trim().equals("") || texDateUntilExtFilt.getText().trim().equals("")){
+            JOptionPane.showMessageDialog(null, "Preencha o campo de data!");
+        }
+    }
+
+    /**
+     * Chamada de filtro para grafico de Despesa
+     */
+    public void filtGraCharg(){}
+
+    /**
+     * Chamada de filtro para graficos de Receita e data
+     */
+    public void filtGraRevDate(){
+        if(texDateFromExtFilt.getText().trim().equals("") || texDateUntilExtFilt.getText().trim().equals("")){
+            JOptionPane.showMessageDialog(null, "Preencha o campo de data!");
+        }
+    }
+
+    /**
+     * Chamade de filtro para grafico de Receita
+     */
+    public void filtGraRev(){};
+
+    /**
+     * Chamada de filtro para grafico de Data
+     */
+    public void filtGraDate(){
+        if(texDateFromExtFilt.getText().trim().equals("") || texDateUntilExtFilt.getText().trim().equals("")){
+            JOptionPane.showMessageDialog(null, "Preencha o campo de data!");
+        }
+    }
     private User user;
     private double balance;
     int id;

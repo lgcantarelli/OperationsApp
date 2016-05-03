@@ -203,11 +203,11 @@
                           <EmptySpace max="-2" attributes="0"/>
                           <Component id="checDateExtFilt" min="-2" max="-2" attributes="0"/>
                           <EmptySpace max="-2" attributes="0"/>
-                          <Component id="texDateFromExtFilt" min="-2" pref="55" max="-2" attributes="0"/>
+                          <Component id="texDateFromExtFilt" min="-2" pref="80" max="-2" attributes="0"/>
                           <EmptySpace max="-2" attributes="0"/>
                           <Component id="labeDateSepExtFilt" min="-2" max="-2" attributes="0"/>
                           <EmptySpace max="-2" attributes="0"/>
-                          <Component id="texDateUntilExtFilt" min="-2" pref="55" max="-2" attributes="0"/>
+                          <Component id="texDateUntilExtFilt" min="-2" pref="80" max="-2" attributes="0"/>
                           <EmptySpace max="32767" attributes="0"/>
                           <Component id="buttonSelecExtFilt" min="-2" max="-2" attributes="0"/>
                           <EmptySpace max="-2" attributes="0"/>
@@ -277,7 +277,7 @@
                     <Property name="text" type="java.lang.String" value="Filtro"/>
                   </Properties>
                   <AuxValues>
-                    <AuxValue name="JavaCodeGenerator_AddingCodePost" type="java.lang.String" value="buttonSelecExtFilt.addActionListener(new java.awt.event.ActionListener() {&#xa;    public void actionPerformed(java.awt.event.ActionEvent evt) {&#xa;        if(checkCharExtFilt.isSelected()){ &#xa;            if(chekRevExtFilt.isSelected()){&#xa;                if(checDateExtFilt.isSelected()){&#xa;                    filtChargRevDate();&#xa;                }&#xa;                else{&#xa;                    filtChargRev();&#xa;                }&#xa;            }else{&#xa;                if(checDateExtFilt.isSelected()){&#xa;                    filtChargDate();&#xa;                }else{&#xa;                    filtCharg();&#xa;                }&#xa;            }&#xa;        }else{&#xa;            if(chekRevExtFilt.isSelected()){&#xa;                if(checDateExtFilt.isSelected()){&#xa;                    filtRevDate();&#xa;                }else{&#xa;                    filtRev();&#xa;                }&#xa;            }else{&#xa;                if(checDateExtFilt.isSelected()){&#xa;                    filtDate();&#xa;                }else{&#xa;                    JOptionPane.showMessageDialog(null, &quot;Selecione um filtro!&quot;);&#xa;                }&#xa;            }&#xa;        }&#xa;    }&#xa;});"/>
+                    <AuxValue name="JavaCodeGenerator_AddingCodePost" type="java.lang.String" value="buttonSelecExtFilt.addActionListener(new java.awt.event.ActionListener() {&#xa;    public void actionPerformed(java.awt.event.ActionEvent evt) {&#xa;        if(checkCharExtFilt.isSelected()){ &#xa;            if(chekRevExtFilt.isSelected()){&#xa;                if(checDateExtFilt.isSelected()){&#xa;                    filtExtChargRevDate();&#xa;                }&#xa;                else{&#xa;                    filtExtChargRev();&#xa;                }&#xa;            }else{&#xa;                if(checDateExtFilt.isSelected()){&#xa;                    filtExtChargDate();&#xa;                }else{&#xa;                    filtExtCharg();&#xa;                }&#xa;            }&#xa;        }else{&#xa;            if(chekRevExtFilt.isSelected()){&#xa;                if(checDateExtFilt.isSelected()){&#xa;                    filtExtRevDate();&#xa;                }else{&#xa;                    filtExtRev();&#xa;                }&#xa;            }else{&#xa;                if(checDateExtFilt.isSelected()){&#xa;                    filtExtDate();&#xa;                }else{&#xa;                    JOptionPane.showMessageDialog(null, &quot;Selecione um filtro!&quot;);&#xa;                }&#xa;            }&#xa;        }&#xa;    }&#xa;});"/>
                   </AuxValues>
                 </Component>
               </SubComponents>
@@ -391,11 +391,11 @@
                               <EmptySpace max="-2" attributes="0"/>
                               <Component id="checDateGraFilt" min="-2" max="-2" attributes="0"/>
                               <EmptySpace max="-2" attributes="0"/>
-                              <Component id="texDateFromGraFilt" min="-2" pref="55" max="-2" attributes="0"/>
+                              <Component id="texDateFromGraFilt" min="-2" pref="80" max="-2" attributes="0"/>
                               <EmptySpace max="-2" attributes="0"/>
                               <Component id="labeDateSepGraFilt" min="-2" max="-2" attributes="0"/>
                               <EmptySpace max="-2" attributes="0"/>
-                              <Component id="texDateUntilGraFilt" min="-2" pref="55" max="-2" attributes="0"/>
+                              <Component id="texDateUntilGraFilt" min="-2" pref="80" max="-2" attributes="0"/>
                               <EmptySpace max="32767" attributes="0"/>
                               <Component id="buttonSelecGraFilt" min="-2" max="-2" attributes="0"/>
                               <EmptySpace max="-2" attributes="0"/>
@@ -464,6 +464,9 @@
                       <Properties>
                         <Property name="text" type="java.lang.String" value="Filtro"/>
                       </Properties>
+                      <AuxValues>
+                        <AuxValue name="JavaCodeGenerator_AddingCodePost" type="java.lang.String" value="buttonSelecGraFilt.addActionListener(new java.awt.event.ActionListener() {&#xa;    public void actionPerformed(java.awt.event.ActionEvent evt) {&#xa;        if(checkCharGraFilt.isSelected()){ &#xa;            if(chekRevGraFilt.isSelected()){&#xa;                if(checDateGraFilt.isSelected()){&#xa;                    filtGraChargRevDate();&#xa;                }&#xa;                else{&#xa;                    filtGraChargRev();&#xa;                }&#xa;            }else{&#xa;                if(checDateGraFilt.isSelected()){&#xa;                    filtGraChargDate();&#xa;                }else{&#xa;                    filtGraCharg();&#xa;                }&#xa;            }&#xa;        }else{&#xa;            if(chekRevGraFilt.isSelected()){&#xa;                if(checDateGraFilt.isSelected()){&#xa;                    filtGraRevDate();&#xa;                }else{&#xa;                    filtGraRev();&#xa;                }&#xa;            }else{&#xa;                if(checDateGraFilt.isSelected()){&#xa;                    filtGraDate();&#xa;                }else{&#xa;                    JOptionPane.showMessageDialog(null, &quot;Selecione um filtro!&quot;);&#xa;                }&#xa;            }&#xa;        }&#xa;    }&#xa;});"/>
+                      </AuxValues>
                     </Component>
                   </SubComponents>
                 </Container>
