@@ -322,7 +322,9 @@ public class GUIHome extends javax.swing.JFrame {
             balanceUpdate();
             addValue.setText(null);
             addDate.setText(null);
-            radioButtonRevenue.setSelected(false);
+            selectCategory.removeAllItems();
+            selectCategory.setEnabled(false);
+            buttonGroupAdd.clearSelection();
         } catch (ParseException ex) {
             Logger.getLogger(GUIHome.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -344,7 +346,9 @@ public class GUIHome extends javax.swing.JFrame {
             balanceUpdate();
             addValue.setText(null);
             addDate.setText(null);
-            radioButtonCharge.setSelected(false);
+            selectCategory.removeAllItems();
+            selectCategory.setEnabled(false);
+            buttonGroupAdd.clearSelection();
             
         } catch (ParseException ex) {
             Logger.getLogger(GUIHome.class.getName()).log(Level.SEVERE, null, ex);
