@@ -55,7 +55,28 @@ public class GUIHome extends javax.swing.JFrame {
         separatorExtract = new javax.swing.JSeparator();
         labelBalance = new javax.swing.JLabel();
         valueBalance = new javax.swing.JLabel();
+        PanelFiltExtr = new javax.swing.JPanel();
+        checkCharExtFilt = new javax.swing.JCheckBox();
+        chekRevExtFilt = new javax.swing.JCheckBox();
+        checDateExtFilt = new javax.swing.JCheckBox();
+        texDateFromExtFilt = new javax.swing.JTextField();
+        labeDateSepExtFilt = new javax.swing.JLabel();
+        texDateUntilExtFilt = new javax.swing.JTextField();
+        buttonSelecExtFilt = new javax.swing.JButton();
         panelReport = new javax.swing.JPanel();
+        panelAnualGraph = new javax.swing.JPanel();
+        labelGrapAnual = new javax.swing.JLabel();
+        jPanel3 = new javax.swing.JPanel();
+        PanelFiltExtr1 = new javax.swing.JPanel();
+        checkCharGraFilt = new javax.swing.JCheckBox();
+        chekRevGraFilt = new javax.swing.JCheckBox();
+        checDateGraFilt = new javax.swing.JCheckBox();
+        texDateFromGraFilt = new javax.swing.JTextField();
+        labeDateSepGraFilt = new javax.swing.JLabel();
+        texDateUntilGraFilt = new javax.swing.JTextField();
+        buttonSelecGraFilt = new javax.swing.JButton();
+        jLabel1 = new javax.swing.JLabel();
+        jSeparator1 = new javax.swing.JSeparator();
         panelAdd = new javax.swing.JPanel();
         labelDate = new javax.swing.JLabel();
         labelValue = new javax.swing.JLabel();
@@ -67,6 +88,7 @@ public class GUIHome extends javax.swing.JFrame {
         labelCategory = new javax.swing.JLabel();
         addDate = new javax.swing.JTextField();
         buttonExp = new javax.swing.JButton();
+        jSeparator2 = new javax.swing.JSeparator();
 
         expFilExp.setAcceptAllFileFilterUsed(false);
         expFilExp.setDialogType(javax.swing.JFileChooser.SAVE_DIALOG);
@@ -91,6 +113,106 @@ public class GUIHome extends javax.swing.JFrame {
 
         valueBalance.setFont(new java.awt.Font("Tahoma", 0, 24)); // NOI18N
 
+        checkCharExtFilt.setText("Despesas");
+
+        chekRevExtFilt.setText("Receitas");
+
+        texDateFromExtFilt.setEnabled(false);
+
+        labeDateSepExtFilt.setText("-");
+
+        texDateUntilExtFilt.setEnabled(false);
+
+        buttonSelecExtFilt.setText("Filtro");
+
+        javax.swing.GroupLayout PanelFiltExtrLayout = new javax.swing.GroupLayout(PanelFiltExtr);
+        PanelFiltExtr.setLayout(PanelFiltExtrLayout);
+        PanelFiltExtrLayout.setHorizontalGroup(
+            PanelFiltExtrLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(PanelFiltExtrLayout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(checkCharExtFilt)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(chekRevExtFilt)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(checDateExtFilt)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(texDateFromExtFilt, javax.swing.GroupLayout.PREFERRED_SIZE, 55, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(labeDateSepExtFilt)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(texDateUntilExtFilt, javax.swing.GroupLayout.PREFERRED_SIZE, 55, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(buttonSelecExtFilt)
+                .addContainerGap())
+        );
+        PanelFiltExtrLayout.setVerticalGroup(
+            PanelFiltExtrLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(PanelFiltExtrLayout.createSequentialGroup()
+                .addGroup(PanelFiltExtrLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(PanelFiltExtrLayout.createSequentialGroup()
+                        .addGap(11, 11, 11)
+                        .addGroup(PanelFiltExtrLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(checkCharExtFilt)
+                            .addComponent(chekRevExtFilt)
+                            .addComponent(checDateExtFilt)))
+                    .addGroup(PanelFiltExtrLayout.createSequentialGroup()
+                        .addContainerGap()
+                        .addGroup(PanelFiltExtrLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(texDateFromExtFilt, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(labeDateSepExtFilt)
+                            .addComponent(texDateUntilExtFilt, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(buttonSelecExtFilt, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+        );
+
+        checDateExtFilt.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                if(checDateExtFilt.isSelected()){
+                    texDateFromExtFilt.setEnabled(true);
+                    texDateUntilExtFilt.setEnabled(true);
+                }
+                else{
+                    texDateFromExtFilt.setEnabled(false);
+                    texDateUntilExtFilt.setEnabled(false);
+                }
+            }
+        });
+        buttonSelecExtFilt.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                if(checkCharExtFilt.isSelected()){
+                    if(chekRevExtFilt.isSelected()){
+                        if(checDateExtFilt.isSelected()){
+                            filtChargRevDate();
+                        }
+                        else{
+                            filtChargRev();
+                        }
+                    }else{
+                        if(checDateExtFilt.isSelected()){
+                            filtChargDate();
+                        }else{
+                            filtCharg();
+                        }
+                    }
+                }else{
+                    if(chekRevExtFilt.isSelected()){
+                        if(checDateExtFilt.isSelected()){
+                            filtRevDate();
+                        }else{
+                            filtRev();
+                        }
+                    }else{
+                        if(checDateExtFilt.isSelected()){
+                            filtDate();
+                        }else{
+                            JOptionPane.showMessageDialog(null, "Selecione um filtro!");
+                        }
+                    }
+                }
+            }
+        });
+
         javax.swing.GroupLayout panelExtractLayout = new javax.swing.GroupLayout(panelExtract);
         panelExtract.setLayout(panelExtractLayout);
         panelExtractLayout.setHorizontalGroup(
@@ -98,16 +220,17 @@ public class GUIHome extends javax.swing.JFrame {
             .addGroup(panelExtractLayout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(panelExtractLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(labelChaRev, javax.swing.GroupLayout.DEFAULT_SIZE, 685, Short.MAX_VALUE)
-                    .addComponent(listExtract)
                     .addComponent(separatorExtract)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panelExtractLayout.createSequentialGroup()
+                        .addComponent(labelChaRev, javax.swing.GroupLayout.DEFAULT_SIZE, 703, Short.MAX_VALUE)
+                        .addGap(10, 10, 10))
+                    .addComponent(listExtract, javax.swing.GroupLayout.Alignment.TRAILING)
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panelExtractLayout.createSequentialGroup()
                         .addGap(0, 0, Short.MAX_VALUE)
                         .addGroup(panelExtractLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panelExtractLayout.createSequentialGroup()
-                                .addComponent(labelBalance)
-                                .addGap(167, 167, 167))
-                            .addComponent(valueBalance, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 224, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                            .addComponent(labelBalance)
+                            .addComponent(valueBalance, javax.swing.GroupLayout.PREFERRED_SIZE, 224, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                    .addComponent(PanelFiltExtr, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addContainerGap())
         );
         panelExtractLayout.setVerticalGroup(
@@ -115,15 +238,17 @@ public class GUIHome extends javax.swing.JFrame {
             .addGroup(panelExtractLayout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(labelChaRev, javax.swing.GroupLayout.PREFERRED_SIZE, 26, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 59, Short.MAX_VALUE)
-                .addComponent(listExtract, javax.swing.GroupLayout.PREFERRED_SIZE, 442, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(8, 8, 8)
+                .addComponent(PanelFiltExtr, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(listExtract, javax.swing.GroupLayout.PREFERRED_SIZE, 445, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(separatorExtract, javax.swing.GroupLayout.PREFERRED_SIZE, 10, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(1, 1, 1)
+                .addComponent(separatorExtract, javax.swing.GroupLayout.PREFERRED_SIZE, 15, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(labelBalance, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(valueBalance)
-                .addGap(16, 16, 16))
+                .addComponent(valueBalance, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap())
         );
 
         valueBalance.setText("R$ " + balance);
@@ -137,15 +262,135 @@ public class GUIHome extends javax.swing.JFrame {
 
         panelInf.addTab("Extrato", panelExtract);
 
+        labelGrapAnual.setText("Anual");
+
+        javax.swing.GroupLayout panelAnualGraphLayout = new javax.swing.GroupLayout(panelAnualGraph);
+        panelAnualGraph.setLayout(panelAnualGraphLayout);
+        panelAnualGraphLayout.setHorizontalGroup(
+            panelAnualGraphLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(panelAnualGraphLayout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(labelGrapAnual)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+        );
+        panelAnualGraphLayout.setVerticalGroup(
+            panelAnualGraphLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(panelAnualGraphLayout.createSequentialGroup()
+                .addComponent(labelGrapAnual)
+                .addGap(0, 185, Short.MAX_VALUE))
+        );
+
+        checkCharGraFilt.setText("Despesas");
+
+        chekRevGraFilt.setText("Receitas");
+
+        texDateFromGraFilt.setEnabled(false);
+
+        labeDateSepGraFilt.setText("-");
+
+        texDateUntilGraFilt.setEnabled(false);
+
+        buttonSelecGraFilt.setText("Filtro");
+
+        javax.swing.GroupLayout PanelFiltExtr1Layout = new javax.swing.GroupLayout(PanelFiltExtr1);
+        PanelFiltExtr1.setLayout(PanelFiltExtr1Layout);
+        PanelFiltExtr1Layout.setHorizontalGroup(
+            PanelFiltExtr1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(PanelFiltExtr1Layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(checkCharGraFilt)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(chekRevGraFilt)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(checDateGraFilt)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(texDateFromGraFilt, javax.swing.GroupLayout.PREFERRED_SIZE, 55, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(labeDateSepGraFilt)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(texDateUntilGraFilt, javax.swing.GroupLayout.PREFERRED_SIZE, 55, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(buttonSelecGraFilt)
+                .addContainerGap())
+        );
+        PanelFiltExtr1Layout.setVerticalGroup(
+            PanelFiltExtr1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(PanelFiltExtr1Layout.createSequentialGroup()
+                .addGroup(PanelFiltExtr1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(PanelFiltExtr1Layout.createSequentialGroup()
+                        .addGap(11, 11, 11)
+                        .addGroup(PanelFiltExtr1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(checkCharGraFilt)
+                            .addComponent(chekRevGraFilt)
+                            .addComponent(checDateGraFilt)))
+                    .addGroup(PanelFiltExtr1Layout.createSequentialGroup()
+                        .addContainerGap()
+                        .addGroup(PanelFiltExtr1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(texDateFromGraFilt, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(labeDateSepGraFilt)
+                            .addComponent(texDateUntilGraFilt, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(buttonSelecGraFilt, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+        );
+
+        checDateGraFilt.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                if(checDateGraFilt.isSelected()){
+                    texDateFromGraFilt.setEnabled(true);
+                    texDateUntilGraFilt.setEnabled(true);
+                }
+                else{
+                    texDateFromGraFilt.setEnabled(false);
+                    texDateUntilGraFilt.setEnabled(false);
+                }
+            }
+        });
+
+        jLabel1.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
+        jLabel1.setText("Graficos");
+
+        javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
+        jPanel3.setLayout(jPanel3Layout);
+        jPanel3Layout.setHorizontalGroup(
+            jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel3Layout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel3Layout.createSequentialGroup()
+                        .addComponent(jLabel1)
+                        .addGap(0, 0, Short.MAX_VALUE))
+                    .addComponent(PanelFiltExtr1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap())
+        );
+        jPanel3Layout.setVerticalGroup(
+            jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel3Layout.createSequentialGroup()
+                .addComponent(jLabel1)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(PanelFiltExtr1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(364, Short.MAX_VALUE))
+        );
+
         javax.swing.GroupLayout panelReportLayout = new javax.swing.GroupLayout(panelReport);
         panelReport.setLayout(panelReportLayout);
         panelReportLayout.setHorizontalGroup(
             panelReportLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 705, Short.MAX_VALUE)
+            .addComponent(panelAnualGraph, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(jPanel3, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addGroup(panelReportLayout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jSeparator1, javax.swing.GroupLayout.PREFERRED_SIZE, 713, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         panelReportLayout.setVerticalGroup(
             panelReportLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 627, Short.MAX_VALUE)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panelReportLayout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jSeparator1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(panelAnualGraph, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         panelInf.addTab("Graficos", panelReport);
@@ -271,20 +516,22 @@ public class GUIHome extends javax.swing.JFrame {
             }
         });
 
+        jSeparator2.setOrientation(javax.swing.SwingConstants.VERTICAL);
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+            .addGroup(layout.createSequentialGroup()
+                .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(panelAdd, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(layout.createSequentialGroup()
-                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(buttonExp)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED))
-                    .addGroup(layout.createSequentialGroup()
-                        .addContainerGap()
-                        .addComponent(panelAdd, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                        .addGap(0, 0, Short.MAX_VALUE)
+                        .addComponent(buttonExp)))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jSeparator2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(panelInf)
                 .addContainerGap())
         );
@@ -292,14 +539,17 @@ public class GUIHome extends javax.swing.JFrame {
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addComponent(panelInf)
             .addGroup(layout.createSequentialGroup()
-                .addGap(27, 27, 27)
-                .addComponent(panelAdd, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(buttonExp)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(jSeparator2, javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(27, 27, 27)
+                        .addComponent(panelAdd, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(buttonExp)))
                 .addGap(29, 29, 29))
         );
 
-        setSize(new java.awt.Dimension(948, 694));
+        setSize(new java.awt.Dimension(948, 709));
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
    
@@ -412,31 +662,51 @@ public void balanceUpdate(){
     }
 }
 
-public void comboBoxRev(){
-    
-}
-
-
+public void filtChargRevDate(){}
+public void filtChargRev(){}
+public void filtChargDate(){}
+public void filtCharg(){}
+public void filtRevDate(){}
+public void filtRev(){};
+public void filtDate(){}
     private User user;
     private double balance;
     int id;
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JPanel PanelFiltExtr;
+    private javax.swing.JPanel PanelFiltExtr1;
     private javax.swing.JTextField addDate;
     private javax.swing.JTextField addValue;
     private javax.swing.JButton buttonAdd;
     private javax.swing.JButton buttonExp;
     private javax.swing.ButtonGroup buttonGroupAdd;
     private javax.swing.ButtonGroup buttonGroupMoreInf;
+    private javax.swing.JButton buttonSelecExtFilt;
+    private javax.swing.JButton buttonSelecGraFilt;
+    private javax.swing.JCheckBox checDateExtFilt;
+    private javax.swing.JCheckBox checDateGraFilt;
+    private javax.swing.JCheckBox checkCharExtFilt;
+    private javax.swing.JCheckBox checkCharGraFilt;
+    private javax.swing.JCheckBox chekRevExtFilt;
+    private javax.swing.JCheckBox chekRevGraFilt;
     private javax.swing.JFileChooser expFilExp;
+    private javax.swing.JLabel jLabel1;
     private javax.swing.JList<String> jList2;
+    private javax.swing.JPanel jPanel3;
+    private javax.swing.JSeparator jSeparator1;
+    private javax.swing.JSeparator jSeparator2;
+    private javax.swing.JLabel labeDateSepExtFilt;
+    private javax.swing.JLabel labeDateSepGraFilt;
     private javax.swing.JLabel labelBalance;
     private javax.swing.JLabel labelCategory;
     private javax.swing.JLabel labelChaRev;
     private javax.swing.JLabel labelDate;
+    private javax.swing.JLabel labelGrapAnual;
     private javax.swing.JLabel labelValue;
     private javax.swing.JScrollPane listExtract;
     private javax.swing.JPanel panelAdd;
+    private javax.swing.JPanel panelAnualGraph;
     private javax.swing.JPanel panelExtract;
     private javax.swing.JTabbedPane panelInf;
     private javax.swing.JPanel panelReport;
@@ -444,6 +714,10 @@ public void comboBoxRev(){
     private javax.swing.JRadioButton radioButtonRevenue;
     private javax.swing.JComboBox<String> selectCategory;
     private javax.swing.JSeparator separatorExtract;
+    private javax.swing.JTextField texDateFromExtFilt;
+    private javax.swing.JTextField texDateFromGraFilt;
+    private javax.swing.JTextField texDateUntilExtFilt;
+    private javax.swing.JTextField texDateUntilGraFilt;
     private javax.swing.JLabel valueBalance;
     // End of variables declaration//GEN-END:variables
 }
