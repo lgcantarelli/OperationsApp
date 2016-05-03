@@ -38,6 +38,7 @@ public class GUIHome extends javax.swing.JFrame {
         id=0;
         listRevenueCategory = listRevCatCri();
         listChargeCategory = listCharCatCri();
+        listCategory = new OperationsApp();
     }
 
     /**
@@ -92,6 +93,8 @@ public class GUIHome extends javax.swing.JFrame {
         radioButtonRevenue = new javax.swing.JRadioButton();
         labelCategory = new javax.swing.JLabel();
         addDate = new javax.swing.JTextField();
+        addTitle = new javax.swing.JTextField();
+        labelTitle = new javax.swing.JLabel();
         buttonExp = new javax.swing.JButton();
         jSeparator2 = new javax.swing.JSeparator();
 
@@ -450,6 +453,8 @@ public class GUIHome extends javax.swing.JFrame {
 
         labelCategory.setText("Categoria");
 
+        labelTitle.setText("Titulo");
+
         javax.swing.GroupLayout panelAddLayout = new javax.swing.GroupLayout(panelAdd);
         panelAdd.setLayout(panelAddLayout);
         panelAddLayout.setHorizontalGroup(
@@ -457,9 +462,11 @@ public class GUIHome extends javax.swing.JFrame {
             .addGroup(panelAddLayout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(panelAddLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(addTitle)
                     .addComponent(buttonAdd, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(addValue)
                     .addComponent(selectCategory, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(addDate)
                     .addGroup(panelAddLayout.createSequentialGroup()
                         .addComponent(radioButtonCharge)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 48, Short.MAX_VALUE)
@@ -468,15 +475,19 @@ public class GUIHome extends javax.swing.JFrame {
                         .addGroup(panelAddLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(labelDate)
                             .addComponent(labelValue, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(labelCategory))
-                        .addGap(0, 0, Short.MAX_VALUE))
-                    .addComponent(addDate))
+                            .addComponent(labelCategory)
+                            .addComponent(labelTitle))
+                        .addGap(0, 0, Short.MAX_VALUE)))
                 .addContainerGap())
         );
         panelAddLayout.setVerticalGroup(
             panelAddLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(panelAddLayout.createSequentialGroup()
-                .addContainerGap()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(labelTitle)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(addTitle, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(panelAddLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(radioButtonCharge)
                     .addComponent(radioButtonRevenue))
@@ -492,7 +503,7 @@ public class GUIHome extends javax.swing.JFrame {
                 .addComponent(labelCategory)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(selectCategory, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 19, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(buttonAdd, javax.swing.GroupLayout.PREFERRED_SIZE, 38, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
         );
@@ -578,7 +589,7 @@ public class GUIHome extends javax.swing.JFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addComponent(jSeparator2, javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(27, 27, 27)
+                        .addGap(21, 21, 21)
                         .addComponent(panelAdd, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(buttonExp)))
@@ -607,11 +618,14 @@ public class GUIHome extends javax.swing.JFrame {
             Date date;
             date = format.parse(textDate);
             RevenueCategory category = listRevenueCategory.get(selectCategory.getSelectedIndex());
-            Revenue revenue = new Revenue(id,value,descrip,date,category);
+            Revenue revenue = new Revenue(id,value,addTitle.getText(),date,category);
+            
+            //Revenue revenue = new Revenue(id,value,descrip,date,category);
             user.add_revenue(revenue);
             balanceUpdate();
             addValue.setText(null);
             addDate.setText(null);
+            addTitle.setText(null);
             selectCategory.removeAllItems();
             selectCategory.setEnabled(false);
             buttonGroupAdd.clearSelection();
@@ -634,11 +648,12 @@ public class GUIHome extends javax.swing.JFrame {
             Date date;
             date = format.parse(textDate);
             ChargeCategory category = listChargeCategory.get(selectCategory.getSelectedIndex());;
-            Charge charge = new Charge(id,value,descrip,date,category);
+            Charge charge = new Charge(id,value,addTitle.getText(),date,category);
             user.add_charge(charge);
             balanceUpdate();
             addValue.setText(null);
             addDate.setText(null);
+            addTitle.setText(null);
             selectCategory.removeAllItems();
             selectCategory.setEnabled(false);
             buttonGroupAdd.clearSelection();
@@ -1028,12 +1043,14 @@ public class GUIHome extends javax.swing.JFrame {
     private User user;
     private double balance;
     int id;
+    OperationsApp listCategory;
     List<RevenueCategory> listRevenueCategory;
     List<ChargeCategory> listChargeCategory;
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JPanel PanelFiltExtr;
     private javax.swing.JPanel PanelFiltExtr1;
     private javax.swing.JTextField addDate;
+    private javax.swing.JTextField addTitle;
     private javax.swing.JTextField addValue;
     private javax.swing.JButton buttonAdd;
     private javax.swing.JButton buttonExp;
@@ -1060,6 +1077,7 @@ public class GUIHome extends javax.swing.JFrame {
     private javax.swing.JLabel labelChaRev;
     private javax.swing.JLabel labelDate;
     private javax.swing.JLabel labelGrapAnual;
+    private javax.swing.JLabel labelTitle;
     private javax.swing.JLabel labelValue;
     private javax.swing.JScrollPane listExtract;
     private javax.swing.JPanel panelAdd;
