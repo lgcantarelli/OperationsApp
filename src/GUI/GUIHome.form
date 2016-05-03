@@ -584,7 +584,7 @@
             <Property name="text" type="java.lang.String" value="Despesa"/>
           </Properties>
           <AuxValues>
-            <AuxValue name="JavaCodeGenerator_AddingCodePost" type="java.lang.String" value="radioButtonCharge.addActionListener(new java.awt.event.ActionListener() {&#xa;    public void actionPerformed(java.awt.event.ActionEvent evt) {&#xa;        selectCategory.removeAllItems();&#xa;        selectCategory.addItem(&quot;Supermecado&quot;);&#xa;        selectCategory.addItem(&quot;Aluguel&quot;);&#xa;        selectCategory.addItem(&quot;Luz&quot;);&#xa;        selectCategory.addItem(&quot;&#xc1;gua&quot;);&#xa;        selectCategory.addItem(&quot;Telefone&quot;);&#xa;        selectCategory.addItem(&quot;Internet&quot;);&#xa;        selectCategory.addItem(&quot;Celular&quot;);&#xa;        selectCategory.setEnabled(true);&#xa;    }&#xa;});"/>
+            <AuxValue name="JavaCodeGenerator_AddingCodePost" type="java.lang.String" value="radioButtonCharge.addActionListener(new java.awt.event.ActionListener() {&#xa;    public void actionPerformed(java.awt.event.ActionEvent evt) {&#xa;        selectCategory.removeAllItems();&#xa;        List&lt;String&gt; list = listCharCatList();&#xa;        for(int i=0;i&lt;list.size();i++){&#xa;            selectCategory.addItem(list.get(i));&#xa;        }&#xa;        selectCategory.setEnabled(true);&#xa;    }&#xa;});"/>
           </AuxValues>
         </Component>
         <Component class="javax.swing.JRadioButton" name="radioButtonRevenue">
@@ -595,7 +595,7 @@
             <Property name="text" type="java.lang.String" value="Receita"/>
           </Properties>
           <AuxValues>
-            <AuxValue name="JavaCodeGenerator_AddingCodePost" type="java.lang.String" value="radioButtonRevenue.addActionListener(new java.awt.event.ActionListener() {&#xa;    public void actionPerformed(java.awt.event.ActionEvent evt) {&#xa;        selectCategory.removeAllItems();&#xa;        selectCategory.addItem(&quot;Bolsa&quot;);&#xa;        selectCategory.addItem(&quot;Freelance&quot;);&#xa;        selectCategory.addItem(&quot;Sal&#xe1;rio&quot;);&#xa;        selectCategory.addItem(&quot;Outros&quot;);&#xa;        selectCategory.setEnabled(true);&#xa;    }&#xa;});"/>
+            <AuxValue name="JavaCodeGenerator_AddingCodePost" type="java.lang.String" value="radioButtonRevenue.addActionListener(new java.awt.event.ActionListener() {&#xa;    public void actionPerformed(java.awt.event.ActionEvent evt) {&#xa;        selectCategory.removeAllItems();&#xa;        List&lt;String&gt; list = listRevCatList();&#xa;        for(int i=0;i&lt;list.size();i++){&#xa;            selectCategory.addItem(list.get(i));&#xa;        }&#xa;        selectCategory.setEnabled(true);&#xa;    }&#xa;});"/>
           </AuxValues>
         </Component>
         <Component class="javax.swing.JLabel" name="labelCategory">

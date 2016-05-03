@@ -11,6 +11,7 @@ import java.io.File;
 import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import java.util.logging.Level;
@@ -35,6 +36,8 @@ public class GUIHome extends javax.swing.JFrame {
         initComponents();
         user = new User();
         id=0;
+        listRevenueCategory = listRevCatCri();
+        listChargeCategory = listCharCatCri();
     }
 
     /**
@@ -524,23 +527,20 @@ public class GUIHome extends javax.swing.JFrame {
         radioButtonCharge.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 selectCategory.removeAllItems();
-                selectCategory.addItem("Supermecado");
-                selectCategory.addItem("Aluguel");
-                selectCategory.addItem("Luz");
-                selectCategory.addItem("Água");
-                selectCategory.addItem("Telefone");
-                selectCategory.addItem("Internet");
-                selectCategory.addItem("Celular");
+                List<String> list = listCharCatList();
+                for(int i=0;i<list.size();i++){
+                    selectCategory.addItem(list.get(i));
+                }
                 selectCategory.setEnabled(true);
             }
         });
         radioButtonRevenue.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 selectCategory.removeAllItems();
-                selectCategory.addItem("Bolsa");
-                selectCategory.addItem("Freelance");
-                selectCategory.addItem("Salário");
-                selectCategory.addItem("Outros");
+                List<String> list = listRevCatList();
+                for(int i=0;i<list.size();i++){
+                    selectCategory.addItem(list.get(i));
+                }
                 selectCategory.setEnabled(true);
             }
         });
@@ -606,7 +606,7 @@ public class GUIHome extends javax.swing.JFrame {
             String descrip = null;
             Date date;
             date = format.parse(textDate);
-            RevenueCategory category = null;
+            RevenueCategory category = listRevenueCategory.get(selectCategory.getSelectedIndex());
             Revenue revenue = new Revenue(id,value,descrip,date,category);
             user.add_revenue(revenue);
             balanceUpdate();
@@ -633,7 +633,7 @@ public class GUIHome extends javax.swing.JFrame {
             String descrip = null;
             Date date;
             date = format.parse(textDate);
-            ChargeCategory category = null;
+            ChargeCategory category = listChargeCategory.get(selectCategory.getSelectedIndex());;
             Charge charge = new Charge(id,value,descrip,date,category);
             user.add_charge(charge);
             balanceUpdate();
@@ -697,6 +697,63 @@ public class GUIHome extends javax.swing.JFrame {
     }
 
     /**
+     * Lista de categoria de Reciita
+     * @return lista de categorias Receita
+     */
+    public List<RevenueCategory> listRevCatCri(){
+        List<RevenueCategory> listCategory = new ArrayList();
+        RevenueCategory category;
+        category = new RevenueCategory("Bolsa");
+        listCategory.add(category);
+        category = new RevenueCategory("Freelance");
+        listCategory.add(category);
+        category = new RevenueCategory("Salário");
+        listCategory.add(category);
+        category = new RevenueCategory("Outros");
+        listCategory.add(category);
+        return listCategory;
+    }
+    
+    public List<String> listRevCatList(){
+        List<String> listRevCatList = new ArrayList();
+        for(int i=0;i<listRevenueCategory.size();i++){
+            listRevCatList.add(listRevenueCategory.get(i).getName());
+        }
+        return listRevCatList;
+    }
+    
+     /**
+     * Lista de categoria de Despesa
+     * @return lista de categorias Receita
+     */
+    public List<ChargeCategory> listCharCatCri(){
+        List<ChargeCategory> listCategory = new ArrayList();
+        ChargeCategory category;
+        category = new ChargeCategory("Supermecado");
+        listCategory.add(category);
+        category = new ChargeCategory("Aluguel");
+        listCategory.add(category);
+        category = new ChargeCategory("Luz");
+        listCategory.add(category);
+        category = new ChargeCategory("Água");
+        listCategory.add(category);
+        category = new ChargeCategory("Telefone");
+        listCategory.add(category);        
+        category = new ChargeCategory("Internet");
+        listCategory.add(category);       
+        category = new ChargeCategory("Celular");
+        listCategory.add(category);
+        return listCategory;
+    }
+    
+    public List<String> listCharCatList(){
+        List<String> listChaCatList = new ArrayList();
+        for(int i=0;i<listChargeCategory.size();i++){
+            listChaCatList.add(listChargeCategory.get(i).getName());
+        }
+        return listChaCatList;
+    }
+    /**
      * Atualização do valor do Saldo 
      */
     public void balanceUpdate(){
@@ -717,13 +774,35 @@ public class GUIHome extends javax.swing.JFrame {
     public void filtExtChargRevDate(){
         if(texDateFromExtFilt.getText().trim().equals("") || texDateUntilExtFilt.getText().trim().equals("")){
             JOptionPane.showMessageDialog(null, "Preencha o campo de data!");
+        }else{
+            try {
+                DateFormat format = DateFormat.getDateInstance();
+                String textDatefrom = texDateFromExtFilt.getText();
+                Date datefrom;
+                datefrom = format.parse(textDatefrom);
+                String textDateUntil = texDateUntilExtFilt.getText();
+                Date dateUntil;
+                dateUntil = format.parse(textDateUntil);
+                //
+                checkCharExtFilt.setSelected(false);
+                chekRevExtFilt.setSelected(false);
+                checDateExtFilt.setSelected(false);
+                texDateFromExtFilt.setText("");
+                texDateUntilExtFilt.setText("");
+            } catch (ParseException ex) {
+                JOptionPane.showMessageDialog(null,"Informe a data corretamente!");
+            }
         }
     }
 
     /**
      * Chamada de filtro para extrato de Despesa e Receita
      */
-    public void filtExtChargRev(){}
+    public void filtExtChargRev(){
+        //
+        checkCharExtFilt.setSelected(false);
+        chekRevExtFilt.setSelected(false);
+    }
 
     /**
      * Chamada de filtro para extrato de Despesa e Data
@@ -731,22 +810,67 @@ public class GUIHome extends javax.swing.JFrame {
     public void filtExtChargDate(){
         if(texDateFromExtFilt.getText().trim().equals("") || texDateUntilExtFilt.getText().trim().equals("")){
             JOptionPane.showMessageDialog(null, "Preencha o campo de data!");
+        }else{
+            try {
+                DateFormat format = DateFormat.getDateInstance();
+                String textDatefrom = texDateFromExtFilt.getText();
+                Date datefrom;
+                datefrom = format.parse(textDatefrom);
+                String textDateUntil = texDateUntilExtFilt.getText();
+                Date dateUntil;
+                dateUntil = format.parse(textDateUntil);
+                //
+                checkCharExtFilt.setSelected(false);
+                checDateExtFilt.setSelected(false);
+                texDateFromExtFilt.setText("");
+                texDateUntilExtFilt.setText("");
+            } catch (ParseException ex) {
+                JOptionPane.showMessageDialog(null,"Informe a data corretamente!");
+            }
         }
     }
 
     /**
      * Chamada de filtro para extrato de Despesa
      */
-    public void filtExtCharg(){}
+    public void filtExtCharg(){
+        //
+        checkCharExtFilt.setSelected(false);
+    }
+    
+    /**
+     * Chamada de filtro para extrato de Receita e data
+     */
     public void filtExtRevDate(){
         if(texDateFromExtFilt.getText().trim().equals("") || texDateUntilExtFilt.getText().trim().equals("")){
             JOptionPane.showMessageDialog(null, "Preencha o campo de data!");
+        }
+        else{
+            try {
+                DateFormat format = DateFormat.getDateInstance();
+                String textDatefrom = texDateFromExtFilt.getText();
+                Date datefrom;
+                datefrom = format.parse(textDatefrom);
+                String textDateUntil = texDateUntilExtFilt.getText();
+                Date dateUntil;
+                dateUntil = format.parse(textDateUntil);
+                //
+                chekRevExtFilt.setSelected(false);
+                checDateExtFilt.setSelected(false);
+                texDateFromExtFilt.setText("");
+                texDateUntilExtFilt.setText("");
+            } catch (ParseException ex) {
+                JOptionPane.showMessageDialog(null,"Informe a data corretamente!");
+            }
         }
     }
     /**
      * Chamada de filtro para extrato de Receita
      */
-    public void filtExtRev(){};
+    public void filtExtRev(){
+        //
+        chekRevExtFilt.setSelected(false);
+    }
 
     /**
      * Chamada de filtro para extrato de Data
@@ -754,62 +878,158 @@ public class GUIHome extends javax.swing.JFrame {
     public void filtExtDate(){
         if(texDateFromExtFilt.getText().trim().equals("") || texDateUntilExtFilt.getText().trim().equals("")){
             JOptionPane.showMessageDialog(null, "Preencha o campo de data!");
+        }else{
+            try {
+                DateFormat format = DateFormat.getDateInstance();
+                String textDatefrom = texDateFromExtFilt.getText();
+                Date datefrom;
+                datefrom = format.parse(textDatefrom);
+                String textDateUntil = texDateUntilExtFilt.getText();
+                Date dateUntil;
+                dateUntil = format.parse(textDateUntil);
+                //
+                checDateExtFilt.setSelected(false);
+                texDateFromExtFilt.setText("");
+                texDateUntilExtFilt.setText("");
+            } catch (ParseException ex) {
+                JOptionPane.showMessageDialog(null,"Informe a data corretamente!");
+            }
         }
     }
     /**
      * Chamada de filtros para graficos com Despesa Receita e data
      */
     public void filtGraChargRevDate(){
-        if(texDateFromExtFilt.getText().trim().equals("") || texDateUntilExtFilt.getText().trim().equals("")){
+        if(texDateFromGraFilt.getText().trim().equals("") || texDateUntilGraFilt.getText().trim().equals("")){
             JOptionPane.showMessageDialog(null, "Preencha o campo de data!");
+        }else{
+            try {
+                DateFormat format = DateFormat.getDateInstance();
+                String textDatefrom = texDateFromGraFilt.getText();
+                Date datefrom;
+                datefrom = format.parse(textDatefrom);
+                String textDateUntil = texDateUntilGraFilt.getText();
+                Date dateUntil;
+                dateUntil = format.parse(textDateUntil);
+                //
+                checkCharGraFilt.setSelected(false);
+                chekRevGraFilt.setSelected(false);
+                checDateGraFilt.setSelected(false);
+                texDateFromGraFilt.setText("");
+                texDateUntilGraFilt.setText("");
+            } catch (ParseException ex) {
+                JOptionPane.showMessageDialog(null,"Informe a data corretamente!");
+            }
         }
     }
 
     /**
      * Chamada de filtros para graficos com Despesa e Receita
      */
-    public void filtGraChargRev(){}
+    public void filtGraChargRev(){
+        //
+        checkCharGraFilt.setSelected(false);
+        chekRevGraFilt.setSelected(false);
+    }
 
     /**
      * Chamada de filtro para grafico com Despesa e data
      */
     public void filtGraChargDate(){
-        if(texDateFromExtFilt.getText().trim().equals("") || texDateUntilExtFilt.getText().trim().equals("")){
+        if(texDateFromGraFilt.getText().trim().equals("") || texDateUntilGraFilt.getText().trim().equals("")){
             JOptionPane.showMessageDialog(null, "Preencha o campo de data!");
+        }else{
+            try {
+                DateFormat format = DateFormat.getDateInstance();
+                String textDatefrom = texDateFromGraFilt.getText();
+                Date datefrom;
+                datefrom = format.parse(textDatefrom);
+                String textDateUntil = texDateUntilGraFilt.getText();
+                Date dateUntil;
+                dateUntil = format.parse(textDateUntil);
+                //
+                checkCharGraFilt.setSelected(false);
+                checDateGraFilt.setSelected(false);
+                texDateFromGraFilt.setText("");
+                texDateUntilGraFilt.setText("");
+            } catch (ParseException ex) {
+                JOptionPane.showMessageDialog(null,"Informe a data corretamente!");
+            }
         }
     }
 
     /**
      * Chamada de filtro para grafico de Despesa
      */
-    public void filtGraCharg(){}
+    public void filtGraCharg(){
+        //
+        checkCharGraFilt.setSelected(false);        
+    }
 
     /**
      * Chamada de filtro para graficos de Receita e data
      */
     public void filtGraRevDate(){
-        if(texDateFromExtFilt.getText().trim().equals("") || texDateUntilExtFilt.getText().trim().equals("")){
+        if(texDateFromGraFilt.getText().trim().equals("") || texDateUntilGraFilt.getText().trim().equals("")){
             JOptionPane.showMessageDialog(null, "Preencha o campo de data!");
+        }else{
+            try {
+                DateFormat format = DateFormat.getDateInstance();
+                String textDatefrom = texDateFromGraFilt.getText();
+                Date datefrom;
+                datefrom = format.parse(textDatefrom);
+                String textDateUntil = texDateUntilGraFilt.getText();
+                Date dateUntil;
+                dateUntil = format.parse(textDateUntil);
+                //
+                chekRevGraFilt.setSelected(false);
+                checDateGraFilt.setSelected(false);
+                texDateFromGraFilt.setText("");
+                texDateUntilGraFilt.setText("");
+            } catch (ParseException ex) {
+                JOptionPane.showMessageDialog(null,"Informe a data corretamente!");
+            }
         }
     }
 
     /**
      * Chamade de filtro para grafico de Receita
      */
-    public void filtGraRev(){};
+    public void filtGraRev(){
+        //
+        chekRevGraFilt.setSelected(false);
+    }
 
     /**
      * Chamada de filtro para grafico de Data
      */
     public void filtGraDate(){
-        if(texDateFromExtFilt.getText().trim().equals("") || texDateUntilExtFilt.getText().trim().equals("")){
+        if(texDateFromGraFilt.getText().trim().equals("") || texDateUntilGraFilt.getText().trim().equals("")){
             JOptionPane.showMessageDialog(null, "Preencha o campo de data!");
+        }else{
+            try {
+                DateFormat format = DateFormat.getDateInstance();
+                String textDatefrom = texDateFromGraFilt.getText();
+                Date datefrom;
+                datefrom = format.parse(textDatefrom);
+                String textDateUntil = texDateUntilGraFilt.getText();
+                Date dateUntil;
+                dateUntil = format.parse(textDateUntil);
+                //
+                checDateGraFilt.setSelected(false);
+                texDateFromGraFilt.setText("");
+                texDateUntilGraFilt.setText("");
+            } catch (ParseException ex) {
+                JOptionPane.showMessageDialog(null,"Informe a data corretamente!");
+            }
         }
     }
+    
     private User user;
     private double balance;
     int id;
-
+    List<RevenueCategory> listRevenueCategory;
+    List<ChargeCategory> listChargeCategory;
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JPanel PanelFiltExtr;
     private javax.swing.JPanel PanelFiltExtr1;
