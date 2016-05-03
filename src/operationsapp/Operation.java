@@ -10,7 +10,7 @@ import java.util.Date;
 public class Operation {
     private int id;
     private double value;
-    private String description;
+    private String title;
     private Date datetime;
     private int type; //1 - Revenue, 2 - Charge
 
@@ -29,13 +29,13 @@ public class Operation {
      * @param id
      * @param value
      * @param datetime 
-     * @param description
+     * @param title
      */
-    public Operation(int id, double value, String description, Date datetime, int type){
+    public Operation(int id, double value, String title, Date datetime, int type){
         this.id = id;
         this.value = value;
         this.datetime = datetime;
-        this.description = description;
+        this.title = title;
         this.type = type;
     }
     
@@ -47,7 +47,7 @@ public class Operation {
         this.id = o.getId();
         this.value = o.getValue();
         this.datetime = o.getDatetime();
-        this.description = o.getDescription();
+        this.title = o.getTitle();
         this.type = o.getType();
     }
     /**
@@ -72,17 +72,17 @@ public class Operation {
     }
     
     /**
-     * @return the description
+     * @return the title
      */
-    public String getDescription(){
-        return description;
+    public String getTitle(){
+        return title;
     }
     
     /**
      * @param value the value to set
      */
-    public void setDescription(String description) {
-        this.description = description;
+    public void setTitle(String title) {
+        this.title = title;
     }
 
     /**
@@ -114,7 +114,7 @@ public class Operation {
     public void edit_operation(double v, String de, Date d){
         value = v;
         datetime = d;
-        description = de;
+        title = de;
     }
 
     /**
@@ -132,7 +132,7 @@ public class Operation {
     }
     
     public String toString(){
-        System.out.print("Id: "+id+" value: "+value+" description: "+description+" data: "+datetime+" type: "+type);
+        System.out.print("Id: "+id+" value: "+value+" title: "+title+" data: "+datetime+" type: "+type);
         if(this instanceof Revenue){
             Revenue r = (Revenue) this;
             System.out.println(" category: "+r.getCategory().getName());

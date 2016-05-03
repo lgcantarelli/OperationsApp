@@ -308,7 +308,7 @@ public class User {
 
                 fileWriter.append(COMMA_DELIMITER);
 
-                fileWriter.append(String.valueOf(operation.getDescription()));
+                fileWriter.append(String.valueOf(operation.getTitle()));
 
                 fileWriter.append(NEW_LINE_SEPARATOR);
 

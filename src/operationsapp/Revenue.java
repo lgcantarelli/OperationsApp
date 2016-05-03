@@ -36,10 +36,12 @@ public class Revenue extends Operation {
      * Constructor for Revenue.
      * @param id
      * @param value
-     * @param datetime 
+     * @param title
+     * @param datetime
+     * @param category
      */
-    public Revenue(int id, double value, String description, Date datetime, RevenueCategory category){
-        super(id,value,description,datetime, 1);
+    public Revenue(int id, double value, String title, Date datetime, RevenueCategory category){
+        super(id,value,title,datetime, 1);
         this.category = category;
     }
 

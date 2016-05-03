@@ -6,29 +6,35 @@
 package operationsapp;
 
 public class ChargeCategory {
+    private int id;
     private String name;
 
     /**
      * Empty constructor for ChargeCategory.
      */
     public ChargeCategory(){
+        id = 0;
         name = "";
     }
     
     /**
      * Copy constructor for ChargeCategory.
+     * 
      * @param r
      */
     
     public ChargeCategory(ChargeCategory r){
         this.name = r.getName();
+        this.id = r.getId();
     }
     /**
      * Constructor for RevenueCategory.
+     * @param id
      * @param name 
      */
-    public ChargeCategory(String name){
+    public ChargeCategory(int id, String name){
         this.name = name;
+        this.id = id;
     }
     /**
      * @return the name
@@ -42,5 +48,19 @@ public class ChargeCategory {
      */
     public void setName(String name) {
         this.name = name;
+    }
+
+    /**
+     * @return the id
+     */
+    public int getId() {
+        return id;
+    }
+
+    /**
+     * @param id the id to set
+     */
+    public void setId(int id) {
+        this.id = id;
     }
 }

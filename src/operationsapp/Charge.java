@@ -38,10 +38,12 @@ public class Charge extends Operation {
      * Constructor for Charge.
      * @param id
      * @param value
-     * @param datetime 
+     * @param title
+     * @param datetime
+     * @param category
      */
-    public Charge(int id, double value,String description, Date datetime, ChargeCategory category){
-        super(id,value,description,datetime, 2);
+    public Charge(int id, double value,String title, Date datetime, ChargeCategory category){
+        super(id,value,title,datetime, 2);
         this.category = category;
     }
 
