@@ -703,13 +703,13 @@ public class GUIHome extends javax.swing.JFrame {
     public List<RevenueCategory> listRevCatCri(){
         List<RevenueCategory> listCategory = new ArrayList();
         RevenueCategory category;
-        category = new RevenueCategory("Bolsa");
+        category = new RevenueCategory(0,"Bolsa");
         listCategory.add(category);
-        category = new RevenueCategory("Freelance");
+        category = new RevenueCategory(1,"Freelance");
         listCategory.add(category);
-        category = new RevenueCategory("Salário");
+        category = new RevenueCategory(2,"Salário");
         listCategory.add(category);
-        category = new RevenueCategory("Outros");
+        category = new RevenueCategory(3,"Outros");
         listCategory.add(category);
         return listCategory;
     }
@@ -729,19 +729,19 @@ public class GUIHome extends javax.swing.JFrame {
     public List<ChargeCategory> listCharCatCri(){
         List<ChargeCategory> listCategory = new ArrayList();
         ChargeCategory category;
-        category = new ChargeCategory("Supermecado");
+        category = new ChargeCategory(0,"Supermecado");
         listCategory.add(category);
-        category = new ChargeCategory("Aluguel");
+        category = new ChargeCategory(1,"Aluguel");
         listCategory.add(category);
-        category = new ChargeCategory("Luz");
+        category = new ChargeCategory(2,"Luz");
         listCategory.add(category);
-        category = new ChargeCategory("Água");
+        category = new ChargeCategory(3,"Água");
         listCategory.add(category);
-        category = new ChargeCategory("Telefone");
+        category = new ChargeCategory(4,"Telefone");
         listCategory.add(category);        
-        category = new ChargeCategory("Internet");
+        category = new ChargeCategory(5,"Internet");
         listCategory.add(category);       
-        category = new ChargeCategory("Celular");
+        category = new ChargeCategory(6,"Celular");
         listCategory.add(category);
         return listCategory;
     }
