@@ -278,21 +278,8 @@
           </Properties>
         </Component>
         <Component class="javax.swing.JTextField" name="addValue">
-          <Events>
-            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="addValueActionPerformed1"/>
-          </Events>
         </Component>
         <Component class="javax.swing.JComboBox" name="selectCategory">
-          <Properties>
-            <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
-              <StringArray count="4">
-                <StringItem index="0" value="Item 1"/>
-                <StringItem index="1" value="Item 2"/>
-                <StringItem index="2" value="Item 3"/>
-                <StringItem index="3" value="Item 4"/>
-              </StringArray>
-            </Property>
-          </Properties>
           <AuxValues>
             <AuxValue name="JavaCodeGenerator_AddingCodePost" type="java.lang.String" value="if(radioButtonCharge.isSelected() == false &amp;&amp; radioButtonRevenue.isSelected() == false ){&#xa;    selectCategory.setEnabled(false);&#xa;}"/>
             <AuxValue name="JavaCodeGenerator_TypeParameters" type="java.lang.String" value="&lt;String&gt;"/>
@@ -320,7 +307,7 @@
             <Property name="text" type="java.lang.String" value="Despesa"/>
           </Properties>
           <AuxValues>
-            <AuxValue name="JavaCodeGenerator_AddingCodePost" type="java.lang.String" value="radioButtonCharge.addActionListener(new java.awt.event.ActionListener() {&#xa;    public void actionPerformed(java.awt.event.ActionEvent evt) {&#xa;        selectCategory.setEnabled(true);&#xa;    }&#xa;});"/>
+            <AuxValue name="JavaCodeGenerator_AddingCodePost" type="java.lang.String" value="radioButtonCharge.addActionListener(new java.awt.event.ActionListener() {&#xa;    public void actionPerformed(java.awt.event.ActionEvent evt) {&#xa;        selectCategory.removeAllItems();&#xa;        selectCategory.addItem(&quot;Supermecado&quot;);&#xa;        selectCategory.addItem(&quot;Aluguel&quot;);&#xa;        selectCategory.addItem(&quot;Luz&quot;);&#xa;        selectCategory.addItem(&quot;&#xc1;gua&quot;);&#xa;        selectCategory.addItem(&quot;Telefone&quot;);&#xa;        selectCategory.addItem(&quot;Internet&quot;);&#xa;        selectCategory.addItem(&quot;Celular&quot;);&#xa;        selectCategory.setEnabled(true);&#xa;    }&#xa;});"/>
           </AuxValues>
         </Component>
         <Component class="javax.swing.JRadioButton" name="radioButtonRevenue">
@@ -331,7 +318,7 @@
             <Property name="text" type="java.lang.String" value="Receita"/>
           </Properties>
           <AuxValues>
-            <AuxValue name="JavaCodeGenerator_AddingCodePost" type="java.lang.String" value="radioButtonRevenue.addActionListener(new java.awt.event.ActionListener() {&#xa;    public void actionPerformed(java.awt.event.ActionEvent evt) {&#xa;        selectCategory.setEnabled(true);&#xa;    }&#xa;});"/>
+            <AuxValue name="JavaCodeGenerator_AddingCodePost" type="java.lang.String" value="radioButtonRevenue.addActionListener(new java.awt.event.ActionListener() {&#xa;    public void actionPerformed(java.awt.event.ActionEvent evt) {&#xa;        selectCategory.removeAllItems();&#xa;        selectCategory.addItem(&quot;Bolsa&quot;);&#xa;        selectCategory.addItem(&quot;Freelance&quot;);&#xa;        selectCategory.addItem(&quot;Sal&#xe1;rio&quot;);&#xa;        selectCategory.addItem(&quot;Outros&quot;);&#xa;        selectCategory.setEnabled(true);&#xa;    }&#xa;});"/>
           </AuxValues>
         </Component>
         <Component class="javax.swing.JLabel" name="labelCategory">
@@ -340,9 +327,6 @@
           </Properties>
         </Component>
         <Component class="javax.swing.JTextField" name="addDate">
-          <Events>
-            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="addDateActionPerformed1"/>
-          </Events>
         </Component>
       </SubComponents>
     </Container>

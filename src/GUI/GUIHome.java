@@ -10,8 +10,10 @@ import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.swing.ComboBoxModel;
 import operationsapp.*;
 import javax.swing.JFileChooser;
 import javax.swing.JOptionPane;
@@ -29,6 +31,8 @@ public class GUIHome extends javax.swing.JFrame {
      */
     public GUIHome() {
         initComponents();
+        user = new User();
+        id=0;
     }
 
     /**
@@ -150,14 +154,6 @@ public class GUIHome extends javax.swing.JFrame {
 
         labelValue.setText("Valor");
 
-        addValue.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                addValueActionPerformed1(evt);
-            }
-        });
-
-        selectCategory.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
-
         buttonAdd.setText("Adicionar");
         buttonAdd.setBorder(null);
         buttonAdd.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
@@ -169,12 +165,6 @@ public class GUIHome extends javax.swing.JFrame {
         radioButtonRevenue.setText("Receita");
 
         labelCategory.setText("Categoria");
-
-        addDate.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                addDateActionPerformed1(evt);
-            }
-        });
 
         javax.swing.GroupLayout panelAddLayout = new javax.swing.GroupLayout(panelAdd);
         panelAdd.setLayout(panelAddLayout);
@@ -252,11 +242,24 @@ public class GUIHome extends javax.swing.JFrame {
         });
         radioButtonCharge.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
+                selectCategory.removeAllItems();
+                selectCategory.addItem("Supermecado");
+                selectCategory.addItem("Aluguel");
+                selectCategory.addItem("Luz");
+                selectCategory.addItem("Água");
+                selectCategory.addItem("Telefone");
+                selectCategory.addItem("Internet");
+                selectCategory.addItem("Celular");
                 selectCategory.setEnabled(true);
             }
         });
         radioButtonRevenue.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
+                selectCategory.removeAllItems();
+                selectCategory.addItem("Bolsa");
+                selectCategory.addItem("Freelance");
+                selectCategory.addItem("Salário");
+                selectCategory.addItem("Outros");
                 selectCategory.setEnabled(true);
             }
         });
@@ -303,15 +306,11 @@ public class GUIHome extends javax.swing.JFrame {
     private void addValueActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_addValueActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_addValueActionPerformed
-
-    private void addValueActionPerformed1(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_addValueActionPerformed1
-        // TODO add your handling code here:
-    }//GEN-LAST:event_addValueActionPerformed1
     private void buttonConfirmAddRev(){
          try {
             // TODO add your handling code here:
             DateFormat format = DateFormat.getDateInstance();
-            int id = 1;
+            id += 1;
             double value = Double.parseDouble(addValue.getText());
             String textDate = addDate.getText();
             String descrip = null;
@@ -319,7 +318,8 @@ public class GUIHome extends javax.swing.JFrame {
             date = format.parse(textDate);
             RevenueCategory category = null;
             Revenue revenue = new Revenue(id,value,descrip,date,category);
-            balanceRev(value);
+            user.add_revenue(revenue);
+            balanceUpdate();
             addValue.setText(null);
             addDate.setText(null);
             radioButtonRevenue.setSelected(false);
@@ -332,7 +332,7 @@ public class GUIHome extends javax.swing.JFrame {
          try {
             // TODO add your handling code here:
             DateFormat format = DateFormat.getDateInstance();
-            int id = 1;
+            id += 1;
             double value = Double.parseDouble(addValue.getText());
             String textDate = addDate.getText();
             String descrip = null;
@@ -340,10 +340,12 @@ public class GUIHome extends javax.swing.JFrame {
             date = format.parse(textDate);
             ChargeCategory category = null;
             Charge charge = new Charge(id,value,descrip,date,category);
-            balanceChar(value);
+            user.add_charge(charge);
+            balanceUpdate();
             addValue.setText(null);
             addDate.setText(null);
             radioButtonCharge.setSelected(false);
+            
         } catch (ParseException ex) {
             Logger.getLogger(GUIHome.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -357,10 +359,6 @@ public class GUIHome extends javax.swing.JFrame {
             System.out.println("File access cancelled by user.");
         }
     }//GEN-LAST:event_buttonExpActionPerformed
-
-    private void addDateActionPerformed1(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_addDateActionPerformed1
-        // TODO add your handling code here:
-    }//GEN-LAST:event_addDateActionPerformed1
 
     /**
      * @param args the command line arguments
@@ -396,22 +394,10 @@ public class GUIHome extends javax.swing.JFrame {
             }
         });
     }
-public JTextField maskValue(int tamanho,String caracteres) { 
-    try { 
-        String quantidade="";
-        for(int i=0 ; i < tamanho; i++){
-            quantidade=quantidade+"#";
-        }
-        javax.swing.text.MaskFormatter nome=new javax.swing.text.MaskFormatter(quantidade);
-        nome.setValidCharacters(caracteres);
-        return new javax.swing.JFormattedTextField(nome);}
-    catch(Exception e){
-        JOptionPane.showMessageDialog(null,"Ocorreu um erro");
-        return new JTextField();
-    }
-}
+
 
 public void balanceUpdate(){
+    balance = user.get_balance();
     valueBalance.setText("R$ " + balance);
     if(balance<0){
         valueBalance.setForeground(Color.red);
@@ -422,19 +408,15 @@ public void balanceUpdate(){
     }
 }
 
-
-public void balanceRev(double value){
-    this.balance += value;
-    balanceUpdate();
+public void comboBoxRev(){
+    
 }
 
 
-public void balanceChar(double value){
-    this.balance -= value;
-    balanceUpdate();
-}
-
+    private User user;
     private double balance;
+    int id;
+
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JTextField addDate;
     private javax.swing.JTextField addValue;
