@@ -979,7 +979,9 @@ public class GUIHome extends javax.swing.JFrame {
         String date;
         while(i>=0){
             int month=user.get_operation(i).getDatetime().getMonth()+1;
-            date = (user.get_operation(i).getDatetime().getDate()+"/"+month+"/"+user.get_operation(i).getDatetime().getYear());
+            int year = user.get_operation(i).getDatetime().getYear();
+            if(year>=100){year-=100;}
+            date = (user.get_operation(i).getDatetime().getDate()+"/"+month+"/"+year);
             String[] espaco = new String[3];
             espaco=spaceSize(i,date);
             listModel.addElement(user.get_operation(i).getTitle()+ espaco[0] + espaco[1] +  date + espaco[2] +  user.get_operation(i).getValue());
