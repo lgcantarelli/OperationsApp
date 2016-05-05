@@ -53,6 +53,8 @@ public class GUIHome extends javax.swing.JFrame {
         buttonGroupMoreInf = new javax.swing.ButtonGroup();
         expFilExp = new javax.swing.JFileChooser();
         buttonGroupAdd = new javax.swing.ButtonGroup();
+        buttonGroupFiltExt = new javax.swing.ButtonGroup();
+        buttonGroupFiltGra = new javax.swing.ButtonGroup();
         panelInf = new javax.swing.JTabbedPane();
         panelExtract = new javax.swing.JPanel();
         labelChaRev = new javax.swing.JLabel();
@@ -114,8 +116,10 @@ public class GUIHome extends javax.swing.JFrame {
 
         valueBalance.setFont(new java.awt.Font("Tahoma", 0, 24)); // NOI18N
 
+        buttonGroupFiltExt.add(checkCharExtFilt);
         checkCharExtFilt.setText("Despesas");
 
+        buttonGroupFiltExt.add(chekRevExtFilt);
         chekRevExtFilt.setText("Receitas");
 
         texDateFromExtFilt.setEnabled(false);
@@ -182,19 +186,10 @@ public class GUIHome extends javax.swing.JFrame {
         buttonSelecExtFilt.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 if(checkCharExtFilt.isSelected()){
-                    if(chekRevExtFilt.isSelected()){
-                        if(checDateExtFilt.isSelected()){
-                            filtExtChargRevDate();
-                        }
-                        else{
-                            filtExtChargRev();
-                        }
+                    if(checDateExtFilt.isSelected()){
+                        filtExtChargDate();
                     }else{
-                        if(checDateExtFilt.isSelected()){
-                            filtExtChargDate();
-                        }else{
-                            filtExtCharg();
-                        }
+                        filtExtCharg();
                     }
                 }else{
                     if(chekRevExtFilt.isSelected()){
@@ -301,8 +296,10 @@ public class GUIHome extends javax.swing.JFrame {
                 .addGap(0, 185, Short.MAX_VALUE))
         );
 
+        buttonGroupFiltGra.add(checkCharGraFilt);
         checkCharGraFilt.setText("Despesas");
 
+        buttonGroupFiltGra.add(chekRevGraFilt);
         chekRevGraFilt.setText("Receitas");
 
         texDateFromGraFilt.setEnabled(false);
@@ -369,19 +366,10 @@ public class GUIHome extends javax.swing.JFrame {
         buttonSelecGraFilt.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 if(checkCharGraFilt.isSelected()){
-                    if(chekRevGraFilt.isSelected()){
-                        if(checDateGraFilt.isSelected()){
-                            filtGraChargRevDate();
-                        }
-                        else{
-                            filtGraChargRev();
-                        }
+                    if(checDateGraFilt.isSelected()){
+                        filtGraChargDate();
                     }else{
-                        if(checDateGraFilt.isSelected()){
-                            filtGraChargDate();
-                        }else{
-                            filtGraCharg();
-                        }
+                        filtGraCharg();
                     }
                 }else{
                     if(chekRevGraFilt.isSelected()){
@@ -799,41 +787,6 @@ public class GUIHome extends javax.swing.JFrame {
         }
     }
 
-    /**
-     * Chamada de filtro para extrato de Despesa Receita e Data
-     */
-    public void filtExtChargRevDate(){
-        if(texDateFromExtFilt.getText().trim().equals("") || texDateUntilExtFilt.getText().trim().equals("")){
-            JOptionPane.showMessageDialog(null, "Preencha o campo de data!");
-        }else{
-            try {
-                DateFormat format = DateFormat.getDateInstance();
-                String textDatefrom = texDateFromExtFilt.getText();
-                Date datefrom;
-                datefrom = format.parse(textDatefrom);
-                String textDateUntil = texDateUntilExtFilt.getText();
-                Date dateUntil;
-                dateUntil = format.parse(textDateUntil);
-                //
-                checkCharExtFilt.setSelected(false);
-                chekRevExtFilt.setSelected(false);
-                checDateExtFilt.setSelected(false);
-                texDateFromExtFilt.setText("");
-                texDateUntilExtFilt.setText("");
-            } catch (ParseException ex) {
-                JOptionPane.showMessageDialog(null,"Informe a data corretamente!");
-            }
-        }
-    }
-
-    /**
-     * Chamada de filtro para extrato de Despesa e Receita
-     */
-    public void filtExtChargRev(){
-        //
-        checkCharExtFilt.setSelected(false);
-        chekRevExtFilt.setSelected(false);
-    }
 
     /**
      * Chamada de filtro para extrato de Despesa e Data
@@ -851,7 +804,7 @@ public class GUIHome extends javax.swing.JFrame {
                 Date dateUntil;
                 dateUntil = format.parse(textDateUntil);
                 //
-                checkCharExtFilt.setSelected(false);
+                buttonGroupFiltExt.clearSelection();
                 checDateExtFilt.setSelected(false);
                 texDateFromExtFilt.setText("");
                 texDateUntilExtFilt.setText("");
@@ -866,7 +819,7 @@ public class GUIHome extends javax.swing.JFrame {
      */
     public void filtExtCharg(){
         //
-        checkCharExtFilt.setSelected(false);
+        buttonGroupFiltExt.clearSelection();
     }
     
     /**
@@ -886,7 +839,8 @@ public class GUIHome extends javax.swing.JFrame {
                 Date dateUntil;
                 dateUntil = format.parse(textDateUntil);
                 //
-                chekRevExtFilt.setSelected(false);
+                System.out.print("tete");
+                buttonGroupFiltExt.clearSelection();
                 checDateExtFilt.setSelected(false);
                 texDateFromExtFilt.setText("");
                 texDateUntilExtFilt.setText("");
@@ -895,12 +849,13 @@ public class GUIHome extends javax.swing.JFrame {
             }
         }
     }
+    
     /**
      * Chamada de filtro para extrato de Receita
      */
     public void filtExtRev(){
         //
-        chekRevExtFilt.setSelected(false);
+        buttonGroupFiltExt.clearSelection();
     }
 
     /**
@@ -927,41 +882,6 @@ public class GUIHome extends javax.swing.JFrame {
             }
         }
     }
-    /**
-     * Chamada de filtros para graficos com Despesa Receita e data
-     */
-    public void filtGraChargRevDate(){
-        if(texDateFromGraFilt.getText().trim().equals("") || texDateUntilGraFilt.getText().trim().equals("")){
-            JOptionPane.showMessageDialog(null, "Preencha o campo de data!");
-        }else{
-            try {
-                DateFormat format = DateFormat.getDateInstance();
-                String textDatefrom = texDateFromGraFilt.getText();
-                Date datefrom;
-                datefrom = format.parse(textDatefrom);
-                String textDateUntil = texDateUntilGraFilt.getText();
-                Date dateUntil;
-                dateUntil = format.parse(textDateUntil);
-                //
-                checkCharGraFilt.setSelected(false);
-                chekRevGraFilt.setSelected(false);
-                checDateGraFilt.setSelected(false);
-                texDateFromGraFilt.setText("");
-                texDateUntilGraFilt.setText("");
-            } catch (ParseException ex) {
-                JOptionPane.showMessageDialog(null,"Informe a data corretamente!");
-            }
-        }
-    }
-
-    /**
-     * Chamada de filtros para graficos com Despesa e Receita
-     */
-    public void filtGraChargRev(){
-        //
-        checkCharGraFilt.setSelected(false);
-        chekRevGraFilt.setSelected(false);
-    }
 
     /**
      * Chamada de filtro para grafico com Despesa e data
@@ -979,7 +899,7 @@ public class GUIHome extends javax.swing.JFrame {
                 Date dateUntil;
                 dateUntil = format.parse(textDateUntil);
                 //
-                checkCharGraFilt.setSelected(false);
+                buttonGroupFiltGra.clearSelection();
                 checDateGraFilt.setSelected(false);
                 texDateFromGraFilt.setText("");
                 texDateUntilGraFilt.setText("");
@@ -994,7 +914,7 @@ public class GUIHome extends javax.swing.JFrame {
      */
     public void filtGraCharg(){
         //
-        checkCharGraFilt.setSelected(false);        
+        buttonGroupFiltGra.clearSelection();        
     }
 
     /**
@@ -1013,7 +933,7 @@ public class GUIHome extends javax.swing.JFrame {
                 Date dateUntil;
                 dateUntil = format.parse(textDateUntil);
                 //
-                chekRevGraFilt.setSelected(false);
+                buttonGroupFiltGra.clearSelection();
                 checDateGraFilt.setSelected(false);
                 texDateFromGraFilt.setText("");
                 texDateUntilGraFilt.setText("");
@@ -1028,7 +948,7 @@ public class GUIHome extends javax.swing.JFrame {
      */
     public void filtGraRev(){
         //
-        chekRevGraFilt.setSelected(false);
+        buttonGroupFiltGra.clearSelection();
     }
 
     /**
@@ -1086,6 +1006,8 @@ public class GUIHome extends javax.swing.JFrame {
     private javax.swing.JButton buttonAdd;
     private javax.swing.JButton buttonExp;
     private javax.swing.ButtonGroup buttonGroupAdd;
+    private javax.swing.ButtonGroup buttonGroupFiltExt;
+    private javax.swing.ButtonGroup buttonGroupFiltGra;
     private javax.swing.ButtonGroup buttonGroupMoreInf;
     private javax.swing.JButton buttonSelecExtFilt;
     private javax.swing.JButton buttonSelecGraFilt;

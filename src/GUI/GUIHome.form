@@ -12,6 +12,10 @@
     </Component>
     <Component class="javax.swing.ButtonGroup" name="buttonGroupAdd">
     </Component>
+    <Component class="javax.swing.ButtonGroup" name="buttonGroupFiltExt">
+    </Component>
+    <Component class="javax.swing.ButtonGroup" name="buttonGroupFiltGra">
+    </Component>
   </NonVisualComponents>
   <Properties>
     <Property name="defaultCloseOperation" type="int" value="3"/>
@@ -218,11 +222,17 @@
               <SubComponents>
                 <Component class="javax.swing.JCheckBox" name="checkCharExtFilt">
                   <Properties>
+                    <Property name="buttonGroup" type="javax.swing.ButtonGroup" editor="org.netbeans.modules.form.RADComponent$ButtonGroupPropertyEditor">
+                      <ComponentRef name="buttonGroupFiltExt"/>
+                    </Property>
                     <Property name="text" type="java.lang.String" value="Despesas"/>
                   </Properties>
                 </Component>
                 <Component class="javax.swing.JCheckBox" name="chekRevExtFilt">
                   <Properties>
+                    <Property name="buttonGroup" type="javax.swing.ButtonGroup" editor="org.netbeans.modules.form.RADComponent$ButtonGroupPropertyEditor">
+                      <ComponentRef name="buttonGroupFiltExt"/>
+                    </Property>
                     <Property name="text" type="java.lang.String" value="Receitas"/>
                   </Properties>
                 </Component>
@@ -251,7 +261,7 @@
                     <Property name="text" type="java.lang.String" value="Filtro"/>
                   </Properties>
                   <AuxValues>
-                    <AuxValue name="JavaCodeGenerator_AddingCodePost" type="java.lang.String" value="buttonSelecExtFilt.addActionListener(new java.awt.event.ActionListener() {&#xa;    public void actionPerformed(java.awt.event.ActionEvent evt) {&#xa;        if(checkCharExtFilt.isSelected()){ &#xa;            if(chekRevExtFilt.isSelected()){&#xa;                if(checDateExtFilt.isSelected()){&#xa;                    filtExtChargRevDate();&#xa;                }&#xa;                else{&#xa;                    filtExtChargRev();&#xa;                }&#xa;            }else{&#xa;                if(checDateExtFilt.isSelected()){&#xa;                    filtExtChargDate();&#xa;                }else{&#xa;                    filtExtCharg();&#xa;                }&#xa;            }&#xa;        }else{&#xa;            if(chekRevExtFilt.isSelected()){&#xa;                if(checDateExtFilt.isSelected()){&#xa;                    filtExtRevDate();&#xa;                }else{&#xa;                    filtExtRev();&#xa;                }&#xa;            }else{&#xa;                if(checDateExtFilt.isSelected()){&#xa;                    filtExtDate();&#xa;                }else{&#xa;                    JOptionPane.showMessageDialog(null, &quot;Selecione um filtro!&quot;);&#xa;                }&#xa;            }&#xa;        }&#xa;    }&#xa;});"/>
+                    <AuxValue name="JavaCodeGenerator_AddingCodePost" type="java.lang.String" value="buttonSelecExtFilt.addActionListener(new java.awt.event.ActionListener() {&#xa;    public void actionPerformed(java.awt.event.ActionEvent evt) {&#xa;        if(checkCharExtFilt.isSelected()){ &#xa;            if(checDateExtFilt.isSelected()){&#xa;                filtExtChargDate();&#xa;            }else{&#xa;                filtExtCharg();&#xa;            }&#xa;        }else{&#xa;            if(chekRevExtFilt.isSelected()){&#xa;                if(checDateExtFilt.isSelected()){&#xa;                    filtExtRevDate();&#xa;                }else{&#xa;                    filtExtRev();&#xa;                }&#xa;            }else{&#xa;                if(checDateExtFilt.isSelected()){&#xa;                    filtExtDate();&#xa;                }else{&#xa;                    JOptionPane.showMessageDialog(null, &quot;Selecione um filtro!&quot;);&#xa;                }&#xa;            }&#xa;        }&#xa;    }&#xa;});"/>
                   </AuxValues>
                 </Component>
               </SubComponents>
@@ -448,11 +458,17 @@
                   <SubComponents>
                     <Component class="javax.swing.JCheckBox" name="checkCharGraFilt">
                       <Properties>
+                        <Property name="buttonGroup" type="javax.swing.ButtonGroup" editor="org.netbeans.modules.form.RADComponent$ButtonGroupPropertyEditor">
+                          <ComponentRef name="buttonGroupFiltGra"/>
+                        </Property>
                         <Property name="text" type="java.lang.String" value="Despesas"/>
                       </Properties>
                     </Component>
                     <Component class="javax.swing.JCheckBox" name="chekRevGraFilt">
                       <Properties>
+                        <Property name="buttonGroup" type="javax.swing.ButtonGroup" editor="org.netbeans.modules.form.RADComponent$ButtonGroupPropertyEditor">
+                          <ComponentRef name="buttonGroupFiltGra"/>
+                        </Property>
                         <Property name="text" type="java.lang.String" value="Receitas"/>
                       </Properties>
                     </Component>
@@ -481,7 +497,7 @@
                         <Property name="text" type="java.lang.String" value="Filtro"/>
                       </Properties>
                       <AuxValues>
-                        <AuxValue name="JavaCodeGenerator_AddingCodePost" type="java.lang.String" value="buttonSelecGraFilt.addActionListener(new java.awt.event.ActionListener() {&#xa;    public void actionPerformed(java.awt.event.ActionEvent evt) {&#xa;        if(checkCharGraFilt.isSelected()){ &#xa;            if(chekRevGraFilt.isSelected()){&#xa;                if(checDateGraFilt.isSelected()){&#xa;                    filtGraChargRevDate();&#xa;                }&#xa;                else{&#xa;                    filtGraChargRev();&#xa;                }&#xa;            }else{&#xa;                if(checDateGraFilt.isSelected()){&#xa;                    filtGraChargDate();&#xa;                }else{&#xa;                    filtGraCharg();&#xa;                }&#xa;            }&#xa;        }else{&#xa;            if(chekRevGraFilt.isSelected()){&#xa;                if(checDateGraFilt.isSelected()){&#xa;                    filtGraRevDate();&#xa;                }else{&#xa;                    filtGraRev();&#xa;                }&#xa;            }else{&#xa;                if(checDateGraFilt.isSelected()){&#xa;                    filtGraDate();&#xa;                }else{&#xa;                    JOptionPane.showMessageDialog(null, &quot;Selecione um filtro!&quot;);&#xa;                }&#xa;            }&#xa;        }&#xa;    }&#xa;});"/>
+                        <AuxValue name="JavaCodeGenerator_AddingCodePost" type="java.lang.String" value="buttonSelecGraFilt.addActionListener(new java.awt.event.ActionListener() {&#xa;    public void actionPerformed(java.awt.event.ActionEvent evt) {&#xa;        if(checkCharGraFilt.isSelected()){ &#xa;            if(checDateGraFilt.isSelected()){&#xa;                filtGraChargDate();&#xa;            }else{&#xa;                filtGraCharg();&#xa;            }&#xa;        }else{&#xa;            if(chekRevGraFilt.isSelected()){&#xa;                if(checDateGraFilt.isSelected()){&#xa;                    filtGraRevDate();&#xa;                }else{&#xa;                    filtGraRev();&#xa;                }&#xa;            }else{&#xa;                if(checDateGraFilt.isSelected()){&#xa;                    filtGraDate();&#xa;                }else{&#xa;                    JOptionPane.showMessageDialog(null, &quot;Selecione um filtro!&quot;);&#xa;                }&#xa;            }&#xa;        }&#xa;    }&#xa;});"/>
                       </AuxValues>
                     </Component>
                   </SubComponents>
