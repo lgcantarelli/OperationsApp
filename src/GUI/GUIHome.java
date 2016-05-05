@@ -518,8 +518,6 @@ public class GUIHome extends javax.swing.JFrame {
                     JOptionPane.showMessageDialog(null, "Campo Valor vazio");
                 }else if(addDate.getText().trim().equals("")){
                     JOptionPane.showMessageDialog(null, "Campo Data vazio");
-                }else if(addTitle.getText().trim().equals("")){
-                    JOptionPane.showMessageDialog(null, "Campo Titulo vazio");
                 }else{
                     if(radioButtonCharge.isSelected() == true){
                         int confirmBox = JOptionPane.showConfirmDialog(null, "salvar DESPESA",null,OK_CANCEL_OPTION);
