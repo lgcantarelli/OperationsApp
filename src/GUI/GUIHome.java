@@ -17,6 +17,7 @@ import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.ComboBoxModel;
+import javax.swing.DefaultListModel;
 import operationsapp.*;
 import javax.swing.JFileChooser;
 import javax.swing.JOptionPane;
@@ -38,7 +39,6 @@ public class GUIHome extends javax.swing.JFrame {
         id=0;
         listRevenueCategory = listRevCatCri();
         listChargeCategory = listCharCatCri();
-        listCategory = new OperationsApp();
     }
 
     /**
@@ -56,8 +56,6 @@ public class GUIHome extends javax.swing.JFrame {
         panelInf = new javax.swing.JTabbedPane();
         panelExtract = new javax.swing.JPanel();
         labelChaRev = new javax.swing.JLabel();
-        listExtract = new javax.swing.JScrollPane();
-        jList2 = new javax.swing.JList<>();
         separatorExtract = new javax.swing.JSeparator();
         labelBalance = new javax.swing.JLabel();
         valueBalance = new javax.swing.JLabel();
@@ -69,6 +67,9 @@ public class GUIHome extends javax.swing.JFrame {
         labeDateSepExtFilt = new javax.swing.JLabel();
         texDateUntilExtFilt = new javax.swing.JTextField();
         buttonSelecExtFilt = new javax.swing.JButton();
+        PanelShowExtract = new javax.swing.JPanel();
+        jScrollPane5 = new javax.swing.JScrollPane();
+        listExt = new javax.swing.JList<>();
         panelReport = new javax.swing.JPanel();
         panelAnualGraph = new javax.swing.JPanel();
         labelGrapAnual = new javax.swing.JLabel();
@@ -107,14 +108,6 @@ public class GUIHome extends javax.swing.JFrame {
 
         labelChaRev.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
         labelChaRev.setText("Extrato");
-
-        jList2.setModel(new javax.swing.AbstractListModel<String>() {
-            String[] strings = { "Item 1", "Item 2", "Item 3", "Item 4", "Item 5" };
-            public int getSize() { return strings.length; }
-            public String getElementAt(int i) { return strings[i]; }
-        });
-        jList2.setSelectionMode(javax.swing.ListSelectionModel.SINGLE_SELECTION);
-        listExtract.setViewportView(jList2);
 
         labelBalance.setFont(new java.awt.Font("Tahoma", 0, 24)); // NOI18N
         labelBalance.setText("Saldo");
@@ -221,6 +214,26 @@ public class GUIHome extends javax.swing.JFrame {
             }
         });
 
+        listExt.setSelectionMode(javax.swing.ListSelectionModel.SINGLE_SELECTION);
+        listExt.setEnabled(false);
+        jScrollPane5.setViewportView(listExt);
+
+        javax.swing.GroupLayout PanelShowExtractLayout = new javax.swing.GroupLayout(PanelShowExtract);
+        PanelShowExtract.setLayout(PanelShowExtractLayout);
+        PanelShowExtractLayout.setHorizontalGroup(
+            PanelShowExtractLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(PanelShowExtractLayout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jScrollPane5)
+                .addContainerGap())
+        );
+        PanelShowExtractLayout.setVerticalGroup(
+            PanelShowExtractLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(PanelShowExtractLayout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jScrollPane5, javax.swing.GroupLayout.DEFAULT_SIZE, 434, Short.MAX_VALUE))
+        );
+
         javax.swing.GroupLayout panelExtractLayout = new javax.swing.GroupLayout(panelExtract);
         panelExtract.setLayout(panelExtractLayout);
         panelExtractLayout.setHorizontalGroup(
@@ -232,13 +245,13 @@ public class GUIHome extends javax.swing.JFrame {
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panelExtractLayout.createSequentialGroup()
                         .addComponent(labelChaRev, javax.swing.GroupLayout.DEFAULT_SIZE, 703, Short.MAX_VALUE)
                         .addGap(10, 10, 10))
-                    .addComponent(listExtract, javax.swing.GroupLayout.Alignment.TRAILING)
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panelExtractLayout.createSequentialGroup()
                         .addGap(0, 0, Short.MAX_VALUE)
                         .addGroup(panelExtractLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(labelBalance)
                             .addComponent(valueBalance, javax.swing.GroupLayout.PREFERRED_SIZE, 224, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                    .addComponent(PanelFiltExtr, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addComponent(PanelFiltExtr, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(PanelShowExtract, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addContainerGap())
         );
         panelExtractLayout.setVerticalGroup(
@@ -248,8 +261,8 @@ public class GUIHome extends javax.swing.JFrame {
                 .addComponent(labelChaRev, javax.swing.GroupLayout.PREFERRED_SIZE, 26, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(8, 8, 8)
                 .addComponent(PanelFiltExtr, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(listExtract, javax.swing.GroupLayout.PREFERRED_SIZE, 445, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(PanelShowExtract, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(separatorExtract, javax.swing.GroupLayout.PREFERRED_SIZE, 15, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -552,6 +565,7 @@ public class GUIHome extends javax.swing.JFrame {
                 for(int i=0;i<list.size();i++){
                     selectCategory.addItem(list.get(i));
                 }
+
                 selectCategory.setEnabled(true);
             }
         });
@@ -617,12 +631,13 @@ public class GUIHome extends javax.swing.JFrame {
             String descrip = null;
             Date date;
             date = format.parse(textDate);
-            RevenueCategory category = listRevenueCategory.get(selectCategory.getSelectedIndex());
-            Revenue revenue = new Revenue(id,value,addTitle.getText(),date,category);
-            
-            //Revenue revenue = new Revenue(id,value,descrip,date,category);
+            //RevenueCategory category = listCategory.getRevenueCategory(selectCategory.getSelectedIndex());
+            //Revenue revenue = new Revenue(id,value,addTitle.getText(),date,category);
+           RevenueCategory category = listRevenueCategory.get(selectCategory.getSelectedIndex());
+            Revenue revenue = new Revenue(id,value,descrip,date,category);
             user.add_revenue(revenue);
             balanceUpdate();
+            updateListExt();
             addValue.setText(null);
             addDate.setText(null);
             addTitle.setText(null);
@@ -630,7 +645,7 @@ public class GUIHome extends javax.swing.JFrame {
             selectCategory.setEnabled(false);
             buttonGroupAdd.clearSelection();
         } catch (ParseException ex) {
-            Logger.getLogger(GUIHome.class.getName()).log(Level.SEVERE, null, ex);
+            JOptionPane.showMessageDialog(null, "Informe um data no fomato DD/MM/AAAA");
         }
     }
     
@@ -638,19 +653,19 @@ public class GUIHome extends javax.swing.JFrame {
      * Adicionar nova Despesa
      */
     private void buttonConfirmAddChar(){
-         try {
+         try {              
             // TODO add your handling code here:
             DateFormat format = DateFormat.getDateInstance();
             id += 1;
             double value = Double.parseDouble(addValue.getText());
             String textDate = addDate.getText();
-            String descrip = null;
             Date date;
             date = format.parse(textDate);
             ChargeCategory category = listChargeCategory.get(selectCategory.getSelectedIndex());;
             Charge charge = new Charge(id,value,addTitle.getText(),date,category);
             user.add_charge(charge);
             balanceUpdate();
+            updateListExt();
             addValue.setText(null);
             addDate.setText(null);
             addTitle.setText(null);
@@ -659,7 +674,7 @@ public class GUIHome extends javax.swing.JFrame {
             buttonGroupAdd.clearSelection();
             
         } catch (ParseException ex) {
-            Logger.getLogger(GUIHome.class.getName()).log(Level.SEVERE, null, ex);
+            JOptionPane.showMessageDialog(null, "Informe um data no fomato DD/MM/AAAA");
         }
     }
     /**
@@ -737,6 +752,7 @@ public class GUIHome extends javax.swing.JFrame {
         return listRevCatList;
     }
     
+
      /**
      * Lista de categoria de Despesa
      * @return lista de categorias Receita
@@ -1040,15 +1056,30 @@ public class GUIHome extends javax.swing.JFrame {
         }
     }
     
+    public void updateListExt(){
+        listModel = new DefaultListModel();
+        int i = user.getOperations().size()-1;
+        String date;
+        int month=user.get_operation(i).getDatetime().getMonth()+1;
+        while(i>=0){
+            date = (user.get_operation(i).getDatetime().getDate()+"/"+month+"/"+user.get_operation(i).getDatetime().getYear());
+            listModel.addElement(user.get_operation(i).getTitle() + "|" + date + "|"+ user.get_operation(i).getValue());
+            i-=1;
+        }
+        listExt.setModel(listModel);
+    }
+    
+    
+    private DefaultListModel listModel;
     private User user;
     private double balance;
     int id;
-    OperationsApp listCategory;
     List<RevenueCategory> listRevenueCategory;
     List<ChargeCategory> listChargeCategory;
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JPanel PanelFiltExtr;
     private javax.swing.JPanel PanelFiltExtr1;
+    private javax.swing.JPanel PanelShowExtract;
     private javax.swing.JTextField addDate;
     private javax.swing.JTextField addTitle;
     private javax.swing.JTextField addValue;
@@ -1066,8 +1097,8 @@ public class GUIHome extends javax.swing.JFrame {
     private javax.swing.JCheckBox chekRevGraFilt;
     private javax.swing.JFileChooser expFilExp;
     private javax.swing.JLabel jLabel1;
-    private javax.swing.JList<String> jList2;
     private javax.swing.JPanel jPanel3;
+    private javax.swing.JScrollPane jScrollPane5;
     private javax.swing.JSeparator jSeparator1;
     private javax.swing.JSeparator jSeparator2;
     private javax.swing.JLabel labeDateSepExtFilt;
@@ -1079,7 +1110,7 @@ public class GUIHome extends javax.swing.JFrame {
     private javax.swing.JLabel labelGrapAnual;
     private javax.swing.JLabel labelTitle;
     private javax.swing.JLabel labelValue;
-    private javax.swing.JScrollPane listExtract;
+    private javax.swing.JList<String> listExt;
     private javax.swing.JPanel panelAdd;
     private javax.swing.JPanel panelAnualGraph;
     private javax.swing.JPanel panelExtract;
