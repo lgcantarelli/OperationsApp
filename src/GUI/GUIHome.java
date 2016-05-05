@@ -210,7 +210,7 @@ public class GUIHome extends javax.swing.JFrame {
         });
 
         listExt.setSelectionMode(javax.swing.ListSelectionModel.SINGLE_SELECTION);
-        listExt.setEnabled(false);
+        listExt.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
         jScrollPane5.setViewportView(listExt);
 
         javax.swing.GroupLayout PanelShowExtractLayout = new javax.swing.GroupLayout(PanelShowExtract);
@@ -518,8 +518,9 @@ public class GUIHome extends javax.swing.JFrame {
                     JOptionPane.showMessageDialog(null, "Campo Valor vazio");
                 }else if(addDate.getText().trim().equals("")){
                     JOptionPane.showMessageDialog(null, "Campo Data vazio");
-                }else{//confirmAddRev.setSize(300,150);
-                    //confirmAddRev.setVisible(true);
+                }else if(addTitle.getText().trim().equals("")){
+                    JOptionPane.showMessageDialog(null, "Campo Titulo vazio");
+                }else{
                     if(radioButtonCharge.isSelected() == true){
                         int confirmBox = JOptionPane.showConfirmDialog(null, "salvar DESPESA",null,OK_CANCEL_OPTION);
                         if(confirmBox == JOptionPane.OK_OPTION){
@@ -616,13 +617,12 @@ public class GUIHome extends javax.swing.JFrame {
             id += 1;
             double value = Double.parseDouble(addValue.getText());
             String textDate = addDate.getText();
-            String descrip = null;
             Date date;
             date = format.parse(textDate);
             //RevenueCategory category = listCategory.getRevenueCategory(selectCategory.getSelectedIndex());
             //Revenue revenue = new Revenue(id,value,addTitle.getText(),date,category);
            RevenueCategory category = listRevenueCategory.get(selectCategory.getSelectedIndex());
-            Revenue revenue = new Revenue(id,value,descrip,date,category);
+            Revenue revenue = new Revenue(id,value,addTitle.getText(),date,category);
             user.add_revenue(revenue);
             balanceUpdate();
             updateListExt();
@@ -839,7 +839,6 @@ public class GUIHome extends javax.swing.JFrame {
                 Date dateUntil;
                 dateUntil = format.parse(textDateUntil);
                 //
-                System.out.print("tete");
                 buttonGroupFiltExt.clearSelection();
                 checDateExtFilt.setSelected(false);
                 texDateFromExtFilt.setText("");
@@ -980,16 +979,31 @@ public class GUIHome extends javax.swing.JFrame {
         listModel = new DefaultListModel();
         int i = user.getOperations().size()-1;
         String date;
-        int month=user.get_operation(i).getDatetime().getMonth()+1;
         while(i>=0){
+            int month=user.get_operation(i).getDatetime().getMonth()+1;
             date = (user.get_operation(i).getDatetime().getDate()+"/"+month+"/"+user.get_operation(i).getDatetime().getYear());
-            listModel.addElement(user.get_operation(i).getTitle() + "|" + date + "|"+ user.get_operation(i).getValue());
+            String[] espaco = new String[3];
+            espaco=spaceSize(i,date);
+            listModel.addElement(user.get_operation(i).getTitle()+ espaco[0] + espaco[1] +  date + espaco[2] +  user.get_operation(i).getValue());
+            //System.out.println(user.get_operation(i).getTitle().length()+ espaco[0].length());
             i-=1;
         }
         listExt.setModel(listModel);
     }
     
-    
+    public String[] spaceSize(int index, String date){
+        String[] position = new String[3];
+        position[0]="";
+        position[1]="";
+        position[2]="";
+        int sizeTitle= 60-user.get_operation(index).getTitle().length();
+        for(int i =0;i<sizeTitle;i++){position[0]+=" ";}
+        int sizeCategory= 30-user.get_operation(index).getTitle().length();
+        for(int i =0;i<sizeCategory;i++){position[1]+=" ";}
+        int sizeDate= 20-date.length();
+        for(int i =0;i<sizeDate;i++){position[2]+=" ";}
+        return position;
+    }
     private DefaultListModel listModel;
     private User user;
     private double balance;
