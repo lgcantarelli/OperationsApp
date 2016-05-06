@@ -67,9 +67,6 @@ public class OperationsApp {
      */
     public static void main(String[] args) {
         // TODO code application logic here
-        
-        
-        
         User user = new User();
         user.add_revenue(new Revenue(user.get_last_id(), 3, "Teste R", new Date(new Date().getTime() + (1000 * 60 * 60 * 24)), revenueCategories.get(1)));
         user.add_revenue(new Revenue(user.get_last_id(), 4, "Teste R 1", new Date(new Date().getTime() + (1000 * 60 * 60 * 24)), revenueCategories.get(2)));

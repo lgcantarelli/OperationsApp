@@ -23,6 +23,10 @@ import javax.swing.JFileChooser;
 import javax.swing.JOptionPane;
 import static javax.swing.JOptionPane.OK_CANCEL_OPTION;
 import javax.swing.JTextField;
+import org.jfree.chart.ChartFactory;
+import org.jfree.chart.ChartFrame;
+import org.jfree.chart.JFreeChart;
+import org.jfree.data.general.DefaultPieDataset;
 
 /**
  *
@@ -617,9 +621,7 @@ public class GUIHome extends javax.swing.JFrame {
             String textDate = addDate.getText();
             Date date;
             date = format.parse(textDate);
-            //RevenueCategory category = listCategory.getRevenueCategory(selectCategory.getSelectedIndex());
-            //Revenue revenue = new Revenue(id,value,addTitle.getText(),date,category);
-           RevenueCategory category = listRevenueCategory.get(selectCategory.getSelectedIndex());
+            RevenueCategory category = listRevenueCategory.get(selectCategory.getSelectedIndex());
             Revenue revenue = new Revenue(id,value,addTitle.getText(),date,category);
             user.add_revenue(revenue);
             balanceUpdate();
@@ -703,6 +705,24 @@ public class GUIHome extends javax.swing.JFrame {
             java.util.logging.Logger.getLogger(GUIHome.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
         //</editor-fold>
+        
+        // create a dataset...
+        DefaultPieDataset data = new DefaultPieDataset();
+        data.setValue("Category 1", 43.2);
+        data.setValue("Category 2", 27.9);
+        data.setValue("Category 3", 79.5);
+        // create a chart...
+        JFreeChart chart = ChartFactory.createPieChart(
+            "Sample Pie Chart",
+            data,
+            true, // legend?
+            true, // tooltips?
+            false // URLs?
+        );
+        // create and display a frame...
+        ChartFrame frame = new ChartFrame("First", chart);
+        frame.pack();
+        frame.setVisible(true);
 
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
