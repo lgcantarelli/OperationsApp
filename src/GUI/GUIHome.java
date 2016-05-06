@@ -6,27 +6,27 @@
  * @author Matheus Soares
  */
 package GUI;
+import java.awt.BorderLayout;
 import java.awt.Color;
+import java.awt.Dimension;
 import java.io.File;
 import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
-import java.util.logging.Level;
-import java.util.logging.Logger;
-import javax.swing.ComboBoxModel;
 import javax.swing.DefaultListModel;
 import operationsapp.*;
 import javax.swing.JFileChooser;
 import javax.swing.JOptionPane;
 import static javax.swing.JOptionPane.OK_CANCEL_OPTION;
-import javax.swing.JTextField;
 import org.jfree.chart.ChartFactory;
 import org.jfree.chart.ChartFrame;
 import org.jfree.chart.JFreeChart;
-import org.jfree.data.general.DefaultPieDataset;
+import org.jfree.chart.plot.PlotOrientation;
+import org.jfree.data.category.DefaultCategoryDataset;
 
 /**
  *
@@ -43,6 +43,41 @@ public class GUIHome extends javax.swing.JFrame {
         id=0;
         listRevenueCategory = listRevCatCri();
         listChargeCategory = listCharCatCri();
+    }
+    
+    /**
+     * @param args the command line arguments
+     */
+    public static void main(String args[]) {
+        /* Set the Nimbus look and feel */
+        //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
+        /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
+         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
+         */
+        try {
+            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
+                if ("Nimbus".equals(info.getName())) {
+                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
+                    break;
+                }
+            }
+        } catch (ClassNotFoundException ex) {
+            java.util.logging.Logger.getLogger(GUIHome.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+        } catch (InstantiationException ex) {
+            java.util.logging.Logger.getLogger(GUIHome.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+        } catch (IllegalAccessException ex) {
+            java.util.logging.Logger.getLogger(GUIHome.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
+            java.util.logging.Logger.getLogger(GUIHome.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+        }
+        //</editor-fold>
+
+        /* Create and display the form */
+        java.awt.EventQueue.invokeLater(new Runnable() {
+            public void run() {
+                new GUIHome().setVisible(true);
+            }
+        });
     }
 
     /**
@@ -111,6 +146,12 @@ public class GUIHome extends javax.swing.JFrame {
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setBackground(new java.awt.Color(255, 255, 255));
         setResizable(false);
+
+        panelInf.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusGained(java.awt.event.FocusEvent evt) {
+                panelInfFocusGained(evt);
+            }
+        });
 
         labelChaRev.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
         labelChaRev.setText("Extrato");
@@ -282,23 +323,15 @@ public class GUIHome extends javax.swing.JFrame {
 
         panelInf.addTab("Extrato", panelExtract);
 
-        labelGrapAnual.setText("Anual");
+        panelAnualGraph.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                panelAnualGraphMouseClicked(evt);
+            }
+        });
+        panelAnualGraph.setLayout(new javax.swing.BoxLayout(panelAnualGraph, javax.swing.BoxLayout.LINE_AXIS));
 
-        javax.swing.GroupLayout panelAnualGraphLayout = new javax.swing.GroupLayout(panelAnualGraph);
-        panelAnualGraph.setLayout(panelAnualGraphLayout);
-        panelAnualGraphLayout.setHorizontalGroup(
-            panelAnualGraphLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(panelAnualGraphLayout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(labelGrapAnual)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-        );
-        panelAnualGraphLayout.setVerticalGroup(
-            panelAnualGraphLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(panelAnualGraphLayout.createSequentialGroup()
-                .addComponent(labelGrapAnual)
-                .addGap(0, 185, Short.MAX_VALUE))
-        );
+        labelGrapAnual.setText("Anual");
+        panelAnualGraph.add(labelGrapAnual);
 
         buttonGroupFiltGra.add(checkCharGraFilt);
         checkCharGraFilt.setText("Despesas");
@@ -422,12 +455,14 @@ public class GUIHome extends javax.swing.JFrame {
         panelReport.setLayout(panelReportLayout);
         panelReportLayout.setHorizontalGroup(
             panelReportLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(panelAnualGraph, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
             .addComponent(jPanel3, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
             .addGroup(panelReportLayout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(jSeparator1, javax.swing.GroupLayout.PREFERRED_SIZE, 713, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+            .addGroup(panelReportLayout.createSequentialGroup()
+                .addComponent(panelAnualGraph, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 0, Short.MAX_VALUE))
         );
         panelReportLayout.setVerticalGroup(
             panelReportLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -679,58 +714,13 @@ public class GUIHome extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_buttonExpActionPerformed
 
-    /**
-     * @param args the command line arguments
-     */
-    public static void main(String args[]) {
-        /* Set the Nimbus look and feel */
-        //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
-        /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
-         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
-         */
-        try {
-            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
-                if ("Nimbus".equals(info.getName())) {
-                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
-                    break;
-                }
-            }
-        } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(GUIHome.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(GUIHome.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(GUIHome.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(GUIHome.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        }
-        //</editor-fold>
-        
-        // create a dataset...
-        DefaultPieDataset data = new DefaultPieDataset();
-        data.setValue("Category 1", 43.2);
-        data.setValue("Category 2", 27.9);
-        data.setValue("Category 3", 79.5);
-        // create a chart...
-        JFreeChart chart = ChartFactory.createPieChart(
-            "Sample Pie Chart",
-            data,
-            true, // legend?
-            true, // tooltips?
-            false // URLs?
-        );
-        // create and display a frame...
-        ChartFrame frame = new ChartFrame("First", chart);
-        frame.pack();
-        frame.setVisible(true);
+    private void panelInfFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_panelInfFocusGained
+        buildAnualChart();
+    }//GEN-LAST:event_panelInfFocusGained
 
-        /* Create and display the form */
-        java.awt.EventQueue.invokeLater(new Runnable() {
-            public void run() {
-                new GUIHome().setVisible(true);
-            }
-        });
-    }
+    private void panelAnualGraphMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_panelAnualGraphMouseClicked
+        buildAnualChart();
+    }//GEN-LAST:event_panelAnualGraphMouseClicked
 
     /**
      * Lista de categoria de Reciita
@@ -1024,6 +1014,44 @@ public class GUIHome extends javax.swing.JFrame {
         for(int i =0;i<sizeDate;i++){position[2]+=" ";}
         return position;
     }
+    
+    public void buildAnualChart() {
+        DefaultCategoryDataset data = new DefaultCategoryDataset();
+        ArrayList<String> last12Months = new ArrayList<String>();
+        
+        for (int i = -11; i <= 0; i++) {
+            Calendar calendar = Calendar.getInstance();
+            calendar.setTime(new Date());
+            calendar.add(Calendar.MONTH, i);
+            last12Months.add(new SimpleDateFormat("MMM").format(calendar.getTime()));
+        }
+        
+        for (String month : last12Months) {
+            data.addValue(20, "Saldo", month);
+            data.addValue(10, "Custo", month);
+            data.addValue(30, "Receita", month);
+        }
+
+        JFreeChart chart = ChartFactory.createLineChart(
+            "Últimos 12 meses",
+            "Meses",
+            "R$",
+            data,
+            PlotOrientation.VERTICAL,
+            true, // legend?
+            true, // tooltips?
+            false // URLs?
+        );
+
+        ChartFrame frame = new ChartFrame("My chart", chart);
+        frame.pack();
+ 
+        panelAnualGraph.removeAll();
+        panelAnualGraph.setPreferredSize(new Dimension(720, 0));
+        panelAnualGraph.add(frame.getChartPanel(), BorderLayout.CENTER);
+        panelAnualGraph.validate();
+   }
+    
     private DefaultListModel listModel;
     private User user;
     private double balance;
