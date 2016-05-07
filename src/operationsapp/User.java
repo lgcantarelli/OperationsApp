@@ -11,6 +11,8 @@ import java.util.Date;
 import java.util.List;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.Calendar;
 
 
@@ -364,4 +366,31 @@ public class User {
         }
     }
     
+    public List<Operation> getFiltredList(String from, String to, boolean revenue, boolean charge) throws ParseException{
+        List<Operation> list = new ArrayList<Operation>();
+        SimpleDateFormat formatter = new SimpleDateFormat("dd/MM/yyyy");
+        Date date = formatter.parse("01/01/1900");
+        Date date1 = formatter.parse("01/01/2999");
+        if(from.length()>0){
+            date  = formatter.parse(from);
+        }
+        if(to.length()>0){
+            date1 = formatter.parse(to);
+        }
+        
+        for(int i = 0; i < operations.size();i++){
+            if(operations.get(i).getDatetime().after(date) && operations.get(i).getDatetime().before(date1)){
+                if(operations.get(i).getType() == 1 && revenue == true){
+                   list.add(operations.get(i));
+                }
+                
+                if(operations.get(i).getType() == 2 && charge == true){
+                   list.add(operations.get(i));
+                }
+            }
+            
+        }
+        return list;
+        
+    }
 }

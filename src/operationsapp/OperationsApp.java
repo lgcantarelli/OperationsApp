@@ -109,7 +109,14 @@ public class OperationsApp {
                 System.out.println("Mes: "+i+" Valor: "+j+" "+a[i][j]);
             }
         }
-        System.out.println(a[0][0]);
+        
+ 
+        List<Operation> list = user.getFiltredList("05/02/2016","01/04/2016",true,true);
+        
+        for(int i = 0; i < list.size(); i++){
+            list.get(i).toString();
+        }
+        
         //System.out.println(user.get_balance());
         
         //user.del_operation_by_id(4);
