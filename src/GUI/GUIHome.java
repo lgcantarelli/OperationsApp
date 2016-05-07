@@ -11,6 +11,7 @@ import java.awt.Color;
 import java.awt.Dimension;
 import java.io.File;
 import java.text.DateFormat;
+import java.text.DecimalFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -22,6 +23,9 @@ import operationsapp.*;
 import javax.swing.JFileChooser;
 import javax.swing.JOptionPane;
 import static javax.swing.JOptionPane.OK_CANCEL_OPTION;
+import javax.swing.table.DefaultTableModel;
+import javax.swing.table.TableCellRenderer;
+import javax.swing.table.TableColumn;
 import org.jfree.chart.ChartFactory;
 import org.jfree.chart.ChartFrame;
 import org.jfree.chart.JFreeChart;
@@ -40,6 +44,16 @@ public class GUIHome extends javax.swing.JFrame {
     public GUIHome() {
         initComponents();
         user = new User();
+        ////////////////////////////////////////////////////////////////////
+        ////////////////////TESTE/////////////////////////////////////
+        /////////////////////////////////////////////////////////////////
+        AddTestes testes = new AddTestes(user);
+        for(int i=0;i<testes.getStrings().size();i++)
+                updateListExt(testes.getStrings(i));
+        balanceUpdate();
+        ////////////////////////////////////////////////////////////////
+        //////////////////////////////////////////////////////////////
+        //////////////////////////////////////////////////////////////*/
         id=0;
         listRevenueCategory = listRevCatCri();
         listChargeCategory = listCharCatCri();
@@ -109,8 +123,8 @@ public class GUIHome extends javax.swing.JFrame {
         texDateUntilExtFilt = new javax.swing.JTextField();
         buttonSelecExtFilt = new javax.swing.JButton();
         PanelShowExtract = new javax.swing.JPanel();
-        jScrollPane5 = new javax.swing.JScrollPane();
-        listExt = new javax.swing.JList<>();
+        jScrollPane1 = new javax.swing.JScrollPane();
+        tableExtract = new javax.swing.JTable();
         panelReport = new javax.swing.JPanel();
         panelAnualGraph = new javax.swing.JPanel();
         labelGrapAnual = new javax.swing.JLabel();
@@ -254,9 +268,27 @@ public class GUIHome extends javax.swing.JFrame {
             }
         });
 
-        listExt.setSelectionMode(javax.swing.ListSelectionModel.SINGLE_SELECTION);
-        listExt.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
-        jScrollPane5.setViewportView(listExt);
+        tableExtract.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+
+            },
+            new String [] {
+                "Titulo", "Categoria", "Data", "Valor"
+            }
+        ) {
+            boolean[] canEdit = new boolean [] {
+                false, false, false, false
+            };
+
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
+                return canEdit [columnIndex];
+            }
+        });
+        jScrollPane1.setViewportView(tableExtract);
+        tableExtract.getColumnModel().getColumn(0).setPreferredWidth(200);
+        tableExtract.getColumnModel().getColumn(1).setPreferredWidth(200);
+        tableExtract.getColumnModel().getColumn(2).setPreferredWidth(100);
+        tableExtract.getColumnModel().getColumn(3).setPreferredWidth(100);
 
         javax.swing.GroupLayout PanelShowExtractLayout = new javax.swing.GroupLayout(PanelShowExtract);
         PanelShowExtract.setLayout(PanelShowExtractLayout);
@@ -264,14 +296,14 @@ public class GUIHome extends javax.swing.JFrame {
             PanelShowExtractLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(PanelShowExtractLayout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jScrollPane5)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 670, Short.MAX_VALUE)
                 .addContainerGap())
         );
         PanelShowExtractLayout.setVerticalGroup(
             PanelShowExtractLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(PanelShowExtractLayout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jScrollPane5, javax.swing.GroupLayout.DEFAULT_SIZE, 434, Short.MAX_VALUE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
 
         javax.swing.GroupLayout panelExtractLayout = new javax.swing.GroupLayout(panelExtract);
@@ -281,17 +313,22 @@ public class GUIHome extends javax.swing.JFrame {
             .addGroup(panelExtractLayout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(panelExtractLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(separatorExtract)
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panelExtractLayout.createSequentialGroup()
                         .addComponent(labelChaRev, javax.swing.GroupLayout.DEFAULT_SIZE, 703, Short.MAX_VALUE)
                         .addGap(10, 10, 10))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panelExtractLayout.createSequentialGroup()
-                        .addGap(0, 0, Short.MAX_VALUE)
-                        .addGroup(panelExtractLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(labelBalance)
-                            .addComponent(valueBalance, javax.swing.GroupLayout.PREFERRED_SIZE, 224, javax.swing.GroupLayout.PREFERRED_SIZE)))
                     .addComponent(PanelFiltExtr, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(PanelShowExtract, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addGroup(panelExtractLayout.createSequentialGroup()
+                        .addComponent(PanelShowExtract, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(0, 0, Short.MAX_VALUE))
+                    .addGroup(panelExtractLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addComponent(separatorExtract)
+                        .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panelExtractLayout.createSequentialGroup()
+                            .addGap(65, 65, 65)
+                            .addGroup(panelExtractLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                .addComponent(valueBalance, javax.swing.GroupLayout.PREFERRED_SIZE, 210, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panelExtractLayout.createSequentialGroup()
+                                    .addComponent(labelBalance)
+                                    .addGap(167, 167, 167))))))
                 .addContainerGap())
         );
         panelExtractLayout.setVerticalGroup(
@@ -304,12 +341,12 @@ public class GUIHome extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(PanelShowExtract, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(separatorExtract, javax.swing.GroupLayout.PREFERRED_SIZE, 15, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(separatorExtract, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(labelBalance, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(valueBalance, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap())
+                .addComponent(valueBalance, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(76, 76, 76))
         );
 
         valueBalance.setText("R$ " + balance);
@@ -660,7 +697,12 @@ public class GUIHome extends javax.swing.JFrame {
             Revenue revenue = new Revenue(id,value,addTitle.getText(),date,category);
             user.add_revenue(revenue);
             balanceUpdate();
-            updateListExt();
+            String[] addList = new String[4];
+            addList[0]=addTitle.getText();
+            addList[2]=addDate.getText();
+            addList[1]=category.getName();
+            addList[3]=addValue.getText();
+            updateListExt(addList);
             addValue.setText(null);
             addDate.setText(null);
             addTitle.setText(null);
@@ -688,7 +730,12 @@ public class GUIHome extends javax.swing.JFrame {
             Charge charge = new Charge(id,value,addTitle.getText(),date,category);
             user.add_charge(charge);
             balanceUpdate();
-            updateListExt();
+            String[] addList = new String[4];
+            addList[0]=addTitle.getText();
+            addList[2]=addDate.getText();
+            addList[1]=category.getName();
+            addList[3]=addValue.getText();
+            updateListExt(addList);
             addValue.setText(null);
             addDate.setText(null);
             addTitle.setText(null);
@@ -756,7 +803,7 @@ public class GUIHome extends javax.swing.JFrame {
     public List<ChargeCategory> listCharCatCri(){
         List<ChargeCategory> listCategory = new ArrayList();
         ChargeCategory category;
-        category = new ChargeCategory(0,"Supermecado");
+        category = new ChargeCategory(0,"Supermercado");
         listCategory.add(category);
         category = new ChargeCategory(1,"Aluguel");
         listCategory.add(category);
@@ -769,6 +816,8 @@ public class GUIHome extends javax.swing.JFrame {
         category = new ChargeCategory(5,"Internet");
         listCategory.add(category);       
         category = new ChargeCategory(6,"Celular");
+        listCategory.add(category);
+        category = new ChargeCategory(7,"Outro");
         listCategory.add(category);
         return listCategory;
     }
@@ -784,8 +833,9 @@ public class GUIHome extends javax.swing.JFrame {
      * Atualização do valor do Saldo 
      */
     public void balanceUpdate(){
+        DecimalFormat df = new DecimalFormat("#,###.00");
         balance = user.get_balance();
-        valueBalance.setText("R$ " + balance);
+        valueBalance.setText("R$ " + df.format(balance));
         if(balance<0){
             valueBalance.setForeground(Color.red);
         }else if(balance>0){
@@ -983,38 +1033,16 @@ public class GUIHome extends javax.swing.JFrame {
         }
     }
     
-    public void updateListExt(){
-        listModel = new DefaultListModel();
-        int i = user.getOperations().size()-1;
-        String date;
-        while(i>=0){
-            int month=user.get_operation(i).getDatetime().getMonth()+1;
-            int year = user.get_operation(i).getDatetime().getYear();
-            if(year>=100){year-=100;}
-            date = (user.get_operation(i).getDatetime().getDate()+"/"+month+"/"+year);
-            String[] espaco = new String[3];
-            espaco=spaceSize(i,date);
-            listModel.addElement(user.get_operation(i).getTitle()+ espaco[0] + espaco[1] +  date + espaco[2] +  user.get_operation(i).getValue());
-            //System.out.println(user.get_operation(i).getTitle().length()+ espaco[0].length());
-            i-=1;
-        }
-        listExt.setModel(listModel);
+    public void updateListExt(String[] add){
+
+        DefaultTableModel model = (DefaultTableModel) tableExtract.getModel();  
+        TableCellRenderer tcr = new Colorir();
+        TableColumn column =  tableExtract.getColumnModel().getColumn(3);
+        column.setCellRenderer(tcr);
+        model.addRow(add);
+        column.setCellRenderer(tcr);  
     }
-    
-    public String[] spaceSize(int index, String date){
-        String[] position = new String[3];
-        position[0]="";
-        position[1]="";
-        position[2]="";
-        int sizeTitle= 60-user.get_operation(index).getTitle().length();
-        for(int i =0;i<sizeTitle;i++){position[0]+=" ";}
-        int sizeCategory= 30-user.get_operation(index).getTitle().length();
-        for(int i =0;i<sizeCategory;i++){position[1]+=" ";}
-        int sizeDate= 20-date.length();
-        for(int i =0;i<sizeDate;i++){position[2]+=" ";}
-        return position;
-    }
-    
+
     public void buildAnualChart() {
         DefaultCategoryDataset data = new DefaultCategoryDataset();
         ArrayList<String> last12Months = new ArrayList<String>();
@@ -1082,7 +1110,7 @@ public class GUIHome extends javax.swing.JFrame {
     private javax.swing.JFileChooser expFilExp;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JPanel jPanel3;
-    private javax.swing.JScrollPane jScrollPane5;
+    private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JSeparator jSeparator1;
     private javax.swing.JSeparator jSeparator2;
     private javax.swing.JLabel labeDateSepExtFilt;
@@ -1094,7 +1122,6 @@ public class GUIHome extends javax.swing.JFrame {
     private javax.swing.JLabel labelGrapAnual;
     private javax.swing.JLabel labelTitle;
     private javax.swing.JLabel labelValue;
-    private javax.swing.JList<String> listExt;
     private javax.swing.JPanel panelAdd;
     private javax.swing.JPanel panelAnualGraph;
     private javax.swing.JPanel panelExtract;
@@ -1104,6 +1131,7 @@ public class GUIHome extends javax.swing.JFrame {
     private javax.swing.JRadioButton radioButtonRevenue;
     private javax.swing.JComboBox<String> selectCategory;
     private javax.swing.JSeparator separatorExtract;
+    private javax.swing.JTable tableExtract;
     private javax.swing.JTextField texDateFromExtFilt;
     private javax.swing.JTextField texDateFromGraFilt;
     private javax.swing.JTextField texDateUntilExtFilt;
