@@ -21,6 +21,9 @@ import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.DefaultListModel;
+import org.jfree.chart.plot.PiePlot;
+import org.jfree.data.general.DefaultPieDataset;
+import org.jfree.data.general.PieDataset;
 import operationsapp.*;
 import javax.swing.JFileChooser;
 import javax.swing.JOptionPane;
@@ -140,12 +143,13 @@ public class GUIHome extends javax.swing.JFrame {
         texDateUntilGraFilt = new javax.swing.JTextField();
         buttonSelecGraFilt = new javax.swing.JButton();
         jLabel1 = new javax.swing.JLabel();
+        panelPieGraph = new javax.swing.JPanel();
         jSeparator1 = new javax.swing.JSeparator();
         panelAdd = new javax.swing.JPanel();
         labelDate = new javax.swing.JLabel();
         labelValue = new javax.swing.JLabel();
         addValue = new javax.swing.JTextField();
-        selectCategory = new javax.swing.JComboBox<>();
+        selectCategory = new javax.swing.JComboBox<String>();
         buttonAdd = new javax.swing.JButton();
         radioButtonCharge = new javax.swing.JRadioButton();
         radioButtonRevenue = new javax.swing.JRadioButton();
@@ -482,6 +486,8 @@ public class GUIHome extends javax.swing.JFrame {
         jLabel1.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
         jLabel1.setText("Graficos");
 
+        panelPieGraph.setLayout(new javax.swing.BoxLayout(panelPieGraph, javax.swing.BoxLayout.LINE_AXIS));
+
         javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
         jPanel3.setLayout(jPanel3Layout);
         jPanel3Layout.setHorizontalGroup(
@@ -489,10 +495,12 @@ public class GUIHome extends javax.swing.JFrame {
             .addGroup(jPanel3Layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(PanelFiltExtr1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addGroup(jPanel3Layout.createSequentialGroup()
-                        .addComponent(jLabel1)
-                        .addGap(0, 0, Short.MAX_VALUE))
-                    .addComponent(PanelFiltExtr1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabel1)
+                            .addComponent(panelPieGraph, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(0, 0, Short.MAX_VALUE)))
                 .addContainerGap())
         );
         jPanel3Layout.setVerticalGroup(
@@ -501,7 +509,8 @@ public class GUIHome extends javax.swing.JFrame {
                 .addComponent(jLabel1)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(PanelFiltExtr1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(364, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(panelPieGraph, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout panelReportLayout = new javax.swing.GroupLayout(panelReport);
@@ -767,10 +776,12 @@ public class GUIHome extends javax.swing.JFrame {
     }
     private void panelInfFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_panelInfFocusGained
         buildAnualChart();
+        buildPieChart();
     }//GEN-LAST:event_panelInfFocusGained
 
     private void panelAnualGraphMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_panelAnualGraphMouseClicked
         buildAnualChart();
+        buildPieChart();
     }//GEN-LAST:event_panelAnualGraphMouseClicked
 
     /**
@@ -1150,6 +1161,38 @@ public class GUIHome extends javax.swing.JFrame {
         panelAnualGraph.validate();
    }
     
+    
+    public void buildPieChart() {
+        DefaultPieDataset dataset = new DefaultPieDataset();
+        dataset.setValue("Telefone", new Double(0));
+        dataset.setValue("Supermercado", new Double(300));
+        dataset.setValue("Aluguel", new Double(600));
+        dataset.setValue("Luz", new Double(80));
+        dataset.setValue("Agua", new Double(100));
+        dataset.setValue("Internet", new Double(100));
+        dataset.setValue("Celular", new Double(30));
+    
+        JFreeChart chart = ChartFactory.createPieChart(
+            "Custos por categoria",  // chart title
+            dataset,            // data
+            false,              // no legend
+            true,               // tooltips
+            false               // no URL generation
+        );
+        
+        ChartFrame frame = new ChartFrame("Pie Chart", chart);
+        frame.pack();
+ 
+        
+        panelPieGraph.removeAll();
+        panelPieGraph.setPreferredSize(new Dimension(350,350));
+        panelPieGraph.add(frame.getChartPanel(), BorderLayout.CENTER);
+        panelPieGraph.validate();
+    
+    
+    
+    }
+    
     private DefaultListModel listModel;
     private User user;
     private double balance;
@@ -1196,6 +1239,7 @@ public class GUIHome extends javax.swing.JFrame {
     private javax.swing.JPanel panelAnualGraph;
     private javax.swing.JPanel panelExtract;
     private javax.swing.JTabbedPane panelInf;
+    private javax.swing.JPanel panelPieGraph;
     private javax.swing.JPanel panelReport;
     private javax.swing.JRadioButton radioButtonCharge;
     private javax.swing.JRadioButton radioButtonRevenue;
