@@ -11,7 +11,6 @@ class Colorir extends JLabel implements	TableCellRenderer{
     public Component getTableCellRendererComponent(JTable table,Object value, boolean isSelected, boolean hasFocus, 
                                             int row, int column) {
 
-        System.out.print(table.getValueAt(row, 1).toString());
         String category = table.getValueAt(row, 1).toString();
         if(category.equals("Supermercado")||
                 category.equals("Aluguel")||

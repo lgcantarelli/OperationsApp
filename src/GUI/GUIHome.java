@@ -320,15 +320,14 @@ public class GUIHome extends javax.swing.JFrame {
                     .addGroup(panelExtractLayout.createSequentialGroup()
                         .addComponent(PanelShowExtract, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(0, 0, Short.MAX_VALUE))
-                    .addGroup(panelExtractLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                        .addComponent(separatorExtract)
-                        .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panelExtractLayout.createSequentialGroup()
-                            .addGap(65, 65, 65)
-                            .addGroup(panelExtractLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                .addComponent(valueBalance, javax.swing.GroupLayout.PREFERRED_SIZE, 210, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panelExtractLayout.createSequentialGroup()
-                                    .addComponent(labelBalance)
-                                    .addGap(167, 167, 167))))))
+                    .addComponent(separatorExtract)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panelExtractLayout.createSequentialGroup()
+                        .addGap(65, 65, 65)
+                        .addGroup(panelExtractLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(valueBalance, javax.swing.GroupLayout.PREFERRED_SIZE, 210, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panelExtractLayout.createSequentialGroup()
+                                .addComponent(labelBalance)
+                                .addGap(167, 167, 167)))))
                 .addContainerGap())
         );
         panelExtractLayout.setVerticalGroup(
@@ -634,11 +633,6 @@ public class GUIHome extends javax.swing.JFrame {
         });
 
         buttonExp.setText("Exportar");
-        buttonExp.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                buttonExpActionPerformed(evt);
-            }
-        });
 
         jSeparator2.setOrientation(javax.swing.SwingConstants.VERTICAL);
 
@@ -647,11 +641,12 @@ public class GUIHome extends javax.swing.JFrame {
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(panelAdd, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(0, 0, Short.MAX_VALUE)
+                        .addContainerGap()
+                        .addComponent(panelAdd, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(57, 57, 57)
                         .addComponent(buttonExp)))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jSeparator2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -663,17 +658,23 @@ public class GUIHome extends javax.swing.JFrame {
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addComponent(panelInf)
             .addGroup(layout.createSequentialGroup()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(jSeparator2, javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(21, 21, 21)
-                        .addComponent(panelAdd, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(buttonExp)))
-                .addGap(29, 29, 29))
+                .addComponent(jSeparator2)
+                .addContainerGap())
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addGap(21, 21, 21)
+                .addComponent(panelAdd, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(buttonExp)
+                .addGap(102, 102, 102))
         );
 
-        setSize(new java.awt.Dimension(948, 709));
+        buttonExp.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                JOptionPane.showMessageDialog(null, "Arquivo salvo em: ");
+            }
+        });
+
+        setSize(new java.awt.Dimension(948, 717));
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
    
@@ -747,20 +748,6 @@ public class GUIHome extends javax.swing.JFrame {
             JOptionPane.showMessageDialog(null, "Informe um data no fomato DD/MM/AAAA");
         }
     }
-    /**
-     * Ação para salvar csv grado
-     * @param evt 
-     */
-    private void buttonExpActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonExpActionPerformed
-        // TODO add your handling code here:
-        int returnVal = expFilExp.showSaveDialog(this);
-        if(returnVal == JFileChooser.APPROVE_OPTION){
-        File file = expFilExp.getSelectedFile();
-        } else{
-            System.out.println("File access cancelled by user.");
-        }
-    }//GEN-LAST:event_buttonExpActionPerformed
-
     private void panelInfFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_panelInfFocusGained
         buildAnualChart();
     }//GEN-LAST:event_panelInfFocusGained
