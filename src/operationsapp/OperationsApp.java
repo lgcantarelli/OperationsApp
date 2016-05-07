@@ -5,14 +5,20 @@
  */
 package operationsapp;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
 public class OperationsApp {
-    private static List<ChargeCategory> chargeCategories;
-    private static List<RevenueCategory> revenueCategories;
+    public static List<ChargeCategory> chargeCategories;
+    public static List<RevenueCategory> revenueCategories;
     
-    private void initialize_categories(){
+    private static void initialize_categories(){
+        chargeCategories = new ArrayList<ChargeCategory>();
+        revenueCategories = new ArrayList<RevenueCategory>();
+        
         chargeCategories.add(new ChargeCategory(1,"Supermecado"));
         chargeCategories.add(new ChargeCategory(2,"Aluguel"));
         chargeCategories.add(new ChargeCategory(3,"Luz"));
@@ -65,40 +71,58 @@ public class OperationsApp {
     /**
      * @param args the command line arguments
      */
-    public static void main(String[] args) {
+    public static void main(String[] args) throws ParseException {
+        initialize_categories();
+        
         // TODO code application logic here
         User user = new User();
-        user.add_revenue(new Revenue(user.get_last_id(), 3, "Teste R", new Date(new Date().getTime() + (1000 * 60 * 60 * 24)), revenueCategories.get(1)));
-        user.add_revenue(new Revenue(user.get_last_id(), 4, "Teste R 1", new Date(new Date().getTime() + (1000 * 60 * 60 * 24)), revenueCategories.get(2)));
-        user.add_revenue(new Revenue(user.get_last_id(), 2, "Teste R 2 ", new Date(), revenueCategories.get(3)));
-        user.add_revenue(new Revenue(user.get_last_id(), 5, "Teste R 3", new Date(new Date().getTime() - (1000 * 60 * 60 * 24)), revenueCategories.get(1)));
         
-        System.out.println(user.get_balance());
+        SimpleDateFormat formatter = new SimpleDateFormat("dd/MM/yyyy");
+        Date date = formatter.parse("07/05/2016");
+        Date date1 = formatter.parse("12/05/2016");
+        Date date2 = formatter.parse("07/04/2016");
+        Date date3 = formatter.parse("12/04/2016");
+        Date date4 = formatter.parse("07/03/2016");
+        Date date5 = formatter.parse("12/03/2016");
+        Date date6 = formatter.parse("07/02/2016");
+        Date date7 = formatter.parse("01/02/2016");        
         
-        user.add_charge(new Charge(user.get_last_id(), 3, "Teste C", new Date(new Date().getTime() + (1000 * 60 * 60 * 24)), chargeCategories.get(1)));
-        user.add_charge(new Charge(user.get_last_id(), 4, "Teste C 1", new Date(new Date().getTime() + (1000 * 60 * 60 * 24)), chargeCategories.get(2)));
-        user.add_charge(new Charge(user.get_last_id(), 2, "Teste C 2 ", new Date(), chargeCategories.get(3)));
-        user.add_charge(new Charge(user.get_last_id(), 5, "Teste C 3", new Date(new Date().getTime() - (1000 * 60 * 60 * 24)), chargeCategories.get(1)));
+        user.add_revenue(new Revenue(user.get_last_id(), 3, "Teste R", date, revenueCategories.get(1)));
+        user.add_revenue(new Revenue(user.get_last_id(), 4, "Teste R 1", date1, revenueCategories.get(2)));
+        user.add_revenue(new Revenue(user.get_last_id(), 2, "Teste R 2 ", date2, revenueCategories.get(3)));
+        user.add_revenue(new Revenue(user.get_last_id(), 5, "Teste R 3", date3, revenueCategories.get(1)));
+        
+        user.add_charge(new Charge(user.get_last_id(), 3, "Teste C", date4, chargeCategories.get(1)));
+        user.add_charge(new Charge(user.get_last_id(), 4, "Teste C 1", date5, chargeCategories.get(2)));
+        user.add_charge(new Charge(user.get_last_id(), 2, "Teste C 2 ", date7, chargeCategories.get(3)));
+        user.add_charge(new Charge(user.get_last_id(), 5, "Teste C 3", date, chargeCategories.get(1)));
+        
+        
+        
+        //user.del_operation(2);
+        
         user.print_operations();
         
-        System.out.println(user.get_balance());
+        double a[][] = user.return_line_date();
+        for(int i = 0; i < 12; i++){
+            for(int j = 0; j < 3; j++){
+                System.out.println("Mes: "+i+" Valor: "+j+" "+a[i][j]);
+            }
+        }
+        System.out.println(a[0][0]);
+        //System.out.println(user.get_balance());
         
-        user.del_operation(2);
+        //user.del_operation_by_id(4);
+       //user.print_operations();
+        //System.out.println(user.get_balance());
         
-        user.print_operations();
-        System.out.println(user.get_balance());
+        //user.edit_operation(3, 10, "Teste R Editada", new Date(new Date().getTime() + (1000 * 60 * 60 * 24)), revenueCategories.get(3), null);
+        //user.print_operations();
+        //System.out.println(user.get_balance());
         
-        user.del_operation_by_id(4);
-        user.print_operations();
-        System.out.println(user.get_balance());
-        
-        user.edit_operation(3, 10, "Teste R Editada", new Date(new Date().getTime() + (1000 * 60 * 60 * 24)), revenueCategories.get(3), null);
-        user.print_operations();
-        System.out.println(user.get_balance());
-        
-        user.edit_operation(7, 10, "Teste C Editada", new Date(new Date().getTime() + (1000 * 60 * 60 * 24)), null, chargeCategories.get(1));
-        user.print_operations();
-        System.out.println(user.get_balance());
+        //user.edit_operation(7, 10, "Teste C Editada", new Date(new Date().getTime() + (1000 * 60 * 60 * 24)), null, chargeCategories.get(1));
+       // user.print_operations();
+       // System.out.println(user.get_balance());
     }
     
 }

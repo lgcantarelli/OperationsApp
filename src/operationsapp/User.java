@@ -11,6 +11,7 @@ import java.util.Date;
 import java.util.List;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.util.Calendar;
 
 
 public class User {
@@ -252,6 +253,27 @@ public class User {
      */
     public void return_pizza_data(){
         
+    }
+    
+    public double[][] return_line_date(){
+        double data[][] = new double[12][3];
+        double revenue = 0;
+        double charge = 0;
+        int month = 1;
+        Calendar cal1 = Calendar.getInstance();
+        for(int i = 0; i < operations.size();i++){
+            cal1.setTime(operations.get(i).getDatetime());
+            
+            if(operations.get(i).getType() == 1){
+                data[cal1.get(Calendar.MONTH)][0] = data[cal1.get(Calendar.MONTH)][0] + operations.get(i).getValue();
+                data[cal1.get(Calendar.MONTH)][2] = data[cal1.get(Calendar.MONTH)][2] + operations.get(i).getValue();
+            }else{
+                data[cal1.get(Calendar.MONTH)][1] = data[cal1.get(Calendar.MONTH)][1] + operations.get(i).getValue(); 
+                data[cal1.get(Calendar.MONTH)][2] = data[cal1.get(Calendar.MONTH)][2] - operations.get(i).getValue();
+            }
+        }
+        
+        return data;
     }
     
     /**
