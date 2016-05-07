@@ -18,6 +18,8 @@ import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.DefaultListModel;
 import operationsapp.*;
 import javax.swing.JFileChooser;
@@ -246,20 +248,35 @@ public class GUIHome extends javax.swing.JFrame {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 if(checkCharExtFilt.isSelected()){
                     if(checDateExtFilt.isSelected()){
-                        filtExtChargDate();
+                        try{
+                            filtExtChargDate();}
+                        catch(ParseException ex){
+                            JOptionPane.showMessageDialog(null, "Erro filtro Despesa Data");}
                     }else{
-                        filtExtCharg();
+                        try{
+                            filtExtCharg();}
+                        catch(ParseException ex){
+                            JOptionPane.showMessageDialog(null, "Erro filtro Despesa");}
                     }
                 }else{
                     if(chekRevExtFilt.isSelected()){
                         if(checDateExtFilt.isSelected()){
-                            filtExtRevDate();
+                            try{
+                                filtExtRevDate();}
+                            catch(ParseException ex){
+                                JOptionPane.showMessageDialog(null, "Erro filtro Receita Data");}
                         }else{
-                            filtExtRev();
+                            try{
+                                filtExtRev();}
+                            catch(ParseException ex){
+                                JOptionPane.showMessageDialog(null, "Erro filtro Receita");}
                         }
                     }else{
                         if(checDateExtFilt.isSelected()){
-                            filtExtDate();
+                            try{
+                                filtExtDate();}
+                            catch(ParseException ex){
+                                JOptionPane.showMessageDialog(null, "Erro filtro Data");}
                         }else{
                             JOptionPane.showMessageDialog(null, "Selecione um filtro!");
                         }
@@ -836,94 +853,158 @@ public class GUIHome extends javax.swing.JFrame {
     /**
      * Chamada de filtro para extrato de Despesa e Data
      */
-    public void filtExtChargDate(){
+    public void filtExtChargDate() throws ParseException{
         if(texDateFromExtFilt.getText().trim().equals("") || texDateUntilExtFilt.getText().trim().equals("")){
             JOptionPane.showMessageDialog(null, "Preencha o campo de data!");
         }else{
+            limparTabela();
+            String textDatefrom = texDateFromExtFilt.getText();
+            String textDateUntil = texDateUntilExtFilt.getText();
             try {
                 DateFormat format = DateFormat.getDateInstance();
-                String textDatefrom = texDateFromExtFilt.getText();
                 Date datefrom;
                 datefrom = format.parse(textDatefrom);
-                String textDateUntil = texDateUntilExtFilt.getText();
                 Date dateUntil;
                 dateUntil = format.parse(textDateUntil);
-                //
-                buttonGroupFiltExt.clearSelection();
-                checDateExtFilt.setSelected(false);
-                texDateFromExtFilt.setText("");
-                texDateUntilExtFilt.setText("");
             } catch (ParseException ex) {
                 JOptionPane.showMessageDialog(null,"Informe a data corretamente!");
             }
+            //
+            List<Operation> listFiltred = user.getFiltredList(textDatefrom, textDateUntil, false, true);
+            String[] add = new String[4];
+            Charge op;
+            limparTabela();
+            for(int index=0; index<listFiltred.size();index++){
+                op = (Charge) listFiltred.get(index);
+                add[0]=listFiltred.get(index).getTitle();
+                System.out.print(op.getCategory().getName());
+                add[1]=op.getCategory().getName();
+                String dateString = dateString(listFiltred.get(index).getDatetime());
+                add[2] = dateString;
+                add[3]=String.valueOf(listFiltred.get(index).getValue());
+                updateListExt(add);
+            }
+            buttonGroupFiltExt.clearSelection();
+            checDateExtFilt.setSelected(false);
+            texDateFromExtFilt.setText("");
+            texDateUntilExtFilt.setText("");
+            
         }
     }
 
     /**
      * Chamada de filtro para extrato de Despesa
      */
-    public void filtExtCharg(){
-        //
+    public void filtExtCharg() throws ParseException{
+        List<Operation> listFiltred = user.getFiltredList("01/01/1900", "01/01/2999", false, true);
+        String[] add = new String[4];
+        Charge op;
+        limparTabela();
+        add(listFiltred,add,true);
         buttonGroupFiltExt.clearSelection();
     }
     
+    private void limparTabela() {
+        while (tableExtract.getRowCount() > 0) {
+            DefaultTableModel dm = (DefaultTableModel) tableExtract.getModel();
+            dm.getDataVector().removeAllElements();
+        }
+    }
+    public String dateString(Date date){
+        String dateString;
+            dateString=date.getDate()+"/"+date.getMonth()+"/"+date.getYear();
+        return dateString;
+    }
     /**
      * Chamada de filtro para extrato de Receita e data
      */
-    public void filtExtRevDate(){
+    public void filtExtRevDate() throws ParseException{
         if(texDateFromExtFilt.getText().trim().equals("") || texDateUntilExtFilt.getText().trim().equals("")){
             JOptionPane.showMessageDialog(null, "Preencha o campo de data!");
         }
         else{
-            try {
-                DateFormat format = DateFormat.getDateInstance();
-                String textDatefrom = texDateFromExtFilt.getText();
-                Date datefrom;
-                datefrom = format.parse(textDatefrom);
-                String textDateUntil = texDateUntilExtFilt.getText();
-                Date dateUntil;
-                dateUntil = format.parse(textDateUntil);
-                //
-                buttonGroupFiltExt.clearSelection();
-                checDateExtFilt.setSelected(false);
-                texDateFromExtFilt.setText("");
-                texDateUntilExtFilt.setText("");
-            } catch (ParseException ex) {
-                JOptionPane.showMessageDialog(null,"Informe a data corretamente!");
-            }
+            limparTabela();
+            String textDatefrom = texDateFromExtFilt.getText();
+            String textDateUntil = texDateUntilExtFilt.getText();
+            List<Operation> listFiltred = user.getFiltredList(textDatefrom, textDateUntil, true, false);
+            String[] add = new String[4];
+            Charge op;
+            limparTabela();
+            add(listFiltred,add,false);
+            buttonGroupFiltExt.clearSelection();
+            checDateExtFilt.setSelected(false);
+            texDateFromExtFilt.setText("");
+            texDateUntilExtFilt.setText("");
+
         }
     }
-    
+    public void add(List<Operation> listFiltred,String[] add,boolean charge){
+        for(int index=0; index<listFiltred.size();index++){
+        if(charge ==true){
+            Charge op=(Charge) listFiltred.get(index);
+                add[1]=op.getCategory().getName();
+        }
+        else{Revenue op = (Revenue) listFiltred.get(index);
+                add[1]=op.getCategory().getName();}
+                add[0]=listFiltred.get(index).getTitle();
+                String dateString = dateString(listFiltred.get(index).getDatetime());
+                add[2] = dateString;
+                add[3]=String.valueOf(listFiltred.get(index).getValue());
+                updateListExt(add);
+            }
+    }
     /**
      * Chamada de filtro para extrato de Receita
      */
-    public void filtExtRev(){
+    public void filtExtRev() throws ParseException{
         //
+        List<Operation> listFiltred = user.getFiltredList("01/01/1900", "01/01/2999", true, false);
+        String[] add = new String[4];
+        Revenue op; 
+        limparTabela();
+        add(listFiltred,add,false);
         buttonGroupFiltExt.clearSelection();
     }
 
     /**
      * Chamada de filtro para extrato de Data
      */
-    public void filtExtDate(){
+    public void filtExtDate() throws ParseException{
         if(texDateFromExtFilt.getText().trim().equals("") || texDateUntilExtFilt.getText().trim().equals("")){
             JOptionPane.showMessageDialog(null, "Preencha o campo de data!");
         }else{
+            limparTabela();
+            String textDatefrom = texDateFromExtFilt.getText();
+            String textDateUntil = texDateUntilExtFilt.getText();
             try {
                 DateFormat format = DateFormat.getDateInstance();
-                String textDatefrom = texDateFromExtFilt.getText();
                 Date datefrom;
                 datefrom = format.parse(textDatefrom);
-                String textDateUntil = texDateUntilExtFilt.getText();
                 Date dateUntil;
                 dateUntil = format.parse(textDateUntil);
-                //
-                checDateExtFilt.setSelected(false);
-                texDateFromExtFilt.setText("");
-                texDateUntilExtFilt.setText("");
             } catch (ParseException ex) {
                 JOptionPane.showMessageDialog(null,"Informe a data corretamente!");
             }
+                //
+            List<Operation> listFiltred = user.getFiltredList(textDatefrom, textDateUntil, false, false);
+            String[] add = new String[4];
+            Charge op;
+            limparTabela();
+            for(int index=0; index<listFiltred.size();index++){
+                op = (Charge) listFiltred.get(index);
+                add[0]=listFiltred.get(index).getTitle();
+                System.out.print(op.getCategory().getName());
+                add[1]=op.getCategory().getName();
+                String dateString = dateString(listFiltred.get(index).getDatetime());
+                //add[2]=listFiltred.get(index).getDatetime().toString();
+                add[2] = dateString;
+                add[3]=String.valueOf(listFiltred.get(index).getValue());
+                updateListExt(add);
+            }
+            checDateExtFilt.setSelected(false);
+            texDateFromExtFilt.setText("");
+            texDateUntilExtFilt.setText("");
+            
         }
     }
 
@@ -934,6 +1015,7 @@ public class GUIHome extends javax.swing.JFrame {
         if(texDateFromGraFilt.getText().trim().equals("") || texDateUntilGraFilt.getText().trim().equals("")){
             JOptionPane.showMessageDialog(null, "Preencha o campo de data!");
         }else{
+            limparTabela();
             try {
                 DateFormat format = DateFormat.getDateInstance();
                 String textDatefrom = texDateFromGraFilt.getText();
@@ -942,14 +1024,15 @@ public class GUIHome extends javax.swing.JFrame {
                 String textDateUntil = texDateUntilGraFilt.getText();
                 Date dateUntil;
                 dateUntil = format.parse(textDateUntil);
-                //
-                buttonGroupFiltGra.clearSelection();
-                checDateGraFilt.setSelected(false);
-                texDateFromGraFilt.setText("");
-                texDateUntilGraFilt.setText("");
             } catch (ParseException ex) {
                 JOptionPane.showMessageDialog(null,"Informe a data corretamente!");
             }
+            ///
+            
+            buttonGroupFiltGra.clearSelection();
+            checDateGraFilt.setSelected(false);
+            texDateFromGraFilt.setText("");
+            texDateUntilGraFilt.setText("");
         }
     }
 
