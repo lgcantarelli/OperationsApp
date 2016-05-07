@@ -246,15 +246,86 @@ public class User {
     /**
      * Return the data to populate the report.
      */
-    public void return_bar_data(){
+    public double[][] return_day_data(String from, String to, boolean revenue, boolean charge) throws ParseException{
+        
+        List<Operation> list = new ArrayList<Operation>();
+        SimpleDateFormat formatter = new SimpleDateFormat("dd/MM/yyyy");
+        Date date = new Date();
+        
+        Calendar c= Calendar.getInstance();
+        c.add(Calendar.DATE, 30);
+        Date date1 = c.getTime();
+    
+        if(from.length()>0){
+            date  = formatter.parse(from);
+        }
+        if(to.length()>0){
+            date1 = formatter.parse(to);
+        }
+        
+        int diffInDays = (int)( (date1.getTime() - date.getTime()) / (1000 * 60 * 60 * 24));
+        
+        double data[][] = new double[diffInDays][3];
+        
+        for(int j = 0; j < diffInDays; j++){
+            Calendar cal = Calendar.getInstance();
+            cal.setTime(date);
+            cal.add(Calendar.DATE, j);
+            Date d = cal.getTime();
+            for(int i = 0; i < operations.size();i++){
+                if(operations.get(i).getDatetime().getDay() == d.getDay() && operations.get(i).getDatetime().getMonth() == d.getMonth() 
+                        && operations.get(i).getDatetime().getYear() == d.getYear()){
+                    if(operations.get(i).getType() == 1 && revenue == true){
+                       data[j][0] = data[j][0] + operations.get(i).getValue();
+                       data[j][2] = data[j][2] + operations.get(i).getValue();
+                    }
+
+                    if(operations.get(i).getType() == 2 && charge == true){
+                       data[j][1] = data[j][1] + operations.get(i).getValue();
+                       data[j][2] = data[j][2] - operations.get(i).getValue();
+                    }
+                }
+            
+            }
+        }
+        
+         
+        return data; 
         
     }
     
     /**
      * Return the data to populate the report.
      */
-    public void return_pizza_data(){
+    public double[] return_pizza_data(String from, String to, boolean revenue, boolean charge) throws ParseException{
+        double data[] = new double[20];
+        List<Operation> list = new ArrayList<Operation>();
+        SimpleDateFormat formatter = new SimpleDateFormat("dd/MM/yyyy");
+        Date date = formatter.parse("01/01/1900");
+        Date date1 = formatter.parse("01/01/2999");
+        if(from.length()>0){
+            date  = formatter.parse(from);
+        }
+        if(to.length()>0){
+            date1 = formatter.parse(to);
+        }
         
+        for(int i = 0; i < operations.size();i++){
+            if(operations.get(i).getDatetime().after(date) && operations.get(i).getDatetime().before(date1)){
+                if(operations.get(i).getType() == 1 && revenue == true){
+                   Revenue r = (Revenue) operations.get(i);
+                   data[r.getCategory().getId()] = data[r.getCategory().getId()] + operations.get(i).getValue();
+                }
+                
+                if(operations.get(i).getType() == 2 && charge == true){
+                   Charge c = (Charge) operations.get(i);
+                   data[c.getCategory().getId()] = data[c.getCategory().getId()] + operations.get(i).getValue();
+                }
+            }
+            
+        }
+         
+        return data; 
     }
     
     public double[][] return_line_date(){

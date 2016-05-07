@@ -103,7 +103,7 @@ public class OperationsApp {
         
         user.print_operations();
         
-        double a[][] = user.return_line_date();
+        /*double a[][] = user.return_line_date();
         for(int i = 0; i < 12; i++){
             for(int j = 0; j < 3; j++){
                 System.out.println("Mes: "+i+" Valor: "+j+" "+a[i][j]);
@@ -115,6 +115,20 @@ public class OperationsApp {
         
         for(int i = 0; i < list.size(); i++){
             list.get(i).toString();
+        }*/
+        
+        /*double a[] = user.return_pizza_data("","",false,true);
+        for(int i = 0; i < 12; i++){
+            System.out.println("idCategoria: "+i+" Valor: "+a[i]);
+            
+        }
+        */
+        
+        double a[][] = user.return_day_data("","", true, true);
+        for(int i = 0; i < 30; i++){
+            for(int j = 0; j < 3; j++){
+                System.out.println("Dia: "+i+" Valor: "+j+" "+a[i][j]);
+            }
         }
         
         //System.out.println(user.get_balance());
