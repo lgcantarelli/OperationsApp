@@ -4,9 +4,12 @@
  * and open the template in the editor.
  */
 package GUI;
+import java.text.DateFormat;
+import java.text.ParseException;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
+import javax.swing.JOptionPane;
 import operationsapp.*;
 /**
  *
@@ -33,6 +36,7 @@ public class AddTestes {
         
         Revenue revenue;
         Charge charge;
+        String date;
         //Revenue revenue = new Revenue(id,value,addTitle.getText(),date,category);
             //user.add_revenue(revenue);
         ChargeCategory chargeCategory0=new ChargeCategory(0,"Supermercado");
@@ -45,45 +49,48 @@ public class AddTestes {
         ChargeCategory chargeCategory7 = new ChargeCategory(7,"Outro");
         
         RevenueCategory revenueCategory0 = new RevenueCategory(0,"Bolsa");
-        RevenueCategory revenueCategory1 = new RevenueCategory(0,"Freelance");
-        RevenueCategory revenueCategory2 = new RevenueCategory(0,"Salário");
-        RevenueCategory revenueCategory3 = new RevenueCategory(0,"Outros");
+        RevenueCategory revenueCategory1 = new RevenueCategory(1,"Freelance");
+        RevenueCategory revenueCategory2 = new RevenueCategory(2,"Salário");
+        RevenueCategory revenueCategory3 = new RevenueCategory(3,"Outros");
         
 
-        
-        charge = new Charge(1,50.00, "Ee devo ze",new Date(new Date().getTime() + (1000 * 60 * 60 * 24)) , chargeCategory7);
-        user.add_charge(charge);
-      //  addListaTest(charge.getTitle(),charge.getCategory().getName(),charge.getDatetime().toString(),String.valueOf(charge.getValue()));
-        addListaTest(charge.getTitle(),charge.getCategory().getName(),dateString(charge.getDatetime()),String.valueOf(charge.getValue()));
-        
-        charge = new Charge(2,25.10, "",new Date(new Date().getTime() + (1000 * 60 * 60 * 24)) , chargeCategory0);
+        date = "02/02/2016";
+        charge = new Charge(1,50.00, "Divida",formatDate(date) , chargeCategory7);
         user.add_charge(charge);
         addListaTest(charge.getTitle(),charge.getCategory().getName(),dateString(charge.getDatetime()),String.valueOf(charge.getValue()));
         
-
-        revenue = new Revenue(1,2600, "Freela",new Date(new Date().getTime() + (1000 * 60 * 60 * 24)) , revenueCategory1);
+        date = "23/03/2016";
+        charge = new Charge(2,77.10, "",formatDate(date) , chargeCategory2);
+        user.add_charge(charge);
+        addListaTest(charge.getTitle(),charge.getCategory().getName(),dateString(charge.getDatetime()),String.valueOf(charge.getValue()));
+        
+        date = "25/01/2016";
+        revenue = new Revenue(1,2600, "Freela",formatDate(date) , revenueCategory1);
         user.add_revenue(revenue);
         addListaTest(revenue.getTitle(),revenue.getCategory().getName(),dateString(revenue.getDatetime()),String.valueOf(revenue.getValue()));
         
-        charge = new Charge(0,10.99, "",new Date(new Date().getTime() + (1000 * 60 * 60 * 24)) , chargeCategory0);
+        date = "08/05/2016";
+        charge = new Charge(0,50, "",formatDate(date) , chargeCategory6);
         user.add_charge(charge);
         addListaTest(charge.getTitle(),charge.getCategory().getName(),dateString(charge.getDatetime()),String.valueOf(charge.getValue()));
         
-
-        revenue = new Revenue(0,200, "Bolsa",new Date(new Date().getTime() + (1000 * 60 * 60 * 24)) , revenueCategory0);
+        date = "05/04/2016";
+        revenue = new Revenue(0,400, "Bolsa",formatDate(date), revenueCategory0);
         user.add_revenue(revenue);
         addListaTest(revenue.getTitle(),revenue.getCategory().getName(),dateString(revenue.getDatetime()),String.valueOf(revenue.getValue()));
         
-        charge = new Charge(4,11.50, "Bar da esquina",new Date(new Date().getTime() + (1000 * 60 * 60 * 24)) , chargeCategory0);
+        date = "10/04/2016";
+        charge = new Charge(4,11.50, "Janta",formatDate(date) , chargeCategory0);
         user.add_charge(charge);
         addListaTest(charge.getTitle(),charge.getCategory().getName(),dateString(charge.getDatetime()),String.valueOf(charge.getValue()));
         
-        charge = new Charge(5,1569.0, "Alugel",new Date(new Date().getTime() + (1000 * 60 * 60 * 24)) , chargeCategory1);
+        date = "15/04/2016";
+        charge = new Charge(5,1569.0, "Alugel atrasado",formatDate(date) , chargeCategory1);
         user.add_charge(charge);
         addListaTest(charge.getTitle(),charge.getCategory().getName(),dateString(charge.getDatetime()),String.valueOf(charge.getValue()));
         
-
-        revenue = new Revenue(2,100, "Zé me deve",new Date(new Date().getTime() + (1000 * 60 * 60 * 24)) , revenueCategory3);
+        date = "05/05/2016";
+        revenue = new Revenue(2,100, "",formatDate(date) , revenueCategory3);
         user.add_revenue(revenue);
         addListaTest(revenue.getTitle(),revenue.getCategory().getName(),dateString(revenue.getDatetime()),String.valueOf(revenue.getValue()));
     }
@@ -123,6 +130,17 @@ public class AddTestes {
         dateString=day+"/"+month+"/"+year;
         
         return dateString;
+    }
+    
+    public Date formatDate(String textDate){
+        Date date = null;
+        DateFormat format = DateFormat.getDateInstance();
+        try {  
+            date = format.parse(textDate);
+        } catch (ParseException ex) {
+           JOptionPane.showMessageDialog(null, "Informe um data no fomato DD/MM/AAAA");
+        }
+        return date;
     }
     
     public static void main(String[] args){
