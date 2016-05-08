@@ -136,12 +136,12 @@ public class OperationsApp {
         */
         
         
-        double a[][] = user.return_day_data("","", true, true);
-        for(int i = 0; i < 30; i++){
+        /*double a[][] = user.return_day_data("","", true, true);
+        for(int i = 0; i < 10; i++){
             for(int j = 0; j < 3; j++){
                 System.out.println("Dia: "+i+" Valor: "+j+" "+a[i][j]);
             }
-        }
+        }*/
         
         //System.out.println(user.get_balance());
         
