@@ -320,6 +320,12 @@ public class User {
         
         double data[][] = new double[diffInDays][3];
         
+        for(int z = 0; z < diffInDays; z++){
+            for(int v =0; v < 3; v++){
+                data[z][v] = 0;
+            }
+        }
+        
         for(int j = 0; j < diffInDays; j++){
             Calendar cal = Calendar.getInstance();
             cal.setTime(date);
@@ -363,6 +369,9 @@ public class User {
             date1 = formatter.parse(to);
         }
         
+        for(int z = 0; z < 20; z++){
+            data[z] = 0;
+        }
         for(int i = 0; i < operations.size();i++){
             if(operations.get(i).getDatetime().after(date) && operations.get(i).getDatetime().before(date1)){
                 if(operations.get(i).getType() == 1 && revenue == true){
@@ -387,6 +396,13 @@ public class User {
         double charge = 0;
         int month = 1;
         Calendar cal1 = Calendar.getInstance();
+        
+        for(int z = 0; z < 12; z++){
+            for(int v =0; v < 3; v++){
+                data[z][v] = 0;
+            }
+        }
+        
         for(int i = 0; i < operations.size();i++){
             cal1.setTime(operations.get(i).getDatetime());
             
