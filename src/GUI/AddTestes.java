@@ -48,10 +48,10 @@ public class AddTestes {
         ChargeCategory chargeCategory6=new ChargeCategory(6,"Celular");
         ChargeCategory chargeCategory7 = new ChargeCategory(7,"Outro");
         
-        RevenueCategory revenueCategory0 = new RevenueCategory(0,"Bolsa");
-        RevenueCategory revenueCategory1 = new RevenueCategory(1,"Freelance");
-        RevenueCategory revenueCategory2 = new RevenueCategory(2,"Salário");
-        RevenueCategory revenueCategory3 = new RevenueCategory(3,"Outros");
+        RevenueCategory revenueCategory0 = new RevenueCategory(8,"Bolsa");
+        RevenueCategory revenueCategory1 = new RevenueCategory(9,"Freelance");
+        RevenueCategory revenueCategory2 = new RevenueCategory(10,"Salário");
+        RevenueCategory revenueCategory3 = new RevenueCategory(11,"Outros");
         
 
         date = "02/02/2016";

@@ -938,13 +938,13 @@ public class GUIHome extends javax.swing.JFrame {
         listChargeCategory.add(chargeCategory7);
         
         listRevenueCategory = new ArrayList();
-        RevenueCategory revenueCategory0 = new RevenueCategory(0,"Bolsa");
+        RevenueCategory revenueCategory0 = new RevenueCategory(8,"Bolsa");
         listRevenueCategory.add(revenueCategory0);
-        RevenueCategory revenueCategory1 = new RevenueCategory(0,"Freelance");
+        RevenueCategory revenueCategory1 = new RevenueCategory(9,"Freelance");
         listRevenueCategory.add(revenueCategory1);
-        RevenueCategory revenueCategory2 = new RevenueCategory(0,"Salário");
+        RevenueCategory revenueCategory2 = new RevenueCategory(10,"Salário");
         listRevenueCategory.add(revenueCategory2);
-        RevenueCategory revenueCategory3 = new RevenueCategory(0,"Outros");
+        RevenueCategory revenueCategory3 = new RevenueCategory(11,"Outros");
         listRevenueCategory.add(revenueCategory3);
     }
     
