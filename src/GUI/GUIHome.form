@@ -199,6 +199,8 @@
                           <EmptySpace max="32767" attributes="0"/>
                           <Component id="buttonSelecExtFilt" min="-2" max="-2" attributes="0"/>
                           <EmptySpace max="-2" attributes="0"/>
+                          <Component id="buttonClearFilter" min="-2" max="-2" attributes="0"/>
+                          <EmptySpace min="-2" pref="18" max="-2" attributes="0"/>
                       </Group>
                   </Group>
                 </DimensionLayout>
@@ -221,6 +223,7 @@
                                       <Component id="labeDateSepExtFilt" alignment="3" min="-2" max="-2" attributes="0"/>
                                       <Component id="texDateUntilExtFilt" alignment="3" min="-2" max="-2" attributes="0"/>
                                       <Component id="buttonSelecExtFilt" alignment="3" max="32767" attributes="0"/>
+                                      <Component id="buttonClearFilter" alignment="3" min="-2" max="-2" attributes="0"/>
                                   </Group>
                               </Group>
                           </Group>
@@ -277,7 +280,15 @@
                     <Property name="text" type="java.lang.String" value="Filtro"/>
                   </Properties>
                   <AuxValues>
-                    <AuxValue name="JavaCodeGenerator_AddingCodePost" type="java.lang.String" value="buttonSelecExtFilt.addActionListener(new java.awt.event.ActionListener() {&#xa;    public void actionPerformed(java.awt.event.ActionEvent evt) {&#xa;        if(checkCharExtFilt.isSelected()){ &#xa;            if(checDateExtFilt.isSelected()){&#xa;                try{&#xa;                filtExtChargDate();}&#xa;                catch(ParseException ex){&#xa;                    JOptionPane.showMessageDialog(null, &quot;Erro filtro Despesa Data&quot;);}&#xa;            }else{&#xa;                try{&#xa;                filtExtCharg();}&#xa;                catch(ParseException ex){&#xa;                    JOptionPane.showMessageDialog(null, &quot;Erro filtro Despesa&quot;);}&#xa;            }&#xa;        }else{&#xa;            if(chekRevExtFilt.isSelected()){&#xa;                if(checDateExtFilt.isSelected()){&#xa;                    try{&#xa;                    filtExtRevDate();}&#xa;                    catch(ParseException ex){&#xa;                        JOptionPane.showMessageDialog(null, &quot;Erro filtro Receita Data&quot;);}&#xa;                }else{&#xa;                    try{&#xa;                    filtExtRev();}&#xa;                    catch(ParseException ex){&#xa;                        JOptionPane.showMessageDialog(null, &quot;Erro filtro Receita&quot;);}&#xa;                }&#xa;            }else{&#xa;                if(checDateExtFilt.isSelected()){&#xa;                    try{&#xa;                    filtExtDate();}&#xa;                    catch(ParseException ex){&#xa;                        JOptionPane.showMessageDialog(null, &quot;Erro filtro Data&quot;);}&#xa;                }else{&#xa;                    JOptionPane.showMessageDialog(null, &quot;Selecione um filtro!&quot;);&#xa;                }&#xa;            }&#xa;        }&#xa;    }&#xa;});"/>
+                    <AuxValue name="JavaCodeGenerator_AddingCodePost" type="java.lang.String" value="buttonSelecExtFilt.addActionListener(new java.awt.event.ActionListener() {&#xa;    public void actionPerformed(java.awt.event.ActionEvent evt) {&#xa;        if(checkCharExtFilt.isSelected()){ &#xa;            if(checDateExtFilt.isSelected()){&#xa;                try{&#xa;                filterExtractChargeDate();}&#xa;                catch(ParseException ex){&#xa;                    JOptionPane.showMessageDialog(null, &quot;Erro filtro Despesa Data&quot;);}&#xa;            }else{&#xa;                try{&#xa;                filterExtractCharge();}&#xa;                catch(ParseException ex){&#xa;                    JOptionPane.showMessageDialog(null, &quot;Erro filtro Despesa&quot;);}&#xa;            }&#xa;        }else{&#xa;            if(chekRevExtFilt.isSelected()){&#xa;                if(checDateExtFilt.isSelected()){&#xa;                    try{&#xa;                    filterExtractRevenueDate();}&#xa;                    catch(ParseException ex){&#xa;                        JOptionPane.showMessageDialog(null, &quot;Erro filtro Receita Data&quot;);}&#xa;                }else{&#xa;                    try{&#xa;                    filterExtractRevenue();}&#xa;                    catch(ParseException ex){&#xa;                        JOptionPane.showMessageDialog(null, &quot;Erro filtro Receita&quot;);}&#xa;                }&#xa;            }else{&#xa;                if(checDateExtFilt.isSelected()){&#xa;                    try{&#xa;                    filterExtractDate();}&#xa;                    catch(ParseException ex){&#xa;                        JOptionPane.showMessageDialog(null, &quot;Erro filtro Data&quot;);}&#xa;                }else{&#xa;                    JOptionPane.showMessageDialog(null, &quot;Selecione um filtro!&quot;);&#xa;                }&#xa;            }&#xa;        }&#xa;    }&#xa;});"/>
+                  </AuxValues>
+                </Component>
+                <Component class="javax.swing.JButton" name="buttonClearFilter">
+                  <Properties>
+                    <Property name="text" type="java.lang.String" value="Limpar"/>
+                  </Properties>
+                  <AuxValues>
+                    <AuxValue name="JavaCodeGenerator_AddingCodePost" type="java.lang.String" value="buttonClearFilter.addActionListener(new java.awt.event.ActionListener() {&#xa;    public void actionPerformed(java.awt.event.ActionEvent evt) {&#xa;        updateList();&#xa;        balanceUpdate();&#xa;    }&#xa;});"/>
                   </AuxValues>
                 </Component>
               </SubComponents>
@@ -714,7 +725,7 @@
             <Property name="text" type="java.lang.String" value="Despesa"/>
           </Properties>
           <AuxValues>
-            <AuxValue name="JavaCodeGenerator_AddingCodePost" type="java.lang.String" value="radioButtonCharge.addActionListener(new java.awt.event.ActionListener() {&#xa;    public void actionPerformed(java.awt.event.ActionEvent evt) {&#xa;        selectCategory.removeAllItems();&#xa;        List&lt;String&gt; list = listCharCatList();&#xa;        for(int i=0;i&lt;list.size();i++){&#xa;            selectCategory.addItem(list.get(i));&#xa;        }&#xa;        selectCategory.setEnabled(true);&#xa;    }&#xa;});"/>
+            <AuxValue name="JavaCodeGenerator_AddingCodePost" type="java.lang.String" value="radioButtonCharge.addActionListener(new java.awt.event.ActionListener() {&#xa;    public void actionPerformed(java.awt.event.ActionEvent evt) {&#xa;        selectCategory.removeAllItems();&#xa;        List&lt;String&gt; list = getlistChargeCategory();&#xa;        for(int i=0;i&lt;list.size();i++){&#xa;            selectCategory.addItem(list.get(i));&#xa;        }&#xa;        selectCategory.setEnabled(true);&#xa;    }&#xa;});"/>
           </AuxValues>
         </Component>
         <Component class="javax.swing.JRadioButton" name="radioButtonRevenue">
@@ -725,7 +736,7 @@
             <Property name="text" type="java.lang.String" value="Receita"/>
           </Properties>
           <AuxValues>
-            <AuxValue name="JavaCodeGenerator_AddingCodePost" type="java.lang.String" value="radioButtonRevenue.addActionListener(new java.awt.event.ActionListener() {&#xa;    public void actionPerformed(java.awt.event.ActionEvent evt) {&#xa;        selectCategory.removeAllItems();&#xa;        List&lt;String&gt; list = listRevCatList();&#xa;        for(int i=0;i&lt;list.size();i++){&#xa;            selectCategory.addItem(list.get(i));&#xa;        }&#xa;        &#xa;        selectCategory.setEnabled(true);&#xa;    }&#xa;});"/>
+            <AuxValue name="JavaCodeGenerator_AddingCodePost" type="java.lang.String" value="radioButtonRevenue.addActionListener(new java.awt.event.ActionListener() {&#xa;    public void actionPerformed(java.awt.event.ActionEvent evt) {&#xa;        selectCategory.removeAllItems();&#xa;        List&lt;String&gt; list = getlistRevenueCategory();&#xa;        for(int i=0;i&lt;list.size();i++){&#xa;            selectCategory.addItem(list.get(i));&#xa;        }&#xa;        &#xa;        selectCategory.setEnabled(true);&#xa;    }&#xa;});"/>
           </AuxValues>
         </Component>
         <Component class="javax.swing.JLabel" name="labelCategory">
@@ -735,7 +746,7 @@
         </Component>
         <Component class="javax.swing.JTextField" name="addDate">
           <AuxValues>
-            <AuxValue name="JavaCodeGenerator_CreateCodePost" type="java.lang.String" value="try{&#xd;&#xa;   javax.swing.text.MaskFormatter data= new javax.swing.text.MaskFormatter(&quot;##/##/##&quot;);&#xd;&#xa;   addDate = new javax.swing.JFormattedTextField(data);&#xd;&#xa;}&#xd;&#xa;   catch (Exception e){&#xd;&#xa;}"/>
+            <AuxValue name="JavaCodeGenerator_CreateCodePost" type="java.lang.String" value="try{&#xa;   javax.swing.text.MaskFormatter data= new javax.swing.text.MaskFormatter(&quot;##/##/####&quot;);&#xa;   addDate = new javax.swing.JFormattedTextField(data);&#xa;}&#xa;   catch (Exception e){&#xa;}"/>
           </AuxValues>
         </Component>
         <Component class="javax.swing.JTextField" name="addTitle">

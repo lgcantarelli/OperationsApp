@@ -49,41 +49,43 @@ public class AddTestes {
         RevenueCategory revenueCategory2 = new RevenueCategory(0,"Salário");
         RevenueCategory revenueCategory3 = new RevenueCategory(0,"Outros");
         
-        charge = new Charge(7,50.00, "Ee devo ze",new Date(new Date().getTime() + (1000 * 60 * 60 * 24)) , chargeCategory7);
-        user.add_charge(charge);
-        addListaTest(charge.getTitle(),charge.getCategory().getName(),charge.getDatetime().toString(),String.valueOf(charge.getValue()));
+
         
-        
-        charge = new Charge(9,25.10, "",new Date(new Date().getTime() + (1000 * 60 * 60 * 24)) , chargeCategory0);
+        charge = new Charge(1,50.00, "Ee devo ze",new Date(new Date().getTime() + (1000 * 60 * 60 * 24)) , chargeCategory7);
         user.add_charge(charge);
-        addListaTest(charge.getTitle(),charge.getCategory().getName(),charge.getDatetime().toString(),String.valueOf(charge.getValue()));
+      //  addListaTest(charge.getTitle(),charge.getCategory().getName(),charge.getDatetime().toString(),String.valueOf(charge.getValue()));
+        addListaTest(charge.getTitle(),charge.getCategory().getName(),dateString(charge.getDatetime()),String.valueOf(charge.getValue()));
+        
+        charge = new Charge(2,25.10, "",new Date(new Date().getTime() + (1000 * 60 * 60 * 24)) , chargeCategory0);
+        user.add_charge(charge);
+        addListaTest(charge.getTitle(),charge.getCategory().getName(),dateString(charge.getDatetime()),String.valueOf(charge.getValue()));
         
 
-        revenue = new Revenue(2,2600, "Freela",new Date(new Date().getTime() + (1000 * 60 * 60 * 24)) , revenueCategory1);
+        revenue = new Revenue(1,2600, "Freela",new Date(new Date().getTime() + (1000 * 60 * 60 * 24)) , revenueCategory1);
         user.add_revenue(revenue);
-        addListaTest(revenue.getTitle(),revenue.getCategory().getName(),revenue.getDatetime().toString(),String.valueOf(revenue.getValue()));
+        addListaTest(revenue.getTitle(),revenue.getCategory().getName(),dateString(revenue.getDatetime()),String.valueOf(revenue.getValue()));
         
-        charge = new Charge(1234,10.99, "",new Date(new Date().getTime() + (1000 * 60 * 60 * 24)) , chargeCategory0);
+        charge = new Charge(0,10.99, "",new Date(new Date().getTime() + (1000 * 60 * 60 * 24)) , chargeCategory0);
         user.add_charge(charge);
-        addListaTest(charge.getTitle(),charge.getCategory().getName(),charge.getDatetime().toString(),String.valueOf(charge.getValue()));
+        addListaTest(charge.getTitle(),charge.getCategory().getName(),dateString(charge.getDatetime()),String.valueOf(charge.getValue()));
         
 
-        revenue = new Revenue(1,200, "Bolsa",new Date(new Date().getTime() + (1000 * 60 * 60 * 24)) , revenueCategory0);
+        revenue = new Revenue(0,200, "Bolsa",new Date(new Date().getTime() + (1000 * 60 * 60 * 24)) , revenueCategory0);
         user.add_revenue(revenue);
-        addListaTest(revenue.getTitle(),revenue.getCategory().getName(),revenue.getDatetime().toString(),String.valueOf(revenue.getValue()));
+        addListaTest(revenue.getTitle(),revenue.getCategory().getName(),dateString(revenue.getDatetime()),String.valueOf(revenue.getValue()));
         
-        charge = new Charge(65,11.50, "Bar da esquina",new Date(new Date().getTime() + (1000 * 60 * 60 * 24)) , chargeCategory0);
+        charge = new Charge(4,11.50, "Bar da esquina",new Date(new Date().getTime() + (1000 * 60 * 60 * 24)) , chargeCategory0);
         user.add_charge(charge);
-        addListaTest(charge.getTitle(),charge.getCategory().getName(),charge.getDatetime().toString(),String.valueOf(charge.getValue()));
+        addListaTest(charge.getTitle(),charge.getCategory().getName(),dateString(charge.getDatetime()),String.valueOf(charge.getValue()));
         
-        charge = new Charge(23,1569.0, "Alugel",new Date(new Date().getTime() + (1000 * 60 * 60 * 24)) , chargeCategory1);
+        charge = new Charge(5,1569.0, "Alugel",new Date(new Date().getTime() + (1000 * 60 * 60 * 24)) , chargeCategory1);
         user.add_charge(charge);
-        addListaTest(charge.getTitle(),charge.getCategory().getName(),charge.getDatetime().toString(),String.valueOf(charge.getValue()));
+        addListaTest(charge.getTitle(),charge.getCategory().getName(),dateString(charge.getDatetime()),String.valueOf(charge.getValue()));
         
 
-        revenue = new Revenue(3,100, "Zé me deve",new Date(new Date().getTime() + (1000 * 60 * 60 * 24)) , revenueCategory3);
+        revenue = new Revenue(2,100, "Zé me deve",new Date(new Date().getTime() + (1000 * 60 * 60 * 24)) , revenueCategory3);
         user.add_revenue(revenue);
-        addListaTest(revenue.getTitle(),revenue.getCategory().getName(),revenue.getDatetime().toString(),String.valueOf(revenue.getValue()));
+        addListaTest(revenue.getTitle(),revenue.getCategory().getName(),dateString(revenue.getDatetime()),String.valueOf(revenue.getValue()));
     }
     
     public void addListaTest(String titulo,String categoria,String data, String valor){
@@ -102,6 +104,25 @@ public class AddTestes {
     
     public String[] getStrings(int index){
         return this.listaTeste.get(index);
+    }
+    
+    public String dateString(Date date){
+        String dateString;
+        String year;
+        String day;
+        String month;
+        if(date.getYear()>=100)year = String.valueOf((date.getYear()-100));
+        else year = String.valueOf(date.getYear());
+        
+        if(date.getDate()<10)day = "0"+String.valueOf(date.getDate());
+        else day = String.valueOf(date.getDate());
+        
+        if(date.getMonth()<10)month = "0"+String.valueOf(date.getMonth());
+        else month = String.valueOf(date.getMonth());
+        
+        dateString=day+"/"+month+"/"+year;
+        
+        return dateString;
     }
     
     public static void main(String[] args){

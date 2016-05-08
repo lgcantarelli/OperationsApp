@@ -9,6 +9,7 @@ package GUI;
 import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Dimension;
+import java.io.File;
 import java.text.DateFormat;
 import java.text.DecimalFormat;
 import java.text.ParseException;
@@ -17,9 +18,14 @@ import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.DefaultListModel;
+import org.jfree.chart.plot.PiePlot;
 import org.jfree.data.general.DefaultPieDataset;
+import org.jfree.data.general.PieDataset;
 import operationsapp.*;
+import javax.swing.JFileChooser;
 import javax.swing.JOptionPane;
 import static javax.swing.JOptionPane.OK_CANCEL_OPTION;
 import javax.swing.table.DefaultTableModel;
@@ -42,20 +48,18 @@ public class GUIHome extends javax.swing.JFrame {
      */
     public GUIHome() {
         initComponents();
-        user = new User();
+        this.user = new User();
         ////////////////////////////////////////////////////////////////////
         ////////////////////TESTE/////////////////////////////////////
         /////////////////////////////////////////////////////////////////
         AddTestes testes = new AddTestes(user);
-        for(int i=0;i<testes.getStrings().size();i++)
-                updateListExt(testes.getStrings(i));
+        updateList();
         balanceUpdate();
         ////////////////////////////////////////////////////////////////
         //////////////////////////////////////////////////////////////
         //////////////////////////////////////////////////////////////*/
-        id=0;
-        listRevenueCategory = listRevCatCri();
-        listChargeCategory = listCharCatCri();
+        id=10;
+        category();
     }
     
     /**
@@ -133,6 +137,7 @@ public class GUIHome extends javax.swing.JFrame {
         catch (Exception e){
         }
         buttonSelecExtFilt = new javax.swing.JButton();
+        buttonClearFilter = new javax.swing.JButton();
         PanelShowExtract = new javax.swing.JPanel();
         jScrollPane1 = new javax.swing.JScrollPane();
         tableExtract = new javax.swing.JTable();
@@ -176,7 +181,7 @@ public class GUIHome extends javax.swing.JFrame {
         labelCategory = new javax.swing.JLabel();
         addDate = new javax.swing.JTextField();
         try{
-            javax.swing.text.MaskFormatter data= new javax.swing.text.MaskFormatter("##/##/##");
+            javax.swing.text.MaskFormatter data= new javax.swing.text.MaskFormatter("##/##/####");
             addDate = new javax.swing.JFormattedTextField(data);
         }
         catch (Exception e){
@@ -221,6 +226,8 @@ public class GUIHome extends javax.swing.JFrame {
 
         buttonSelecExtFilt.setText("Filtro");
 
+        buttonClearFilter.setText("Limpar");
+
         javax.swing.GroupLayout PanelFiltExtrLayout = new javax.swing.GroupLayout(PanelFiltExtr);
         PanelFiltExtr.setLayout(PanelFiltExtrLayout);
         PanelFiltExtrLayout.setHorizontalGroup(
@@ -240,7 +247,9 @@ public class GUIHome extends javax.swing.JFrame {
                 .addComponent(texDateUntilExtFilt, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(buttonSelecExtFilt)
-                .addContainerGap())
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(buttonClearFilter)
+                .addGap(18, 18, 18))
         );
         PanelFiltExtrLayout.setVerticalGroup(
             PanelFiltExtrLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -258,7 +267,8 @@ public class GUIHome extends javax.swing.JFrame {
                             .addComponent(texDateFromExtFilt, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(labeDateSepExtFilt)
                             .addComponent(texDateUntilExtFilt, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(buttonSelecExtFilt, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
+                            .addComponent(buttonSelecExtFilt, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(buttonClearFilter))))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
@@ -279,12 +289,12 @@ public class GUIHome extends javax.swing.JFrame {
                 if(checkCharExtFilt.isSelected()){
                     if(checDateExtFilt.isSelected()){
                         try{
-                            filtExtChargDate();}
+                            filterExtractChargeDate();}
                         catch(ParseException ex){
                             JOptionPane.showMessageDialog(null, "Erro filtro Despesa Data");}
                     }else{
                         try{
-                            filtExtCharg();}
+                            filterExtractCharge();}
                         catch(ParseException ex){
                             JOptionPane.showMessageDialog(null, "Erro filtro Despesa");}
                     }
@@ -292,19 +302,19 @@ public class GUIHome extends javax.swing.JFrame {
                     if(chekRevExtFilt.isSelected()){
                         if(checDateExtFilt.isSelected()){
                             try{
-                                filtExtRevDate();}
+                                filterExtractRevenueDate();}
                             catch(ParseException ex){
                                 JOptionPane.showMessageDialog(null, "Erro filtro Receita Data");}
                         }else{
                             try{
-                                filtExtRev();}
+                                filterExtractRevenue();}
                             catch(ParseException ex){
                                 JOptionPane.showMessageDialog(null, "Erro filtro Receita");}
                         }
                     }else{
                         if(checDateExtFilt.isSelected()){
                             try{
-                                filtExtDate();}
+                                filterExtractDate();}
                             catch(ParseException ex){
                                 JOptionPane.showMessageDialog(null, "Erro filtro Data");}
                         }else{
@@ -312,6 +322,12 @@ public class GUIHome extends javax.swing.JFrame {
                         }
                     }
                 }
+            }
+        });
+        buttonClearFilter.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                updateList();
+                balanceUpdate();
             }
         });
 
@@ -714,7 +730,7 @@ public class GUIHome extends javax.swing.JFrame {
         radioButtonCharge.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 selectCategory.removeAllItems();
-                List<String> list = listCharCatList();
+                List<String> list = getlistChargeCategory();
                 for(int i=0;i<list.size();i++){
                     selectCategory.addItem(list.get(i));
                 }
@@ -724,7 +740,7 @@ public class GUIHome extends javax.swing.JFrame {
         radioButtonRevenue.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 selectCategory.removeAllItems();
-                List<String> list = listRevCatList();
+                List<String> list = getlistRevenueCategory();
                 for(int i=0;i<list.size();i++){
                     selectCategory.addItem(list.get(i));
                 }
@@ -787,68 +803,80 @@ public class GUIHome extends javax.swing.JFrame {
      * Adicionar nova Receita
      */
     private void buttonConfirmAddRev(){
-         try {
-            // TODO add your handling code here:
-            DateFormat format = DateFormat.getDateInstance();
-            id += 1;
-            double value = Double.parseDouble(addValue.getText());
-            String textDate = addDate.getText();
-            Date date;
-            date = format.parse(textDate);
-            RevenueCategory category = listRevenueCategory.get(selectCategory.getSelectedIndex());
-            Revenue revenue = new Revenue(id,value,addTitle.getText(),date,category);
-            user.add_revenue(revenue);
-            balanceUpdate();
-            String[] addList = new String[4];
-            addList[0]=addTitle.getText();
-            addList[2]=addDate.getText();
-            addList[1]=category.getName();
-            addList[3]=addValue.getText();
-            updateListExt(addList);
-            addValue.setText(null);
-            addDate.setText(null);
-            addTitle.setText(null);
-            selectCategory.removeAllItems();
-            selectCategory.setEnabled(false);
-            buttonGroupAdd.clearSelection();
-        } catch (ParseException ex) {
-            JOptionPane.showMessageDialog(null, "Informe um data no fomato DD/MM/AAAA");
-        }
+        id += 1;
+        double value = Double.parseDouble(addValue.getText());
+        Date date = formatDate();
+        RevenueCategory category = listRevenueCategory.get(selectCategory.getSelectedIndex());
+        Revenue revenue = new Revenue(id,value,addTitle.getText(),date,category);
+        user.add_revenue(revenue);
+        balanceUpdate();
+        updateList();
+        addValue.setText(null);
+        addDate.setText(null);
+        addTitle.setText(null);
+        selectCategory.removeAllItems();
+        selectCategory.setEnabled(false);
+        buttonGroupAdd.clearSelection();
     }
     
     /**
      * Adicionar nova Despesa
      */
     private void buttonConfirmAddChar(){
-         try {              
-            // TODO add your handling code here:
-            DateFormat format = DateFormat.getDateInstance();
-            id += 1;
-            double value = Double.parseDouble(addValue.getText());
-            String textDate = addDate.getText();
-            Date date;
-            date = format.parse(textDate);
-            ChargeCategory category = listChargeCategory.get(selectCategory.getSelectedIndex());;
-            Charge charge = new Charge(id,value,addTitle.getText(),date,category);
-            user.add_charge(charge);
-            balanceUpdate();
-            String[] addList = new String[4];
-            addList[0]=addTitle.getText();
-            addList[2]=addDate.getText();
-            addList[1]=category.getName();
-            addList[3]=addValue.getText();
-            updateListExt(addList);
-            addValue.setText(null);
-            addDate.setText(null);
-            addTitle.setText(null);
-            selectCategory.removeAllItems();
-            selectCategory.setEnabled(false);
-            buttonGroupAdd.clearSelection();
-            
-        } catch (ParseException ex) {
-            JOptionPane.showMessageDialog(null, "Informe um data no fomato DD/MM/AAAA");
-        }
+        id += 1;
+        double value = Double.parseDouble(addValue.getText());
+        Date date = formatDate();
+        ChargeCategory category = listChargeCategory.get(selectCategory.getSelectedIndex());
+        Charge charge = new Charge(id,value, addTitle.getText(),date , category);
+        user.add_charge(charge);
+        balanceUpdate();
+        updateList();
+        addValue.setText(null);
+        addDate.setText(null);
+        addTitle.setText(null);
+        selectCategory.removeAllItems();
+        selectCategory.setEnabled(false);
+        buttonGroupAdd.clearSelection();
     }
+    
+    /**
+     * Atualiza tabela Extrato
+     */
+    public void updateList(){
+        limparTabela();
+        for(int i=0;i<user.getOperations().size();i++){
+            String[] add = new String[4];
+            add[0]=user.get_operation(i).getTitle();
+            if(user.get_operation(i).getType()==1){
+                Revenue op = (Revenue) user.get_operation(i);
+                add[1]=op.getCategory().getName();}
+            else{Charge op=(Charge) user.get_operation(i);
+                add[1]=op.getCategory().getName();}
+                String dateString = formatDate(user.get_operation(i).getDatetime());
+                add[2] = dateString;
+                add[3]=String.valueOf(user.get_operation(i).getValue());
+                updateListExt(add);
+        }
+        balanceUpdate();
+    }
+    
+    /**
+     * Formata string em date
+     * 
+     * @return Date
+     */
+    public Date formatDate(){
+        DateFormat format = DateFormat.getDateInstance();
+        String textDate = addDate.getText();
+        Date date = null ;
+        try {  
+            date = format.parse(textDate);
+        } catch (ParseException ex) {
+           JOptionPane.showMessageDialog(null, "Informe um data no fomato DD/MM/AA");
+        }
+        return date;
+    }
+    
     private void panelInfFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_panelInfFocusGained
         buildAnualChart();
         filtGraAll();
@@ -864,24 +892,46 @@ public class GUIHome extends javax.swing.JFrame {
     }//GEN-LAST:event_panelPieGraphMouseClicked
 
     /**
-     * Lista de categoria de Reciita
-     * @return lista de categorias Receita
+     * Definição das categorias
      */
-    public List<RevenueCategory> listRevCatCri(){
-        List<RevenueCategory> listCategory = new ArrayList();
-        RevenueCategory category;
-        category = new RevenueCategory(0,"Bolsa");
-        listCategory.add(category);
-        category = new RevenueCategory(1,"Freelance");
-        listCategory.add(category);
-        category = new RevenueCategory(2,"Salário");
-        listCategory.add(category);
-        category = new RevenueCategory(3,"Outros");
-        listCategory.add(category);
-        return listCategory;
+    public void category(){
+        Revenue revenue;
+        Charge charge;
+        listChargeCategory = new ArrayList();    
+        ChargeCategory chargeCategory0=new ChargeCategory(0,"Supermercado");
+        listChargeCategory.add(chargeCategory0);
+        ChargeCategory chargeCategory1=new ChargeCategory(1,"Aluguel");
+        listChargeCategory.add(chargeCategory1);
+        ChargeCategory chargeCategory2=new ChargeCategory(2,"Luz");
+        listChargeCategory.add(chargeCategory2);
+        ChargeCategory chargeCategory3=new ChargeCategory(3,"Água");
+        listChargeCategory.add(chargeCategory3);
+        ChargeCategory chargeCategory4=new ChargeCategory(4,"Telefone");
+        listChargeCategory.add(chargeCategory4);
+        ChargeCategory chargeCategory5=new ChargeCategory(5,"Internet");
+        listChargeCategory.add(chargeCategory5);
+        ChargeCategory chargeCategory6=new ChargeCategory(6,"Celular");
+        listChargeCategory.add(chargeCategory6);
+        ChargeCategory chargeCategory7 = new ChargeCategory(7,"Outro");
+        listChargeCategory.add(chargeCategory7);
+        
+        listRevenueCategory = new ArrayList();
+        RevenueCategory revenueCategory0 = new RevenueCategory(0,"Bolsa");
+        listRevenueCategory.add(revenueCategory0);
+        RevenueCategory revenueCategory1 = new RevenueCategory(0,"Freelance");
+        listRevenueCategory.add(revenueCategory1);
+        RevenueCategory revenueCategory2 = new RevenueCategory(0,"Salário");
+        listRevenueCategory.add(revenueCategory2);
+        RevenueCategory revenueCategory3 = new RevenueCategory(0,"Outros");
+        listRevenueCategory.add(revenueCategory3);
     }
     
-    public List<String> listRevCatList(){
+    /**
+     * Cria lista com categorias de receita
+     * 
+     * @return List<String>
+     */
+    public List<String> getlistRevenueCategory(){
         List<String> listRevCatList = new ArrayList();
         for(int i=0;i<listRevenueCategory.size();i++){
             listRevCatList.add(listRevenueCategory.get(i).getName());
@@ -889,40 +939,19 @@ public class GUIHome extends javax.swing.JFrame {
         return listRevCatList;
     }
     
-
-     /**
-     * Lista de categoria de Despesa
-     * @return lista de categorias Receita
+    /**
+     * Cria lista com categorias de despesa
+     * 
+     * @return List<String>
      */
-    public List<ChargeCategory> listCharCatCri(){
-        List<ChargeCategory> listCategory = new ArrayList();
-        ChargeCategory category;
-        category = new ChargeCategory(0,"Supermercado");
-        listCategory.add(category);
-        category = new ChargeCategory(1,"Aluguel");
-        listCategory.add(category);
-        category = new ChargeCategory(2,"Luz");
-        listCategory.add(category);
-        category = new ChargeCategory(3,"Água");
-        listCategory.add(category);
-        category = new ChargeCategory(4,"Telefone");
-        listCategory.add(category);        
-        category = new ChargeCategory(5,"Internet");
-        listCategory.add(category);       
-        category = new ChargeCategory(6,"Celular");
-        listCategory.add(category);
-        category = new ChargeCategory(7,"Outro");
-        listCategory.add(category);
-        return listCategory;
-    }
-    
-    public List<String> listCharCatList(){
+    public List<String> getlistChargeCategory(){
         List<String> listChaCatList = new ArrayList();
         for(int i=0;i<listChargeCategory.size();i++){
             listChaCatList.add(listChargeCategory.get(i).getName());
         }
         return listChaCatList;
     }
+   
     /**
      * Atualização do valor do Saldo 
      */
@@ -943,7 +972,7 @@ public class GUIHome extends javax.swing.JFrame {
     /**
      * Chamada de filtro para extrato de Despesa e Data
      */
-    public void filtExtChargDate() throws ParseException{
+    public void filterExtractChargeDate() throws ParseException{
         if(texDateFromExtFilt.getText().trim().equals("") || texDateUntilExtFilt.getText().trim().equals("")){
             JOptionPane.showMessageDialog(null, "Preencha o campo de data!");
         }else{
@@ -969,7 +998,7 @@ public class GUIHome extends javax.swing.JFrame {
                 add[0]=listFiltred.get(index).getTitle();
                 System.out.print(op.getCategory().getName());
                 add[1]=op.getCategory().getName();
-                String dateString = dateString(listFiltred.get(index).getDatetime());
+                String dateString = formatDate(listFiltred.get(index).getDatetime());
                 add[2] = dateString;
                 add[3]=String.valueOf(listFiltred.get(index).getValue());
                 updateListExt(add);
@@ -985,7 +1014,7 @@ public class GUIHome extends javax.swing.JFrame {
     /**
      * Chamada de filtro para extrato de Despesa
      */
-    public void filtExtCharg() throws ParseException{
+    public void filterExtractCharge() throws ParseException{
         List<Operation> listFiltred = user.getFiltredList("01/01/1900", "01/01/2999", false, true);
         String[] add = new String[4];
         Charge op;
@@ -1000,15 +1029,35 @@ public class GUIHome extends javax.swing.JFrame {
             dm.getDataVector().removeAllElements();
         }
     }
-    public String dateString(Date date){
+    
+    /**
+     * Formata date em String
+     * 
+     * @param date
+     * @return String
+     */
+    public String formatDate(Date date){
         String dateString;
-            dateString=date.getDate()+"/"+date.getMonth()+"/"+date.getYear();
+        String year;
+        String day;
+        String month;
+        if(date.getYear()>=100)year = String.valueOf((date.getYear())-100);
+        else year = String.valueOf(date.getYear());
+        
+        if(date.getDate()<10)day = "0"+String.valueOf(date.getDate()-1);
+        else day = String.valueOf(date.getDate());
+        
+        if(date.getMonth()<9)month = "0"+String.valueOf(date.getMonth()+1);
+        else month = String.valueOf(date.getMonth()+1);
+        
+        dateString=day+"/"+month+"/"+year;
+        
         return dateString;
     }
     /**
      * Chamada de filtro para extrato de Receita e data
      */
-    public void filtExtRevDate() throws ParseException{
+    public void filterExtractRevenueDate() throws ParseException{
         if(texDateFromExtFilt.getText().trim().equals("") || texDateUntilExtFilt.getText().trim().equals("")){
             JOptionPane.showMessageDialog(null, "Preencha o campo de data!");
         }
@@ -1037,7 +1086,7 @@ public class GUIHome extends javax.swing.JFrame {
         else{Revenue op = (Revenue) listFiltred.get(index);
                 add[1]=op.getCategory().getName();}
                 add[0]=listFiltred.get(index).getTitle();
-                String dateString = dateString(listFiltred.get(index).getDatetime());
+                String dateString = formatDate(listFiltred.get(index).getDatetime());
                 add[2] = dateString;
                 add[3]=String.valueOf(listFiltred.get(index).getValue());
                 updateListExt(add);
@@ -1046,7 +1095,7 @@ public class GUIHome extends javax.swing.JFrame {
     /**
      * Chamada de filtro para extrato de Receita
      */
-    public void filtExtRev() throws ParseException{
+    public void filterExtractRevenue() throws ParseException{
         //
         List<Operation> listFiltred = user.getFiltredList("01/01/1900", "01/01/2999", true, false);
         String[] add = new String[4];
@@ -1059,7 +1108,7 @@ public class GUIHome extends javax.swing.JFrame {
     /**
      * Chamada de filtro para extrato de Data
      */
-    public void filtExtDate() throws ParseException{
+    public void filterExtractDate() throws ParseException{
         if(texDateFromExtFilt.getText().trim().equals("") || texDateUntilExtFilt.getText().trim().equals("")){
             JOptionPane.showMessageDialog(null, "Preencha o campo de data!");
         }else{
@@ -1085,7 +1134,7 @@ public class GUIHome extends javax.swing.JFrame {
                 add[0]=listFiltred.get(index).getTitle();
                 System.out.print(op.getCategory().getName());
                 add[1]=op.getCategory().getName();
-                String dateString = dateString(listFiltred.get(index).getDatetime());
+                String dateString = formatDate(listFiltred.get(index).getDatetime());
                 //add[2]=listFiltred.get(index).getDatetime().toString();
                 add[2] = dateString;
                 add[3]=String.valueOf(listFiltred.get(index).getValue());
@@ -1341,6 +1390,7 @@ public class GUIHome extends javax.swing.JFrame {
     private javax.swing.JTextField addTitle;
     private javax.swing.JTextField addValue;
     private javax.swing.JButton buttonAdd;
+    private javax.swing.JButton buttonClearFilter;
     private javax.swing.JButton buttonExp;
     private javax.swing.ButtonGroup buttonGroupAdd;
     private javax.swing.ButtonGroup buttonGroupFiltExt;
