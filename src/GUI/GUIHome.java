@@ -1019,7 +1019,7 @@ public class GUIHome extends javax.swing.JFrame {
         String[] add = new String[4];
         Charge op;
         limparTabela();
-        add(listFiltred,add,true);
+        add(listFiltred,add);
         buttonGroupFiltExt.clearSelection();
     }
     
@@ -1069,7 +1069,7 @@ public class GUIHome extends javax.swing.JFrame {
             String[] add = new String[4];
             Charge op;
             limparTabela();
-            add(listFiltred,add,false);
+            add(listFiltred,add);
             buttonGroupFiltExt.clearSelection();
             checDateExtFilt.setSelected(false);
             texDateFromExtFilt.setText("");
@@ -1077,13 +1077,14 @@ public class GUIHome extends javax.swing.JFrame {
 
         }
     }
-    public void add(List<Operation> listFiltred,String[] add,boolean charge){
+    public void add(List<Operation> listFiltred,String[] add){
         for(int index=0; index<listFiltred.size();index++){
-        if(charge ==true){
+            System.out.print(user.get_operation_by_id(listFiltred.get(index).getId()).getType());
+        if(listFiltred.get(index).getType()==1){
+                Revenue op = (Revenue) listFiltred.get(index);
+                add[1]=op.getCategory().getName();}
+        else{
             Charge op=(Charge) listFiltred.get(index);
-                add[1]=op.getCategory().getName();
-        }
-        else{Revenue op = (Revenue) listFiltred.get(index);
                 add[1]=op.getCategory().getName();}
                 add[0]=listFiltred.get(index).getTitle();
                 String dateString = formatDate(listFiltred.get(index).getDatetime());
@@ -1101,7 +1102,7 @@ public class GUIHome extends javax.swing.JFrame {
         String[] add = new String[4];
         Revenue op; 
         limparTabela();
-        add(listFiltred,add,false);
+        add(listFiltred,add);
         buttonGroupFiltExt.clearSelection();
     }
 
@@ -1111,41 +1112,23 @@ public class GUIHome extends javax.swing.JFrame {
     public void filterExtractDate() throws ParseException{
         if(texDateFromExtFilt.getText().trim().equals("") || texDateUntilExtFilt.getText().trim().equals("")){
             JOptionPane.showMessageDialog(null, "Preencha o campo de data!");
-        }else{
+        }
+        else{
             limparTabela();
             String textDatefrom = texDateFromExtFilt.getText();
             String textDateUntil = texDateUntilExtFilt.getText();
-            try {
-                DateFormat format = DateFormat.getDateInstance();
-                Date datefrom;
-                datefrom = format.parse(textDatefrom);
-                Date dateUntil;
-                dateUntil = format.parse(textDateUntil);
-            } catch (ParseException ex) {
-                JOptionPane.showMessageDialog(null,"Informe a data corretamente!");
-            }
-                //
-            List<Operation> listFiltred = user.getFiltredList(textDatefrom, textDateUntil, false, false);
+            List<Operation> listFiltred = user.getFiltredList(textDatefrom, textDateUntil);
             String[] add = new String[4];
-            Charge op;
             limparTabela();
-            for(int index=0; index<listFiltred.size();index++){
-                op = (Charge) listFiltred.get(index);
-                add[0]=listFiltred.get(index).getTitle();
-                System.out.print(op.getCategory().getName());
-                add[1]=op.getCategory().getName();
-                String dateString = formatDate(listFiltred.get(index).getDatetime());
-                //add[2]=listFiltred.get(index).getDatetime().toString();
-                add[2] = dateString;
-                add[3]=String.valueOf(listFiltred.get(index).getValue());
-                updateListExt(add);
-            }
+            add(listFiltred,add);
+            buttonGroupFiltExt.clearSelection();
             checDateExtFilt.setSelected(false);
             texDateFromExtFilt.setText("");
             texDateUntilExtFilt.setText("");
-            
+
         }
     }
+
 
     /**
      * Chamada de filtro para grafico com Despesa e data
