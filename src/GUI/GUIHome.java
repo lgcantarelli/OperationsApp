@@ -168,7 +168,8 @@ public class GUIHome extends javax.swing.JFrame {
         jLabel1 = new javax.swing.JLabel();
         jPanel1 = new javax.swing.JPanel();
         panelPieGraph = new javax.swing.JPanel();
-        jPanel4 = new javax.swing.JPanel();
+        jPanel2 = new javax.swing.JPanel();
+        panelDailyGraph = new javax.swing.JPanel();
         jSeparator1 = new javax.swing.JSeparator();
         panelAdd = new javax.swing.JPanel();
         labelDate = new javax.swing.JLabel();
@@ -560,15 +561,36 @@ public class GUIHome extends javax.swing.JFrame {
                     .addContainerGap()))
         );
 
-        javax.swing.GroupLayout jPanel4Layout = new javax.swing.GroupLayout(jPanel4);
-        jPanel4.setLayout(jPanel4Layout);
-        jPanel4Layout.setHorizontalGroup(
-            jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 349, Short.MAX_VALUE)
+        javax.swing.GroupLayout panelDailyGraphLayout = new javax.swing.GroupLayout(panelDailyGraph);
+        panelDailyGraph.setLayout(panelDailyGraphLayout);
+        panelDailyGraphLayout.setHorizontalGroup(
+            panelDailyGraphLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 318, Short.MAX_VALUE)
         );
-        jPanel4Layout.setVerticalGroup(
-            jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 359, Short.MAX_VALUE)
+        panelDailyGraphLayout.setVerticalGroup(
+            panelDailyGraphLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 347, Short.MAX_VALUE)
+        );
+
+        javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
+        jPanel2.setLayout(jPanel2Layout);
+        jPanel2Layout.setHorizontalGroup(
+            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 338, Short.MAX_VALUE)
+            .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(jPanel2Layout.createSequentialGroup()
+                    .addContainerGap()
+                    .addComponent(panelDailyGraph, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+        );
+        jPanel2Layout.setVerticalGroup(
+            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 369, Short.MAX_VALUE)
+            .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(jPanel2Layout.createSequentialGroup()
+                    .addContainerGap()
+                    .addComponent(panelDailyGraph, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addContainerGap()))
         );
 
         javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
@@ -584,8 +606,8 @@ public class GUIHome extends javax.swing.JFrame {
                             .addComponent(jLabel1)
                             .addGroup(jPanel3Layout.createSequentialGroup()
                                 .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(jPanel4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                                .addGap(18, 18, 18)
+                                .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
                         .addGap(0, 0, Short.MAX_VALUE)))
                 .addContainerGap())
         );
@@ -599,8 +621,8 @@ public class GUIHome extends javax.swing.JFrame {
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addGroup(jPanel3Layout.createSequentialGroup()
-                        .addGap(0, 10, Short.MAX_VALUE)
-                        .addComponent(jPanel4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(0, 0, Short.MAX_VALUE)))
                 .addContainerGap())
         );
 
@@ -1147,6 +1169,8 @@ public class GUIHome extends javax.swing.JFrame {
                 Date dateUntil;
                 dateUntil = format.parse(textDateUntil);
                 double[] data=user.return_pizza_data(textDatefrom, textDateUntil, false, true);
+                double[][] daydata=user.return_day_data(textDatefrom, textDateUntil, false, true);
+                buildDailyChart(daydata);
                 buildPieChart(data);
             } catch (ParseException ex) {
                 JOptionPane.showMessageDialog(null,"Informe a data corretamente!");
@@ -1169,6 +1193,9 @@ public class GUIHome extends javax.swing.JFrame {
         try {
             double data[]= user.return_pizza_data("", "", false, true);
             buildPieChart(data);
+            double daydata[][]= user.return_day_data("", "", false, true);
+            buildDailyChart(daydata);
+            
         } catch (ParseException ex) {
             Logger.getLogger(GUIHome.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -1181,6 +1208,8 @@ public class GUIHome extends javax.swing.JFrame {
         try {
             double data[]= user.return_pizza_data("", "", true, true);
             buildPieChart(data);
+            double daydata[][]= user.return_day_data("", "", false, true);
+            buildDailyChart(daydata);
         } catch (ParseException ex) {
             Logger.getLogger(GUIHome.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -1204,6 +1233,8 @@ public class GUIHome extends javax.swing.JFrame {
                 dateUntil = format.parse(textDateUntil);
                 double[] data=user.return_pizza_data(textDatefrom, textDateUntil, true, false);
                 buildPieChart(data);
+                double daydata[][]= user.return_day_data(textDatefrom, textDateUntil, true, false);
+                buildDailyChart(daydata);
                 //
                 buttonGroupFiltGra.clearSelection();
                 checDateGraFilt.setSelected(false);
@@ -1223,6 +1254,8 @@ public class GUIHome extends javax.swing.JFrame {
         try {
             double data[]=user.return_pizza_data("", "",true, false);
             buildPieChart(data);
+            double daydata[][]= user.return_day_data("", "",true, false);
+            buildDailyChart(daydata);
         } catch (ParseException ex) {
             Logger.getLogger(GUIHome.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -1246,7 +1279,9 @@ public class GUIHome extends javax.swing.JFrame {
                 Date dateUntil;
                 dateUntil = format.parse(textDateUntil);
                 double[] data=user.return_pizza_data(textDatefrom, textDateUntil, true, true);
+                double[][] daydata=user.return_day_data(textDatefrom, textDateUntil, true, true);
                 buildPieChart(data);
+                buildDailyChart(daydata);
                 //
                 checDateGraFilt.setSelected(false);
                 texDateFromGraFilt.setText("");
@@ -1267,6 +1302,35 @@ public class GUIHome extends javax.swing.JFrame {
         column.setCellRenderer(tcr);  
     }
 
+    public void buildDailyChart(double data[][]) {
+        DefaultCategoryDataset dataset = new DefaultCategoryDataset();
+        
+        for (int i = 0; i <= data.length; i++) {      
+            dataset.addValue(data[i][0], "Receita", Integer.toString(i+1));
+            dataset.addValue(data[i][1], "Custo", Integer.toString(i+1));
+            dataset.addValue(data[i][2], "Saldo", Integer.toString(i+1));   
+        }      
+        
+        JFreeChart dailychart = ChartFactory.createLineChart(
+            "Gráfico diário",
+            "Dia",
+            "R$",
+            dataset,
+            PlotOrientation.VERTICAL,
+            true, // legend?
+            true, // tooltips?
+            false // URLs?
+        );
+
+        ChartFrame frame = new ChartFrame("DailyChart", dailychart);
+        frame.pack();
+        frame.setSize(panelDailyGraph.getPreferredSize()); 
+        
+        panelDailyGraph.removeAll();
+        panelDailyGraph.add(frame.getChartPanel(), BorderLayout.CENTER);
+        panelDailyGraph.validate();
+   }
+    
     public void buildAnualChart() {
         DefaultCategoryDataset data = new DefaultCategoryDataset();
         double [][] operationsData = user.return_line_data();
@@ -1390,8 +1454,8 @@ public class GUIHome extends javax.swing.JFrame {
     private javax.swing.JFileChooser expFilExp;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JPanel jPanel1;
+    private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
-    private javax.swing.JPanel jPanel4;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JSeparator jSeparator1;
     private javax.swing.JSeparator jSeparator2;
@@ -1406,6 +1470,7 @@ public class GUIHome extends javax.swing.JFrame {
     private javax.swing.JLabel labelValue;
     private javax.swing.JPanel panelAdd;
     private javax.swing.JPanel panelAnualGraph;
+    private javax.swing.JPanel panelDailyGraph;
     private javax.swing.JPanel panelExtract;
     private javax.swing.JTabbedPane panelInf;
     private javax.swing.JPanel panelPieGraph;
