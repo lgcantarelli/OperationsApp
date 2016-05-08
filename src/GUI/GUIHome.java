@@ -486,6 +486,11 @@ public class GUIHome extends javax.swing.JFrame {
         jLabel1.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
         jLabel1.setText("Graficos");
 
+        panelPieGraph.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                panelPieGraphMouseClicked(evt);
+            }
+        });
         panelPieGraph.setLayout(new javax.swing.BoxLayout(panelPieGraph, javax.swing.BoxLayout.LINE_AXIS));
 
         javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
@@ -776,13 +781,17 @@ public class GUIHome extends javax.swing.JFrame {
     }
     private void panelInfFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_panelInfFocusGained
         buildAnualChart();
-        buildPieChart();
+        filtGraAll();
     }//GEN-LAST:event_panelInfFocusGained
 
     private void panelAnualGraphMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_panelAnualGraphMouseClicked
         buildAnualChart();
-        buildPieChart();
+        filtGraAll();
     }//GEN-LAST:event_panelAnualGraphMouseClicked
+
+    private void panelPieGraphMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_panelPieGraphMouseClicked
+        // TODO add your handling code here:
+    }//GEN-LAST:event_panelPieGraphMouseClicked
 
     /**
      * Lista de categoria de Reciita
@@ -1035,9 +1044,12 @@ public class GUIHome extends javax.swing.JFrame {
                 String textDateUntil = texDateUntilGraFilt.getText();
                 Date dateUntil;
                 dateUntil = format.parse(textDateUntil);
+                double[] data=user.return_pizza_data(textDatefrom, textDateUntil, false, true);
+                buildPieChart(data);
             } catch (ParseException ex) {
                 JOptionPane.showMessageDialog(null,"Informe a data corretamente!");
             }
+            
             ///
             
             buttonGroupFiltGra.clearSelection();
@@ -1051,8 +1063,26 @@ public class GUIHome extends javax.swing.JFrame {
      * Chamada de filtro para grafico de Despesa
      */
     public void filtGraCharg(){
+        
+        try {
+            double data[]= user.return_pizza_data("", "", false, true);
+            buildPieChart(data);
+        } catch (ParseException ex) {
+            Logger.getLogger(GUIHome.class.getName()).log(Level.SEVERE, null, ex);
+        }
         //
         buttonGroupFiltGra.clearSelection();        
+    }
+    
+    
+    public void filtGraAll(){
+        try {
+            double data[]= user.return_pizza_data("", "", true, true);
+            buildPieChart(data);
+        } catch (ParseException ex) {
+            Logger.getLogger(GUIHome.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        buttonGroupFiltGra.clearSelection();
     }
 
     /**
@@ -1070,6 +1100,8 @@ public class GUIHome extends javax.swing.JFrame {
                 String textDateUntil = texDateUntilGraFilt.getText();
                 Date dateUntil;
                 dateUntil = format.parse(textDateUntil);
+                double[] data=user.return_pizza_data(textDatefrom, textDateUntil, true, false);
+                buildPieChart(data);
                 //
                 buttonGroupFiltGra.clearSelection();
                 checDateGraFilt.setSelected(false);
@@ -1085,6 +1117,13 @@ public class GUIHome extends javax.swing.JFrame {
      * Chamade de filtro para grafico de Receita
      */
     public void filtGraRev(){
+        
+        try {
+            double data[]=user.return_pizza_data("", "",true, false);
+            buildPieChart(data);
+        } catch (ParseException ex) {
+            Logger.getLogger(GUIHome.class.getName()).log(Level.SEVERE, null, ex);
+        }
         //
         buttonGroupFiltGra.clearSelection();
     }
@@ -1104,6 +1143,8 @@ public class GUIHome extends javax.swing.JFrame {
                 String textDateUntil = texDateUntilGraFilt.getText();
                 Date dateUntil;
                 dateUntil = format.parse(textDateUntil);
+                double[] data=user.return_pizza_data(textDatefrom, textDateUntil, true, true);
+                buildPieChart(data);
                 //
                 checDateGraFilt.setSelected(false);
                 texDateFromGraFilt.setText("");
@@ -1162,15 +1203,41 @@ public class GUIHome extends javax.swing.JFrame {
    }
     
     
-    public void buildPieChart() {
+    public void buildPieChart(double data[]) {
         DefaultPieDataset dataset = new DefaultPieDataset();
-        dataset.setValue("Telefone", new Double(0));
-        dataset.setValue("Supermercado", new Double(300));
-        dataset.setValue("Aluguel", new Double(600));
-        dataset.setValue("Luz", new Double(80));
-        dataset.setValue("Agua", new Double(100));
-        dataset.setValue("Internet", new Double(100));
-        dataset.setValue("Celular", new Double(30));
+        if(data[1]!=0){
+            dataset.setValue("Supermercado",data[1]);
+        }
+        if(data[2]!=0){
+            dataset.setValue("Aluguel",data[2]);
+        }
+        if(data[3]!=0){
+            dataset.setValue("Luz",data[3]);
+        }
+        if(data[4]!=0){
+            dataset.setValue("Agua",data[4]);
+        }
+        if(data[5]!=0){
+            dataset.setValue("Telefone",data[5]);
+        }
+        if(data[6]!=0){
+            dataset.setValue("Internet",data[6]);
+        }
+        if(data[7]!=0){
+            dataset.setValue("Celular",data[7]);
+        }
+        if(data[8]!=0){
+            dataset.setValue("Salario",data[8]);
+        }
+        if(data[9]!=0){
+            dataset.setValue("Bolsa",data[9]);
+        }
+        if(data[10]!=0){
+            dataset.setValue("Freelance",data[10]);
+        }
+        if(data[11]!=0){
+            dataset.setValue("Supermercado",data[11]);
+        }
     
         JFreeChart chart = ChartFactory.createPieChart(
             "Custos por categoria",  // chart title
