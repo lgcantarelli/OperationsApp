@@ -1390,7 +1390,10 @@ public class GUIHome extends javax.swing.JFrame {
             dataset.setValue("Freelance",data[10]);
         }
         if(data[11]!=0){
-            dataset.setValue("Supermercado",data[11]);
+            dataset.setValue("Outro",data[11]);
+        }
+        if(data[12]!=0){
+            dataset.setValue("Outro",data[12]);
         }
     
         JFreeChart chart = ChartFactory.createPieChart(

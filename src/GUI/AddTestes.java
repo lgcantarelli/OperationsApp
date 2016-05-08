@@ -39,17 +39,17 @@ public class AddTestes {
         String date;
         //Revenue revenue = new Revenue(id,value,addTitle.getText(),date,category);
             //user.add_revenue(revenue);
-        ChargeCategory chargeCategory0=new ChargeCategory(0,"Supermercado");
-        ChargeCategory chargeCategory1=new ChargeCategory(1,"Aluguel");
-        ChargeCategory chargeCategory2=new ChargeCategory(2,"Luz");
-        ChargeCategory chargeCategory3=new ChargeCategory(3,"Água");
-        ChargeCategory chargeCategory4=new ChargeCategory(4,"Telefone");
-        ChargeCategory chargeCategory5=new ChargeCategory(5,"Internet");
-        ChargeCategory chargeCategory6=new ChargeCategory(6,"Celular");
-        ChargeCategory chargeCategory7 = new ChargeCategory(7,"Outro");
+        ChargeCategory chargeCategory0=new ChargeCategory(1,"Supermercado");
+        ChargeCategory chargeCategory1=new ChargeCategory(2,"Aluguel");
+        ChargeCategory chargeCategory2=new ChargeCategory(3,"Luz");
+        ChargeCategory chargeCategory3=new ChargeCategory(4,"Água");
+        ChargeCategory chargeCategory4=new ChargeCategory(5,"Telefone");
+        ChargeCategory chargeCategory5=new ChargeCategory(6,"Internet");
+        ChargeCategory chargeCategory6=new ChargeCategory(7,"Celular");
+        ChargeCategory chargeCategory7 = new ChargeCategory(12,"Outro");
         
-        RevenueCategory revenueCategory0 = new RevenueCategory(8,"Bolsa");
-        RevenueCategory revenueCategory1 = new RevenueCategory(9,"Freelance");
+        RevenueCategory revenueCategory0 = new RevenueCategory(9,"Bolsa");
+        RevenueCategory revenueCategory1 = new RevenueCategory(8,"Freelance");
         RevenueCategory revenueCategory2 = new RevenueCategory(10,"Salário");
         RevenueCategory revenueCategory3 = new RevenueCategory(11,"Outros");
         
