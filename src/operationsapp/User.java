@@ -306,7 +306,7 @@ public class User {
         Date date = new Date();
         
         Calendar c= Calendar.getInstance();
-        c.add(Calendar.DATE, 30);
+        c.add(Calendar.DATE, 10);
         Date date1 = c.getTime();
     
         if(from.length()>0){
