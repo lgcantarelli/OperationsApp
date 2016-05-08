@@ -1293,7 +1293,7 @@ public class GUIHome extends javax.swing.JFrame {
     public void buildDailyChart(double data[][]) {
         DefaultCategoryDataset dataset = new DefaultCategoryDataset();
         
-        for (int i = 0; i <= data.length; i++) {      
+        for (int i = 0; i < data.length; i++) {      
             dataset.addValue(data[i][0], "Receita", Integer.toString(i+1));
             dataset.addValue(data[i][1], "Custo", Integer.toString(i+1));
             dataset.addValue(data[i][2], "Saldo", Integer.toString(i+1));   
