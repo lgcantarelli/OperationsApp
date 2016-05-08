@@ -464,4 +464,24 @@ public class User {
         return list;
         
     }
+    
+     public List<Operation> getFiltredList(String from, String to) throws ParseException{
+        List<Operation> list = new ArrayList<Operation>();
+        SimpleDateFormat formatter = new SimpleDateFormat("dd/MM/yyyy");
+        Date date = formatter.parse("01/01/1900");
+        Date date1 = formatter.parse("01/01/2999");
+        if(from.length()>0){
+            date  = formatter.parse(from);
+        }
+        if(to.length()>0){
+            date1 = formatter.parse(to);
+        }
+        
+        for(int i = 0; i < operations.size();i++){
+            if(operations.get(i).getDatetime().after(date) && operations.get(i).getDatetime().before(date1)){
+                   list.add(operations.get(i));
+                }
+            }
+        return list;
+     }
 }
