@@ -259,7 +259,7 @@
                     <Property name="enabled" type="boolean" value="false"/>
                   </Properties>
                   <AuxValues>
-                    <AuxValue name="JavaCodeGenerator_CreateCodePost" type="java.lang.String" value="try{&#xd;&#xa;   javax.swing.text.MaskFormatter data= new javax.swing.text.MaskFormatter(&quot;##/##/##&quot;);&#xd;&#xa;   texDateFromExtFilt = new javax.swing.JFormattedTextField(data);&#xd;&#xa;}&#xd;&#xa;   catch (Exception e){&#xd;&#xa;}"/>
+                    <AuxValue name="JavaCodeGenerator_CreateCodePost" type="java.lang.String" value="try{&#xa;   javax.swing.text.MaskFormatter data= new javax.swing.text.MaskFormatter(&quot;##/##/####&quot;);&#xa;   texDateFromExtFilt = new javax.swing.JFormattedTextField(data);&#xa;}&#xa;   catch (Exception e){&#xa;}"/>
                   </AuxValues>
                 </Component>
                 <Component class="javax.swing.JLabel" name="labeDateSepExtFilt">
@@ -272,7 +272,7 @@
                     <Property name="enabled" type="boolean" value="false"/>
                   </Properties>
                   <AuxValues>
-                    <AuxValue name="JavaCodeGenerator_CreateCodePost" type="java.lang.String" value="try{&#xd;&#xa;   javax.swing.text.MaskFormatter data= new javax.swing.text.MaskFormatter(&quot;##/##/##&quot;);&#xd;&#xa;   texDateUntilExtFilt = new javax.swing.JFormattedTextField(data);&#xd;&#xa;}&#xd;&#xa;   catch (Exception e){&#xd;&#xa;}"/>
+                    <AuxValue name="JavaCodeGenerator_CreateCodePost" type="java.lang.String" value="try{&#xa;   javax.swing.text.MaskFormatter data= new javax.swing.text.MaskFormatter(&quot;##/##/####&quot;);&#xa;   texDateUntilExtFilt = new javax.swing.JFormattedTextField(data);&#xa;}&#xa;   catch (Exception e){&#xa;}"/>
                   </AuxValues>
                 </Component>
                 <Component class="javax.swing.JButton" name="buttonSelecExtFilt">
@@ -518,7 +518,7 @@
                         <Property name="enabled" type="boolean" value="false"/>
                       </Properties>
                       <AuxValues>
-                        <AuxValue name="JavaCodeGenerator_CreateCodePost" type="java.lang.String" value="try{&#xd;&#xa;   javax.swing.text.MaskFormatter data= new javax.swing.text.MaskFormatter(&quot;##/##/##&quot;);&#xd;&#xa;   texDateFromGraFilt = new javax.swing.JFormattedTextField(data);&#xd;&#xa;}&#xd;&#xa;   catch (Exception e){&#xd;&#xa;}"/>
+                        <AuxValue name="JavaCodeGenerator_CreateCodePost" type="java.lang.String" value="try{&#xa;   javax.swing.text.MaskFormatter data= new javax.swing.text.MaskFormatter(&quot;##/##/####&quot;);&#xa;   texDateFromGraFilt = new javax.swing.JFormattedTextField(data);&#xa;}&#xa;   catch (Exception e){&#xa;}"/>
                       </AuxValues>
                     </Component>
                     <Component class="javax.swing.JLabel" name="labeDateSepGraFilt">
@@ -531,7 +531,7 @@
                         <Property name="enabled" type="boolean" value="false"/>
                       </Properties>
                       <AuxValues>
-                        <AuxValue name="JavaCodeGenerator_CreateCodePost" type="java.lang.String" value="try{&#xd;&#xa;   javax.swing.text.MaskFormatter data= new javax.swing.text.MaskFormatter(&quot;##/##/##&quot;);&#xd;&#xa;   texDateUntilGraFilt = new javax.swing.JFormattedTextField(data);&#xd;&#xa;}&#xd;&#xa;   catch (Exception e){&#xd;&#xa;}"/>
+                        <AuxValue name="JavaCodeGenerator_CreateCodePost" type="java.lang.String" value="try{&#xa;   javax.swing.text.MaskFormatter data= new javax.swing.text.MaskFormatter(&quot;##/##/####&quot;);&#xa;   texDateUntilGraFilt = new javax.swing.JFormattedTextField(data);&#xa;}&#xa;   catch (Exception e){&#xa;}"/>
                       </AuxValues>
                     </Component>
                     <Component class="javax.swing.JButton" name="buttonSelecGraFilt">

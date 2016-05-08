@@ -123,7 +123,7 @@ public class GUIHome extends javax.swing.JFrame {
         checDateExtFilt = new javax.swing.JCheckBox();
         texDateFromExtFilt = new javax.swing.JTextField();
         try{
-            javax.swing.text.MaskFormatter data= new javax.swing.text.MaskFormatter("##/##/##");
+            javax.swing.text.MaskFormatter data= new javax.swing.text.MaskFormatter("##/##/####");
             texDateFromExtFilt = new javax.swing.JFormattedTextField(data);
         }
         catch (Exception e){
@@ -131,7 +131,7 @@ public class GUIHome extends javax.swing.JFrame {
         labeDateSepExtFilt = new javax.swing.JLabel();
         texDateUntilExtFilt = new javax.swing.JTextField();
         try{
-            javax.swing.text.MaskFormatter data= new javax.swing.text.MaskFormatter("##/##/##");
+            javax.swing.text.MaskFormatter data= new javax.swing.text.MaskFormatter("##/##/####");
             texDateUntilExtFilt = new javax.swing.JFormattedTextField(data);
         }
         catch (Exception e){
@@ -151,7 +151,7 @@ public class GUIHome extends javax.swing.JFrame {
         checDateGraFilt = new javax.swing.JCheckBox();
         texDateFromGraFilt = new javax.swing.JTextField();
         try{
-            javax.swing.text.MaskFormatter data= new javax.swing.text.MaskFormatter("##/##/##");
+            javax.swing.text.MaskFormatter data= new javax.swing.text.MaskFormatter("##/##/####");
             texDateFromGraFilt = new javax.swing.JFormattedTextField(data);
         }
         catch (Exception e){
@@ -159,7 +159,7 @@ public class GUIHome extends javax.swing.JFrame {
         labeDateSepGraFilt = new javax.swing.JLabel();
         texDateUntilGraFilt = new javax.swing.JTextField();
         try{
-            javax.swing.text.MaskFormatter data= new javax.swing.text.MaskFormatter("##/##/##");
+            javax.swing.text.MaskFormatter data= new javax.swing.text.MaskFormatter("##/##/####");
             texDateUntilGraFilt = new javax.swing.JFormattedTextField(data);
         }
         catch (Exception e){
