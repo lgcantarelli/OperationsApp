@@ -920,32 +920,20 @@ public class GUIHome extends javax.swing.JFrame {
         Revenue revenue;
         Charge charge;
         listChargeCategory = new ArrayList();    
-        ChargeCategory chargeCategory0=new ChargeCategory(0,"Supermercado");
-        listChargeCategory.add(chargeCategory0);
-        ChargeCategory chargeCategory1=new ChargeCategory(1,"Aluguel");
-        listChargeCategory.add(chargeCategory1);
-        ChargeCategory chargeCategory2=new ChargeCategory(2,"Luz");
-        listChargeCategory.add(chargeCategory2);
-        ChargeCategory chargeCategory3=new ChargeCategory(3,"Água");
-        listChargeCategory.add(chargeCategory3);
-        ChargeCategory chargeCategory4=new ChargeCategory(4,"Telefone");
-        listChargeCategory.add(chargeCategory4);
-        ChargeCategory chargeCategory5=new ChargeCategory(5,"Internet");
-        listChargeCategory.add(chargeCategory5);
-        ChargeCategory chargeCategory6=new ChargeCategory(6,"Celular");
-        listChargeCategory.add(chargeCategory6);
-        ChargeCategory chargeCategory7 = new ChargeCategory(7,"Outro");
-        listChargeCategory.add(chargeCategory7);
+        listChargeCategory.add(new ChargeCategory(1,"Supermecado"));
+        listChargeCategory.add(new ChargeCategory(2,"Aluguel"));
+        listChargeCategory.add(new ChargeCategory(3,"Luz"));
+        listChargeCategory.add(new ChargeCategory(4,"Água"));
+        listChargeCategory.add(new ChargeCategory(5,"Telefone"));
+        listChargeCategory.add(new ChargeCategory(6,"Internet"));
+        listChargeCategory.add(new ChargeCategory(7,"Celular"));
+        listChargeCategory.add(new ChargeCategory(12,"Outros"));
         
         listRevenueCategory = new ArrayList();
-        RevenueCategory revenueCategory0 = new RevenueCategory(8,"Bolsa");
-        listRevenueCategory.add(revenueCategory0);
-        RevenueCategory revenueCategory1 = new RevenueCategory(9,"Freelance");
-        listRevenueCategory.add(revenueCategory1);
-        RevenueCategory revenueCategory2 = new RevenueCategory(10,"Salário");
-        listRevenueCategory.add(revenueCategory2);
-        RevenueCategory revenueCategory3 = new RevenueCategory(11,"Outros");
-        listRevenueCategory.add(revenueCategory3);
+        listRevenueCategory.add(new RevenueCategory(8,"Salário"));
+        listRevenueCategory.add(new RevenueCategory(9,"Bolsa"));
+        listRevenueCategory.add(new RevenueCategory(10,"Freelance"));
+        listRevenueCategory.add(new RevenueCategory(11,"Outros"));
     }
     
     /**
