@@ -503,20 +503,20 @@ public class GUIHome extends javax.swing.JFrame {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 if(checkCharGraFilt.isSelected()){
                     if(checDateGraFilt.isSelected()){
-                        filtGraChargDate();
+                        filterGraphicsChargeDate();
                     }else{
-                        filtGraCharg();
+                        filterGraphicsCharge();
                     }
                 }else{
                     if(chekRevGraFilt.isSelected()){
                         if(checDateGraFilt.isSelected()){
-                            filtGraRevDate();
+                            filterGraphicsRevenueDate();
                         }else{
-                            filtGraRev();
+                            filterGraphicsRevenue();
                         }
                     }else{
                         if(checDateGraFilt.isSelected()){
-                            filtGraDate();
+                            filterGraphicsDate();
                         }else{
                             JOptionPane.showMessageDialog(null, "Selecione um filtro!");
                         }
@@ -879,12 +879,12 @@ public class GUIHome extends javax.swing.JFrame {
     
     private void panelInfFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_panelInfFocusGained
         buildAnualChart();
-        filtGraAll();
+        filterGraphicsAll();
     }//GEN-LAST:event_panelInfFocusGained
 
     private void panelAnualGraphMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_panelAnualGraphMouseClicked
         buildAnualChart();
-        filtGraAll();
+        filterGraphicsAll();
     }//GEN-LAST:event_panelAnualGraphMouseClicked
 
     private void panelPieGraphMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_panelPieGraphMouseClicked
@@ -1133,7 +1133,7 @@ public class GUIHome extends javax.swing.JFrame {
     /**
      * Chamada de filtro para grafico com Despesa e data
      */
-    public void filtGraChargDate(){
+    public void filterGraphicsChargeDate(){
         if(texDateFromGraFilt.getText().trim().equals("") || texDateUntilGraFilt.getText().trim().equals("")){
             JOptionPane.showMessageDialog(null, "Preencha o campo de data!");
         }else{
@@ -1164,7 +1164,7 @@ public class GUIHome extends javax.swing.JFrame {
     /**
      * Chamada de filtro para grafico de Despesa
      */
-    public void filtGraCharg(){
+    public void filterGraphicsCharge(){
         
         try {
             double data[]= user.return_pizza_data("", "", false, true);
@@ -1177,7 +1177,7 @@ public class GUIHome extends javax.swing.JFrame {
     }
     
     
-    public void filtGraAll(){
+    public void filterGraphicsAll(){
         try {
             double data[]= user.return_pizza_data("", "", true, true);
             buildPieChart(data);
@@ -1190,7 +1190,7 @@ public class GUIHome extends javax.swing.JFrame {
     /**
      * Chamada de filtro para graficos de Receita e data
      */
-    public void filtGraRevDate(){
+    public void filterGraphicsRevenueDate(){
         if(texDateFromGraFilt.getText().trim().equals("") || texDateUntilGraFilt.getText().trim().equals("")){
             JOptionPane.showMessageDialog(null, "Preencha o campo de data!");
         }else{
@@ -1218,7 +1218,7 @@ public class GUIHome extends javax.swing.JFrame {
     /**
      * Chamade de filtro para grafico de Receita
      */
-    public void filtGraRev(){
+    public void filterGraphicsRevenue(){
         
         try {
             double data[]=user.return_pizza_data("", "",true, false);
@@ -1233,7 +1233,7 @@ public class GUIHome extends javax.swing.JFrame {
     /**
      * Chamada de filtro para grafico de Data
      */
-    public void filtGraDate(){
+    public void filterGraphicsDate(){
         if(texDateFromGraFilt.getText().trim().equals("") || texDateUntilGraFilt.getText().trim().equals("")){
             JOptionPane.showMessageDialog(null, "Preencha o campo de data!");
         }else{
