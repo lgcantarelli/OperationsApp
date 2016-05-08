@@ -6,6 +6,7 @@
 package operationsapp;
 
 import java.io.File;
+import java.io.FileNotFoundException;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -14,7 +15,10 @@ import java.io.IOException;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
-
+import java.util.Scanner;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import operationsapp.*;
 
 public class User {
     private List<Operation> operations;
@@ -23,15 +27,19 @@ public class User {
     
     private static final String COMMA_DELIMITER = ",";
     private static final String NEW_LINE_SEPARATOR = "\n";
-    private static final String FILE_HEADER = "id,type,value,category,description";
-    private static final String fileName = System.getProperty("user.home")+"/operations.csv";
+    private static final String FILE_HEADER = "id,type,value,category,title,datetime";
+    private static final String fileName = "operations.csv";
     
     /**
      * Initialize the User with a empty list of operations and call the method to populate it.
      */
     public User(){
-        operations = new ArrayList<Operation>();
-        populate_initial();
+       operations = new ArrayList<Operation>();
+        try {
+            populate_initial();
+        } catch (ParseException ex) {
+            Logger.getLogger(User.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
     
     /**
@@ -51,7 +59,52 @@ public class User {
     /**
      * Open the .csv file and populate the list of operations in the date order.
      */
-    private void populate_initial(){
+    private void populate_initial() throws ParseException{
+        Scanner scanner;
+        try {
+            scanner = new Scanner(new File(fileName));
+            scanner.nextLine();
+            String line = scanner.nextLine();
+            String[] fields;
+            SimpleDateFormat formatter = new SimpleDateFormat("EEE MMM dd hh:mm:ss zzz yyyy");
+            
+            int i;
+            int id, category;
+            String type, title;
+            double value;
+            Date datetime;
+            while(scanner.hasNextLine()){
+                fields = line.split(",");
+                
+                id = Integer.parseInt(fields[0]);
+                type = fields[1];
+                value = Double.parseDouble(fields[2]);
+                category = Integer.parseInt(fields[3]);
+                title = fields[4];
+                datetime = formatter.parse(fields[5]);
+                
+                if(type.equals("Revenue")){
+                    RevenueCategory c = OperationsApp.getRevenueCategory(category);
+                    Revenue r = new Revenue(id,value,title,datetime,c);
+                    add_revenue(r);
+                }else{
+                    ChargeCategory c1 = OperationsApp.getChargeCategory(category);
+                    Charge c = new Charge(id,value,title,datetime,c1);
+                    add_charge(c);
+                }
+                    
+                
+                line = scanner.nextLine();
+                fields = line.split(",");
+            }
+            
+            
+            
+            
+            scanner.close();
+        } catch (FileNotFoundException ex) {
+            
+        }
         
     }
     
@@ -91,7 +144,7 @@ public class User {
         }
         balance = balance + r.getValue();
         last_id++;
-        //rewrite_csv();
+        rewrite_csv();
     }
     
     /**
@@ -101,7 +154,7 @@ public class User {
      */
     public void add_revenue(double value,String description, Date datetime,RevenueCategory category){
         Revenue revenue=new Revenue(last_id,value,description,datetime,category);
-        operations.add(revenue);
+        add_revenue(revenue);
     }
     
     /**
@@ -116,7 +169,7 @@ public class User {
         }else{
             for(; i < operations.size(); i++){
                 if(c.getDatetime().before(operations.get(i).getDatetime())){
-                    System.out.println(i);
+                    //System.out.println(i);
                     break;
                 }
             }
@@ -141,6 +194,7 @@ public class User {
         }
         balance = balance - c.getValue();
         last_id++;
+        rewrite_csv();
     }
     
     /**
@@ -150,7 +204,7 @@ public class User {
      */
     public void add_charge(double value, String description, Date datetime,ChargeCategory category){
         Charge charge=new Charge(last_id,value,description,datetime,category);
-        operations.add(charge);
+        add_charge(charge);
     }
     
     /**
@@ -238,7 +292,6 @@ public class User {
         for(int i=0;i<operations.size();i++){
             if(id==operations.get(i).getId()){
                 del_operation(i);
-                rewrite_csv();
             }
         }
     }
@@ -376,15 +429,15 @@ public class User {
             fileWriter.append(NEW_LINE_SEPARATOR);
 
             for (Operation operation : operations) {
-                String category = "";
+                int category = 0;
                 String type = "";
                 if(operation.getType() == 1){
                     Revenue op = (Revenue) operation;
-                    category = op.getCategory().getName();
+                    category = op.getCategory().getId();
                     type = "Revenue";
                 }else{
                     Charge op = (Charge) operation;
-                    category = op.getCategory().getName();
+                    category = op.getCategory().getId();
                     type = "Charge";
                 }
                 fileWriter.append(String.valueOf(operation.getId()));
@@ -399,19 +452,21 @@ public class User {
 
                 fileWriter.append(COMMA_DELIMITER);
 
-                fileWriter.append(category);
+                fileWriter.append(String.valueOf(category));
 
                 fileWriter.append(COMMA_DELIMITER);
 
                 fileWriter.append(String.valueOf(operation.getTitle()));
+                
+                fileWriter.append(COMMA_DELIMITER);
+
+                fileWriter.append(String.valueOf(operation.getDatetime()));
 
                 fileWriter.append(NEW_LINE_SEPARATOR);
 
             }
 
-               System.out.println("CSV file was created successfully !!!");
         } catch (Exception e) {
-            System.out.println("Error in CsvFileWriter !!!");
             e.printStackTrace();
         } finally {
             try {

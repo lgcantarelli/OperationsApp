@@ -15,7 +15,7 @@ public class OperationsApp {
     public static List<ChargeCategory> chargeCategories;
     public static List<RevenueCategory> revenueCategories;
     
-    private static void initialize_categories(){
+    public static void initialize_categories(){
         chargeCategories = new ArrayList<ChargeCategory>();
         revenueCategories = new ArrayList<RevenueCategory>();
         
@@ -33,7 +33,7 @@ public class OperationsApp {
         revenueCategories.add(new RevenueCategory(11,"Outros"));
     }
     
-    private ChargeCategory getChargeCategory(int id){
+    public static ChargeCategory getChargeCategory(int id){
         for(int i = 0; i < chargeCategories.size(); i++){
             if(chargeCategories.get(i).getId() == id){
                 return chargeCategories.get(i);
@@ -42,7 +42,7 @@ public class OperationsApp {
         return null;
     }
     
-    private ChargeCategory getChargeCategory(String name){
+    public static ChargeCategory getChargeCategory(String name){
         for(int i = 0; i < chargeCategories.size(); i++){
             if(chargeCategories.get(i).getName().equals(name)){
                 return chargeCategories.get(i);
@@ -51,7 +51,7 @@ public class OperationsApp {
         return null;
     }
     
-    private RevenueCategory getRevenueCategory(int id){
+    public static RevenueCategory getRevenueCategory(int id){
         for(int i = 0; i < revenueCategories.size(); i++){
             if(revenueCategories.get(i).getId() == id){
                 return revenueCategories.get(i);
@@ -60,9 +60,18 @@ public class OperationsApp {
         return null;
     }
     
-    private RevenueCategory getRevenueCategory(String name){
+    public static RevenueCategory getRevenueCategory(String name){
         for(int i = 0; i < revenueCategories.size(); i++){
             if(revenueCategories.get(i).getName().equals(name)){
+                return revenueCategories.get(i);
+            }
+        }
+        return null;
+    }
+    
+    public static RevenueCategory getRevenueCategory1(int id){
+        for(int i = 0; i < revenueCategories.size(); i++){
+            if(revenueCategories.get(i).getId() == id){
                 return revenueCategories.get(i);
             }
         }
@@ -78,7 +87,7 @@ public class OperationsApp {
         User user = new User();
         
         SimpleDateFormat formatter = new SimpleDateFormat("dd/MM/yyyy");
-        Date date = formatter.parse("07/05/2016");
+        Date date = formatter.parse("05/05/2016");
         Date date1 = formatter.parse("12/05/2016");
         Date date2 = formatter.parse("07/04/2016");
         Date date3 = formatter.parse("12/04/2016");
@@ -86,7 +95,8 @@ public class OperationsApp {
         Date date5 = formatter.parse("12/03/2016");
         Date date6 = formatter.parse("07/02/2016");
         Date date7 = formatter.parse("01/02/2016");        
-        
+         user.add_revenue(new Revenue(user.get_last_id(), 3, "Teste R", date1, revenueCategories.get(1)));
+        /*
         user.add_revenue(new Revenue(user.get_last_id(), 3, "Teste R", date, revenueCategories.get(1)));
         user.add_revenue(new Revenue(user.get_last_id(), 4, "Teste R 1", date1, revenueCategories.get(2)));
         user.add_revenue(new Revenue(user.get_last_id(), 2, "Teste R 2 ", date2, revenueCategories.get(3)));
@@ -97,7 +107,7 @@ public class OperationsApp {
         user.add_charge(new Charge(user.get_last_id(), 2, "Teste C 2 ", date7, chargeCategories.get(3)));
         user.add_charge(new Charge(user.get_last_id(), 5, "Teste C 3", date, chargeCategories.get(1)));
         
-        
+        */
         
         //user.del_operation(2);
         
@@ -123,6 +133,7 @@ public class OperationsApp {
             
         }
         */
+        
         
         double a[][] = user.return_day_data("","", true, true);
         for(int i = 0; i < 30; i++){

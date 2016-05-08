@@ -1,0 +1,7 @@
+id,type,value,category,title,datetime
+6,Charge,2.0,4,Teste C 2 ,Mon Feb 01 00:00:00 BRST 2016
+4,Charge,3.0,2,Teste C,Mon Mar 07 00:00:00 BRT 2016
+5,Charge,4.0,3,Teste C 1,Sat Mar 12 00:00:00 BRT 2016
+2,Revenue,2.0,11,Teste R 2 ,Thu Apr 07 00:00:00 BRT 2016
+3,Revenue,5.0,9,Teste R 3,Tue Apr 12 00:00:00 BRT 2016
+5,Revenue,3.0,9,Teste R,Thu May 12 00:00:00 BRT 2016
