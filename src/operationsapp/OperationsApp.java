@@ -95,7 +95,7 @@ public class OperationsApp {
         Date date5 = formatter.parse("12/03/2016");
         Date date6 = formatter.parse("07/02/2016");
         Date date7 = formatter.parse("01/02/2016");        
-        /* 
+        /*
         user.add_revenue(new Revenue(user.get_last_id(), 3, "Teste R", date1, revenueCategories.get(1)));
         
         user.add_revenue(new Revenue(user.get_last_id(), 3, "Teste R", date, revenueCategories.get(1)));

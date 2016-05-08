@@ -64,7 +64,7 @@ public class User {
         try {
             scanner = new Scanner(new File(fileName));
             scanner.nextLine();
-            String line = scanner.nextLine();
+            String line;
             String[] fields;
             SimpleDateFormat formatter = new SimpleDateFormat("EEE MMM dd hh:mm:ss zzz yyyy");
             
@@ -74,6 +74,7 @@ public class User {
             double value;
             Date datetime;
             while(scanner.hasNextLine()){
+                line = scanner.nextLine();
                 fields = line.split(",");
                 
                 id = Integer.parseInt(fields[0]);
@@ -94,8 +95,7 @@ public class User {
                 }
                     
                 
-                line = scanner.nextLine();
-                fields = line.split(",");
+                
             }
             
             
