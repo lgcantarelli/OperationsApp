@@ -124,8 +124,20 @@ public class GUIHome extends javax.swing.JFrame {
         chekRevExtFilt = new javax.swing.JCheckBox();
         checDateExtFilt = new javax.swing.JCheckBox();
         texDateFromExtFilt = new javax.swing.JTextField();
+        try{
+            javax.swing.text.MaskFormatter data= new javax.swing.text.MaskFormatter("##/##/##");
+            texDateFromExtFilt = new javax.swing.JFormattedTextField(data);
+        }
+        catch (Exception e){
+        }
         labeDateSepExtFilt = new javax.swing.JLabel();
         texDateUntilExtFilt = new javax.swing.JTextField();
+        try{
+            javax.swing.text.MaskFormatter data= new javax.swing.text.MaskFormatter("##/##/##");
+            texDateUntilExtFilt = new javax.swing.JFormattedTextField(data);
+        }
+        catch (Exception e){
+        }
         buttonSelecExtFilt = new javax.swing.JButton();
         PanelShowExtract = new javax.swing.JPanel();
         jScrollPane1 = new javax.swing.JScrollPane();
@@ -139,8 +151,20 @@ public class GUIHome extends javax.swing.JFrame {
         chekRevGraFilt = new javax.swing.JCheckBox();
         checDateGraFilt = new javax.swing.JCheckBox();
         texDateFromGraFilt = new javax.swing.JTextField();
+        try{
+            javax.swing.text.MaskFormatter data= new javax.swing.text.MaskFormatter("##/##/##");
+            texDateFromGraFilt = new javax.swing.JFormattedTextField(data);
+        }
+        catch (Exception e){
+        }
         labeDateSepGraFilt = new javax.swing.JLabel();
         texDateUntilGraFilt = new javax.swing.JTextField();
+        try{
+            javax.swing.text.MaskFormatter data= new javax.swing.text.MaskFormatter("##/##/##");
+            texDateUntilGraFilt = new javax.swing.JFormattedTextField(data);
+        }
+        catch (Exception e){
+        }
         buttonSelecGraFilt = new javax.swing.JButton();
         jLabel1 = new javax.swing.JLabel();
         jPanel1 = new javax.swing.JPanel();
@@ -157,6 +181,12 @@ public class GUIHome extends javax.swing.JFrame {
         radioButtonRevenue = new javax.swing.JRadioButton();
         labelCategory = new javax.swing.JLabel();
         addDate = new javax.swing.JTextField();
+        try{
+            javax.swing.text.MaskFormatter data= new javax.swing.text.MaskFormatter("##/##/##");
+            addDate = new javax.swing.JFormattedTextField(data);
+        }
+        catch (Exception e){
+        }
         addTitle = new javax.swing.JTextField();
         labelTitle = new javax.swing.JLabel();
         buttonExp = new javax.swing.JButton();
