@@ -9,7 +9,6 @@ package GUI;
 import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Dimension;
-import java.io.File;
 import java.text.DateFormat;
 import java.text.DecimalFormat;
 import java.text.ParseException;
@@ -18,14 +17,9 @@ import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import javax.swing.DefaultListModel;
-import org.jfree.chart.plot.PiePlot;
 import org.jfree.data.general.DefaultPieDataset;
-import org.jfree.data.general.PieDataset;
 import operationsapp.*;
-import javax.swing.JFileChooser;
 import javax.swing.JOptionPane;
 import static javax.swing.JOptionPane.OK_CANCEL_OPTION;
 import javax.swing.table.DefaultTableModel;
@@ -1243,19 +1237,19 @@ public class GUIHome extends javax.swing.JFrame {
 
     public void buildAnualChart() {
         DefaultCategoryDataset data = new DefaultCategoryDataset();
-        ArrayList<String> last12Months = new ArrayList<String>();
-        
-        for (int i = -11; i <= 0; i++) {
+        double [][] operationsData = user.return_line_data();
+         
+       for (int i = -11; i <= 0; i++) {
             Calendar calendar = Calendar.getInstance();
             calendar.setTime(new Date());
             calendar.add(Calendar.MONTH, i);
-            last12Months.add(new SimpleDateFormat("MMM").format(calendar.getTime()));
-        }
-        
-        for (String month : last12Months) {
-            data.addValue(20, "Saldo", month);
-            data.addValue(10, "Custo", month);
-            data.addValue(30, "Receita", month);
+            
+            String month = new SimpleDateFormat("MMM").format(calendar.getTime());
+            int monthNumber = Math.abs(i);
+            
+            data.addValue(operationsData[monthNumber][0], "Receita", month);
+            data.addValue(operationsData[monthNumber][1], "Custo", month);
+            data.addValue(operationsData[monthNumber][2], "Saldo", month);
         }
 
         JFreeChart chart = ChartFactory.createLineChart(
@@ -1331,9 +1325,6 @@ public class GUIHome extends javax.swing.JFrame {
         //panelPieGraph.setPreferredSize(new Dimension(350,350));
         panelPieGraph.add(frame.getChartPanel(), BorderLayout.CENTER);
         panelPieGraph.validate();
-    
-    
-    
     }
     
     private DefaultListModel listModel;

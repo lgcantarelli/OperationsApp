@@ -328,7 +328,7 @@ public class User {
         return data; 
     }
     
-    public double[][] return_line_date(){
+    public double[][] return_line_data(){
         double data[][] = new double[12][3];
         double revenue = 0;
         double charge = 0;
