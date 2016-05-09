@@ -19,9 +19,9 @@ class Colorir extends JLabel implements	TableCellRenderer{
                 category.equals("Telefone")||
                 category.equals("Internet")||
                 category.equals("Celular")||
-                category.equals("Outro")) {
-            setForeground(Color.RED);	
-        } else if(category.equals("Bolsa")||
+                category.equals("Outros")) 
+            setForeground(Color.RED);
+         else if(category.equals("Bolsa")||
                 category.equals("Freelance")||
                 category.equals("Salário")||
                 category.equals("Outros")) {

@@ -59,8 +59,8 @@
               <EmptySpace max="-2" attributes="0"/>
               <Component id="jSeparator2" min="-2" max="-2" attributes="0"/>
               <EmptySpace max="-2" attributes="0"/>
-              <Component id="panelInf" max="32767" attributes="0"/>
-              <EmptySpace max="-2" attributes="0"/>
+              <Component id="panelInf" min="-2" pref="700" max="-2" attributes="0"/>
+              <EmptySpace pref="12" max="32767" attributes="0"/>
           </Group>
       </Group>
     </DimensionLayout>
@@ -105,7 +105,7 @@
                       <EmptySpace max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="0" attributes="0">
                           <Group type="102" alignment="1" attributes="0">
-                              <Component id="labelChaRev" pref="703" max="32767" attributes="0"/>
+                              <Component id="labelChaRev" max="32767" attributes="0"/>
                               <EmptySpace min="-2" pref="10" max="-2" attributes="0"/>
                           </Group>
                           <Component id="PanelFiltExtr" max="32767" attributes="0"/>
@@ -355,7 +355,6 @@
           <Layout>
             <DimensionLayout dim="0">
               <Group type="103" groupAlignment="0" attributes="0">
-                  <Component id="jPanel3" alignment="1" max="32767" attributes="0"/>
                   <Group type="102" alignment="0" attributes="0">
                       <EmptySpace max="-2" attributes="0"/>
                       <Component id="jSeparator1" min="-2" pref="713" max="-2" attributes="0"/>
@@ -364,6 +363,11 @@
                   <Group type="102" alignment="0" attributes="0">
                       <Component id="panelAnualGraph" min="-2" max="-2" attributes="0"/>
                       <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
+                  </Group>
+                  <Group type="102" alignment="1" attributes="0">
+                      <EmptySpace max="32767" attributes="0"/>
+                      <Component id="jPanel3" min="-2" pref="714" max="-2" attributes="0"/>
+                      <EmptySpace min="-2" pref="155" max="-2" attributes="0"/>
                   </Group>
               </Group>
             </DimensionLayout>
@@ -375,7 +379,8 @@
                       <EmptySpace max="-2" attributes="0"/>
                       <Component id="jSeparator1" min="-2" max="-2" attributes="0"/>
                       <EmptySpace max="-2" attributes="0"/>
-                      <Component id="panelAnualGraph" pref="231" max="32767" attributes="0"/>
+                      <Component id="panelAnualGraph" min="-2" pref="163" max="-2" attributes="0"/>
+                      <EmptySpace pref="66" max="32767" attributes="0"/>
                   </Group>
               </Group>
             </DimensionLayout>
@@ -403,20 +408,17 @@
                       <Group type="102" alignment="0" attributes="0">
                           <EmptySpace max="-2" attributes="0"/>
                           <Group type="103" groupAlignment="0" attributes="0">
-                              <Component id="PanelFiltExtr1" max="32767" attributes="0"/>
-                              <Group type="102" attributes="0">
-                                  <Group type="103" groupAlignment="0" attributes="0">
-                                      <Component id="jLabel1" min="-2" max="-2" attributes="0"/>
-                                      <Group type="102" alignment="0" attributes="0">
-                                          <Component id="jPanel1" min="-2" max="-2" attributes="0"/>
-                                          <EmptySpace type="separate" min="-2" max="-2" attributes="0"/>
-                                          <Component id="jPanel2" min="-2" max="-2" attributes="0"/>
-                                      </Group>
-                                  </Group>
-                                  <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
+                              <Component id="PanelFiltExtr1" min="-2" max="-2" attributes="0"/>
+                              <Component id="jLabel1" min="-2" max="-2" attributes="0"/>
+                              <Group type="102" alignment="0" attributes="0">
+                                  <Component id="jPanel1" min="-2" max="-2" attributes="0"/>
+                                  <EmptySpace min="-2" pref="2" max="-2" attributes="0"/>
+                                  <Component id="panelDailyGraph" min="-2" max="-2" attributes="0"/>
+                                  <EmptySpace max="-2" attributes="0"/>
+                                  <Component id="jPanel2" min="-2" max="-2" attributes="0"/>
                               </Group>
                           </Group>
-                          <EmptySpace max="-2" attributes="0"/>
+                          <EmptySpace max="32767" attributes="0"/>
                       </Group>
                   </Group>
                 </DimensionLayout>
@@ -424,17 +426,26 @@
                   <Group type="103" groupAlignment="0" attributes="0">
                       <Group type="102" alignment="0" attributes="0">
                           <Component id="jLabel1" min="-2" max="-2" attributes="0"/>
-                          <EmptySpace type="unrelated" max="-2" attributes="0"/>
-                          <Component id="PanelFiltExtr1" min="-2" max="-2" attributes="0"/>
-                          <EmptySpace max="-2" attributes="0"/>
                           <Group type="103" groupAlignment="0" attributes="0">
-                              <Component id="jPanel1" max="32767" attributes="0"/>
                               <Group type="102" attributes="0">
-                                  <Component id="jPanel2" min="-2" max="-2" attributes="0"/>
-                                  <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
+                                  <EmptySpace type="unrelated" max="-2" attributes="0"/>
+                                  <Component id="PanelFiltExtr1" min="-2" max="-2" attributes="0"/>
+                                  <EmptySpace max="-2" attributes="0"/>
+                                  <Group type="103" groupAlignment="0" attributes="0">
+                                      <Component id="jPanel1" max="32767" attributes="0"/>
+                                      <Group type="102" attributes="0">
+                                          <Component id="jPanel2" min="-2" max="-2" attributes="0"/>
+                                          <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
+                                      </Group>
+                                  </Group>
+                                  <EmptySpace max="-2" attributes="0"/>
+                              </Group>
+                              <Group type="102" alignment="1" attributes="0">
+                                  <EmptySpace max="32767" attributes="0"/>
+                                  <Component id="panelDailyGraph" max="-2" attributes="0"/>
+                                  <EmptySpace min="-2" pref="24" max="-2" attributes="0"/>
                               </Group>
                           </Group>
-                          <EmptySpace max="-2" attributes="0"/>
                       </Group>
                   </Group>
                 </DimensionLayout>
@@ -458,9 +469,11 @@
                               <Component id="labeDateSepGraFilt" min="-2" max="-2" attributes="0"/>
                               <EmptySpace max="-2" attributes="0"/>
                               <Component id="texDateUntilGraFilt" min="-2" pref="80" max="-2" attributes="0"/>
-                              <EmptySpace max="32767" attributes="0"/>
+                              <EmptySpace pref="137" max="32767" attributes="0"/>
                               <Component id="buttonSelecGraFilt" min="-2" max="-2" attributes="0"/>
                               <EmptySpace max="-2" attributes="0"/>
+                              <Component id="buttonClearFilterGraphics" min="-2" max="-2" attributes="0"/>
+                              <EmptySpace min="-2" pref="63" max="-2" attributes="0"/>
                           </Group>
                       </Group>
                     </DimensionLayout>
@@ -483,6 +496,7 @@
                                           <Component id="labeDateSepGraFilt" alignment="3" min="-2" max="-2" attributes="0"/>
                                           <Component id="texDateUntilGraFilt" alignment="3" min="-2" max="-2" attributes="0"/>
                                           <Component id="buttonSelecGraFilt" alignment="3" max="32767" attributes="0"/>
+                                          <Component id="buttonClearFilterGraphics" alignment="3" min="-2" max="-2" attributes="0"/>
                                       </Group>
                                   </Group>
                               </Group>
@@ -540,6 +554,14 @@
                       </Properties>
                       <AuxValues>
                         <AuxValue name="JavaCodeGenerator_AddingCodePost" type="java.lang.String" value="buttonSelecGraFilt.addActionListener(new java.awt.event.ActionListener() {&#xa;    public void actionPerformed(java.awt.event.ActionEvent evt) {&#xa;        if(checkCharGraFilt.isSelected()){ &#xa;            if(checDateGraFilt.isSelected()){&#xa;                filterGraphicsChargeDate();&#xa;            }else{&#xa;                filterGraphicsCharge();&#xa;            }&#xa;        }else{&#xa;            if(chekRevGraFilt.isSelected()){&#xa;                if(checDateGraFilt.isSelected()){&#xa;                    filterGraphicsRevenueDate();&#xa;                }else{&#xa;                    filterGraphicsRevenue();&#xa;                }&#xa;            }else{&#xa;                if(checDateGraFilt.isSelected()){&#xa;                    filterGraphicsDate();&#xa;                }else{&#xa;                    JOptionPane.showMessageDialog(null, &quot;Selecione um filtro!&quot;);&#xa;                }&#xa;            }&#xa;        }&#xa;    }&#xa;});"/>
+                      </AuxValues>
+                    </Component>
+                    <Component class="javax.swing.JButton" name="buttonClearFilterGraphics">
+                      <Properties>
+                        <Property name="text" type="java.lang.String" value="Limpar"/>
+                      </Properties>
+                      <AuxValues>
+                        <AuxValue name="JavaCodeGenerator_AddingCodePost" type="java.lang.String" value="buttonClearFilterGraphics.addActionListener(new java.awt.event.ActionListener() {&#xa;    public void actionPerformed(java.awt.event.ActionEvent evt) {&#xa;        buildAnualChart();&#xa;        filterGraphicsAll();&#xa;    }&#xa;});"/>
                       </AuxValues>
                     </Component>
                   </SubComponents>
@@ -604,45 +626,29 @@
                     <DimensionLayout dim="0">
                       <Group type="103" groupAlignment="0" attributes="0">
                           <EmptySpace min="0" pref="342" max="32767" attributes="0"/>
-                          <Group type="103" rootIndex="1" groupAlignment="0" attributes="0">
-                              <Group type="102" alignment="0" attributes="0">
-                                  <EmptySpace max="-2" attributes="0"/>
-                                  <Component id="panelDailyGraph" min="-2" max="-2" attributes="0"/>
-                                  <EmptySpace max="32767" attributes="0"/>
-                              </Group>
-                          </Group>
                       </Group>
                     </DimensionLayout>
                     <DimensionLayout dim="1">
                       <Group type="103" groupAlignment="0" attributes="0">
                           <EmptySpace min="0" pref="371" max="32767" attributes="0"/>
-                          <Group type="103" rootIndex="1" groupAlignment="0" attributes="0">
-                              <Group type="102" alignment="0" attributes="0">
-                                  <EmptySpace max="-2" attributes="0"/>
-                                  <Component id="panelDailyGraph" max="-2" attributes="0"/>
-                                  <EmptySpace max="-2" attributes="0"/>
-                              </Group>
-                          </Group>
                       </Group>
                     </DimensionLayout>
                   </Layout>
-                  <SubComponents>
-                    <Container class="javax.swing.JPanel" name="panelDailyGraph">
+                </Container>
+                <Container class="javax.swing.JPanel" name="panelDailyGraph">
 
-                      <Layout>
-                        <DimensionLayout dim="0">
-                          <Group type="103" groupAlignment="0" attributes="0">
-                              <EmptySpace min="0" pref="318" max="32767" attributes="0"/>
-                          </Group>
-                        </DimensionLayout>
-                        <DimensionLayout dim="1">
-                          <Group type="103" groupAlignment="0" attributes="0">
-                              <EmptySpace min="0" pref="347" max="32767" attributes="0"/>
-                          </Group>
-                        </DimensionLayout>
-                      </Layout>
-                    </Container>
-                  </SubComponents>
+                  <Layout>
+                    <DimensionLayout dim="0">
+                      <Group type="103" groupAlignment="0" attributes="0">
+                          <EmptySpace min="0" pref="318" max="32767" attributes="0"/>
+                      </Group>
+                    </DimensionLayout>
+                    <DimensionLayout dim="1">
+                      <Group type="103" groupAlignment="0" attributes="0">
+                          <EmptySpace min="0" pref="347" max="32767" attributes="0"/>
+                      </Group>
+                    </DimensionLayout>
+                  </Layout>
                 </Container>
               </SubComponents>
             </Container>
@@ -741,11 +747,11 @@
               <Border info="null"/>
             </Property>
             <Property name="cursor" type="java.awt.Cursor" editor="org.netbeans.modules.form.editors2.CursorEditor">
-              <Color id="Default Cursor"/>
+              <Color id="Cursor Padr&#xe3;o"/>
             </Property>
           </Properties>
           <AuxValues>
-            <AuxValue name="JavaCodeGenerator_AddingCodePost" type="java.lang.String" value="buttonAdd.addActionListener(new java.awt.event.ActionListener() {&#xa;    public void actionPerformed(java.awt.event.ActionEvent evt) {&#xa;        if(addValue.getText().trim().equals(&quot;&quot;)){&#xa;            JOptionPane.showMessageDialog(null, &quot;Campo Valor vazio&quot;);&#xa;        }else if(addDate.getText().trim().equals(&quot;&quot;)){&#xa;            JOptionPane.showMessageDialog(null, &quot;Campo Data vazio&quot;);&#xa;        }else{&#xa;            if(radioButtonCharge.isSelected() == true){&#xa;                int confirmBox = JOptionPane.showConfirmDialog(null, &quot;salvar DESPESA&quot;,null,OK_CANCEL_OPTION);&#xa;                if(confirmBox == JOptionPane.OK_OPTION){&#xa;                    buttonConfirmAddChar();&#xa;                }&#xa;            }else if(radioButtonRevenue.isSelected() == true){&#xa;                int confirmBox = JOptionPane.showConfirmDialog(null, &quot;salvar Receita&quot;,null,OK_CANCEL_OPTION);&#xa;                if(confirmBox == JOptionPane.OK_OPTION){&#xa;                    buttonConfirmAddRev();&#xa;                }&#xa;            }else{&#xa;                JOptionPane.showMessageDialog(null, &quot;Seleciona o tipo de transa&#xe7;&#xe3;o&quot;);&#xa;            }&#xa;        }&#xa;    }&#xa;});"/>
+            <AuxValue name="JavaCodeGenerator_AddingCodePost" type="java.lang.String" value="buttonAdd.addActionListener(new java.awt.event.ActionListener() {&#xa;    public void actionPerformed(java.awt.event.ActionEvent evt) {&#xa;        if(addValue.getText().trim().equals(&quot;&quot;)){&#xa;            JOptionPane.showMessageDialog(null, &quot;Campo Valor vazio&quot;);&#xa;        }else if(addDate.getText().trim().equals(&quot;&quot;)){&#xa;            JOptionPane.showMessageDialog(null, &quot;Campo Data vazio&quot;);&#xa;        }else{/*&#xa;            if(radioButtonCharge.isSelected() == true){&#xa;                int confirmBox = JOptionPane.showConfirmDialog(null, &quot;salvar DESPESA&quot;,null,OK_CANCEL_OPTION);&#xa;                if(confirmBox == JOptionPane.OK_OPTION){&#xa;                    buttonConfirmAddChar();&#xa;                }&#xa;            }else if(radioButtonRevenue.isSelected() == true){&#xa;                int confirmBox = JOptionPane.showConfirmDialog(null, &quot;salvar Receita&quot;,null,OK_CANCEL_OPTION);&#xa;                if(confirmBox == JOptionPane.OK_OPTION){&#xa;                    buttonConfirmAddRev();&#xa;                }&#xa;            }else{&#xa;                JOptionPane.showMessageDialog(null, &quot;Seleciona o tipo de transa&#xe7;&#xe3;o&quot;);&#xa;            }*/&#xa;            addButton();&#xa;        }&#xa;    }&#xa;});"/>
           </AuxValues>
         </Component>
         <Component class="javax.swing.JRadioButton" name="radioButtonCharge">
@@ -756,7 +762,7 @@
             <Property name="text" type="java.lang.String" value="Despesa"/>
           </Properties>
           <AuxValues>
-            <AuxValue name="JavaCodeGenerator_AddingCodePost" type="java.lang.String" value="radioButtonCharge.addActionListener(new java.awt.event.ActionListener() {&#xa;    public void actionPerformed(java.awt.event.ActionEvent evt) {&#xa;        selectCategory.removeAllItems();&#xa;        List&lt;String&gt; list = getlistChargeCategory();&#xa;        for(int i=0;i&lt;list.size();i++){&#xa;            selectCategory.addItem(list.get(i));&#xa;        }&#xa;        selectCategory.setEnabled(true);&#xa;    }&#xa;});"/>
+            <AuxValue name="JavaCodeGenerator_AddingCodePost" type="java.lang.String" value="radioButtonCharge.addActionListener(new java.awt.event.ActionListener() {&#xa;    public void actionPerformed(java.awt.event.ActionEvent evt) {&#xa;        selectCategory.removeAllItems();&#xa;        for(int i=0;i&lt;listChargeCategoryString.size();i++){&#xa;            selectCategory.addItem(listChargeCategoryString.get(i));&#xa;        }&#xa;        selectCategory.setEnabled(true);&#xa;    }&#xa;});"/>
           </AuxValues>
         </Component>
         <Component class="javax.swing.JRadioButton" name="radioButtonRevenue">
@@ -767,7 +773,7 @@
             <Property name="text" type="java.lang.String" value="Receita"/>
           </Properties>
           <AuxValues>
-            <AuxValue name="JavaCodeGenerator_AddingCodePost" type="java.lang.String" value="radioButtonRevenue.addActionListener(new java.awt.event.ActionListener() {&#xa;    public void actionPerformed(java.awt.event.ActionEvent evt) {&#xa;        selectCategory.removeAllItems();&#xa;        List&lt;String&gt; list = getlistRevenueCategory();&#xa;        for(int i=0;i&lt;list.size();i++){&#xa;            selectCategory.addItem(list.get(i));&#xa;        }&#xa;        &#xa;        selectCategory.setEnabled(true);&#xa;    }&#xa;});"/>
+            <AuxValue name="JavaCodeGenerator_AddingCodePost" type="java.lang.String" value="radioButtonRevenue.addActionListener(new java.awt.event.ActionListener() {&#xa;    public void actionPerformed(java.awt.event.ActionEvent evt) {&#xa;        selectCategory.removeAllItems();&#xa;        for(int i=0;i&lt;listRevenueCategoryString.size();i++){&#xa;            selectCategory.addItem(listRevenueCategoryString.get(i));&#xa;        }&#xa;        &#xa;        selectCategory.setEnabled(true);&#xa;    }&#xa;});"/>
           </AuxValues>
         </Component>
         <Component class="javax.swing.JLabel" name="labelCategory">

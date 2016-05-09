@@ -49,18 +49,32 @@ public class GUIHome extends javax.swing.JFrame {
     public GUIHome() {
         initComponents();
         this.user = new User();
-        ////////////////////////////////////////////////////////////////////
-        ////////////////////TESTE/////////////////////////////////////
-        /////////////////////////////////////////////////////////////////
-        AddTestes testes = new AddTestes(user);
-        updateList();
-        balanceUpdate();
-        ////////////////////////////////////////////////////////////////
-        //////////////////////////////////////////////////////////////
-        //////////////////////////////////////////////////////////////*/
-        id=10;
+        OperationsApp op = new OperationsApp();
+        op.initialize_categories();id=10;
         category();
     }
+    
+    public GUIHome(User user) {
+        initComponents();
+        this.user = user;
+        category();
+        updateList();
+        balanceUpdate();
+    }
+    
+
+    public GUIHome(User user,OperationsApp op) {
+        this.op = op;
+        initComponents();
+        this.user = user;
+        this.listRevenueCategoryString=op.getlistRevenueCategory();
+        this.listChargeCategoryString=op.getlistChargeCategory();
+        this.listChargeCategory=op.getChargeCategory();
+        this.listRevenueCategory = op.getRevenueCategory();
+        updateList();
+        balanceUpdate();
+    }
+    
     
     /**
      * @param args the command line arguments
@@ -96,7 +110,6 @@ public class GUIHome extends javax.swing.JFrame {
             }
         });
     }
-
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -165,6 +178,7 @@ public class GUIHome extends javax.swing.JFrame {
         catch (Exception e){
         }
         buttonSelecGraFilt = new javax.swing.JButton();
+        buttonClearFilterGraphics = new javax.swing.JButton();
         jLabel1 = new javax.swing.JLabel();
         jPanel1 = new javax.swing.JPanel();
         panelPieGraph = new javax.swing.JPanel();
@@ -378,7 +392,7 @@ public class GUIHome extends javax.swing.JFrame {
                 .addContainerGap()
                 .addGroup(panelExtractLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panelExtractLayout.createSequentialGroup()
-                        .addComponent(labelChaRev, javax.swing.GroupLayout.DEFAULT_SIZE, 703, Short.MAX_VALUE)
+                        .addComponent(labelChaRev, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addGap(10, 10, 10))
                     .addComponent(PanelFiltExtr, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addGroup(panelExtractLayout.createSequentialGroup()
@@ -447,6 +461,8 @@ public class GUIHome extends javax.swing.JFrame {
 
         buttonSelecGraFilt.setText("Filtro");
 
+        buttonClearFilterGraphics.setText("Limpar");
+
         javax.swing.GroupLayout PanelFiltExtr1Layout = new javax.swing.GroupLayout(PanelFiltExtr1);
         PanelFiltExtr1.setLayout(PanelFiltExtr1Layout);
         PanelFiltExtr1Layout.setHorizontalGroup(
@@ -464,9 +480,11 @@ public class GUIHome extends javax.swing.JFrame {
                 .addComponent(labeDateSepGraFilt)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(texDateUntilGraFilt, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 137, Short.MAX_VALUE)
                 .addComponent(buttonSelecGraFilt)
-                .addContainerGap())
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(buttonClearFilterGraphics)
+                .addGap(63, 63, 63))
         );
         PanelFiltExtr1Layout.setVerticalGroup(
             PanelFiltExtr1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -484,7 +502,8 @@ public class GUIHome extends javax.swing.JFrame {
                             .addComponent(texDateFromGraFilt, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(labeDateSepGraFilt)
                             .addComponent(texDateUntilGraFilt, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(buttonSelecGraFilt, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
+                            .addComponent(buttonSelecGraFilt, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(buttonClearFilterGraphics))))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
@@ -525,6 +544,12 @@ public class GUIHome extends javax.swing.JFrame {
                 }
             }
         });
+        buttonClearFilterGraphics.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                buildAnualChart();
+                filterGraphicsAll();
+            }
+        });
 
         jLabel1.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
         jLabel1.setText("Graficos");
@@ -544,7 +569,7 @@ public class GUIHome extends javax.swing.JFrame {
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 338, Short.MAX_VALUE)
+            .addGap(0, 342, Short.MAX_VALUE)
             .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addGroup(jPanel1Layout.createSequentialGroup()
                     .addContainerGap()
@@ -561,6 +586,17 @@ public class GUIHome extends javax.swing.JFrame {
                     .addContainerGap()))
         );
 
+        javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
+        jPanel2.setLayout(jPanel2Layout);
+        jPanel2Layout.setHorizontalGroup(
+            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 342, Short.MAX_VALUE)
+        );
+        jPanel2Layout.setVerticalGroup(
+            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 371, Short.MAX_VALUE)
+        );
+
         javax.swing.GroupLayout panelDailyGraphLayout = new javax.swing.GroupLayout(panelDailyGraph);
         panelDailyGraph.setLayout(panelDailyGraphLayout);
         panelDailyGraphLayout.setHorizontalGroup(
@@ -572,27 +608,6 @@ public class GUIHome extends javax.swing.JFrame {
             .addGap(0, 347, Short.MAX_VALUE)
         );
 
-        javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
-        jPanel2.setLayout(jPanel2Layout);
-        jPanel2Layout.setHorizontalGroup(
-            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 338, Short.MAX_VALUE)
-            .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                .addGroup(jPanel2Layout.createSequentialGroup()
-                    .addContainerGap()
-                    .addComponent(panelDailyGraph, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
-        );
-        jPanel2Layout.setVerticalGroup(
-            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 369, Short.MAX_VALUE)
-            .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                .addGroup(jPanel2Layout.createSequentialGroup()
-                    .addContainerGap()
-                    .addComponent(panelDailyGraph, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addContainerGap()))
-        );
-
         javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
         jPanel3.setLayout(jPanel3Layout);
         jPanel3Layout.setHorizontalGroup(
@@ -600,37 +615,41 @@ public class GUIHome extends javax.swing.JFrame {
             .addGroup(jPanel3Layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(PanelFiltExtr1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(PanelFiltExtr1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel1)
                     .addGroup(jPanel3Layout.createSequentialGroup()
-                        .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabel1)
-                            .addGroup(jPanel3Layout.createSequentialGroup()
-                                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(18, 18, 18)
-                                .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                        .addGap(0, 0, Short.MAX_VALUE)))
-                .addContainerGap())
+                        .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(2, 2, 2)
+                        .addComponent(panelDailyGraph, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanel3Layout.setVerticalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel3Layout.createSequentialGroup()
                 .addComponent(jLabel1)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(PanelFiltExtr1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addGroup(jPanel3Layout.createSequentialGroup()
-                        .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(0, 0, Short.MAX_VALUE)))
-                .addContainerGap())
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(PanelFiltExtr1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addGroup(jPanel3Layout.createSequentialGroup()
+                                .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(0, 0, Short.MAX_VALUE)))
+                        .addContainerGap())
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel3Layout.createSequentialGroup()
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(panelDailyGraph, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(24, 24, 24))))
         );
 
         javax.swing.GroupLayout panelReportLayout = new javax.swing.GroupLayout(panelReport);
         panelReport.setLayout(panelReportLayout);
         panelReportLayout.setHorizontalGroup(
             panelReportLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel3, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
             .addGroup(panelReportLayout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(jSeparator1, javax.swing.GroupLayout.PREFERRED_SIZE, 713, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -638,6 +657,10 @@ public class GUIHome extends javax.swing.JFrame {
             .addGroup(panelReportLayout.createSequentialGroup()
                 .addComponent(panelAnualGraph, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(0, 0, Short.MAX_VALUE))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panelReportLayout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, 714, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(155, 155, 155))
         );
         panelReportLayout.setVerticalGroup(
             panelReportLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -647,7 +670,8 @@ public class GUIHome extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jSeparator1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(panelAnualGraph, javax.swing.GroupLayout.DEFAULT_SIZE, 231, Short.MAX_VALUE))
+                .addComponent(panelAnualGraph, javax.swing.GroupLayout.PREFERRED_SIZE, 163, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(66, Short.MAX_VALUE))
         );
 
         panelInf.addTab("Graficos", panelReport);
@@ -732,7 +756,7 @@ public class GUIHome extends javax.swing.JFrame {
                     JOptionPane.showMessageDialog(null, "Campo Valor vazio");
                 }else if(addDate.getText().trim().equals("")){
                     JOptionPane.showMessageDialog(null, "Campo Data vazio");
-                }else{
+                }else{/*
                     if(radioButtonCharge.isSelected() == true){
                         int confirmBox = JOptionPane.showConfirmDialog(null, "salvar DESPESA",null,OK_CANCEL_OPTION);
                         if(confirmBox == JOptionPane.OK_OPTION){
@@ -745,16 +769,16 @@ public class GUIHome extends javax.swing.JFrame {
                         }
                     }else{
                         JOptionPane.showMessageDialog(null, "Seleciona o tipo de transação");
-                    }
+                    }*/
+                    addButton();
                 }
             }
         });
         radioButtonCharge.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 selectCategory.removeAllItems();
-                List<String> list = getlistChargeCategory();
-                for(int i=0;i<list.size();i++){
-                    selectCategory.addItem(list.get(i));
+                for(int i=0;i<listChargeCategoryString.size();i++){
+                    selectCategory.addItem(listChargeCategoryString.get(i));
                 }
                 selectCategory.setEnabled(true);
             }
@@ -762,9 +786,8 @@ public class GUIHome extends javax.swing.JFrame {
         radioButtonRevenue.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 selectCategory.removeAllItems();
-                List<String> list = getlistRevenueCategory();
-                for(int i=0;i<list.size();i++){
-                    selectCategory.addItem(list.get(i));
+                for(int i=0;i<listRevenueCategoryString.size();i++){
+                    selectCategory.addItem(listRevenueCategoryString.get(i));
                 }
 
                 selectCategory.setEnabled(true);
@@ -790,8 +813,8 @@ public class GUIHome extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jSeparator2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(panelInf)
-                .addContainerGap())
+                .addComponent(panelInf, javax.swing.GroupLayout.PREFERRED_SIZE, 700, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(12, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -822,35 +845,15 @@ public class GUIHome extends javax.swing.JFrame {
     }//GEN-LAST:event_addValueActionPerformed
     
     /**
-     * Adicionar nova Receita
+     * Adicionar transaçao
      */
-    private void buttonConfirmAddRev(){
-        id += 1;
-        double value = Double.parseDouble(addValue.getText());
-        Date date = formatDate();
-        RevenueCategory category = listRevenueCategory.get(selectCategory.getSelectedIndex());
-        Revenue revenue = new Revenue(id,value,addTitle.getText(),date,category);
-        user.add_revenue(revenue);
-        balanceUpdate();
-        updateList();
-        addValue.setText(null);
-        addDate.setText(null);
-        addTitle.setText(null);
-        selectCategory.removeAllItems();
-        selectCategory.setEnabled(false);
-        buttonGroupAdd.clearSelection();
-    }
-    
-    /**
-     * Adicionar nova Despesa
-     */
-    private void buttonConfirmAddChar(){
-        id += 1;
-        double value = Double.parseDouble(addValue.getText());
-        Date date = formatDate();
-        ChargeCategory category = listChargeCategory.get(selectCategory.getSelectedIndex());
-        Charge charge = new Charge(id,value, addTitle.getText(),date , category);
-        user.add_charge(charge);
+    private void addButton(){
+        if(radioButtonCharge.isSelected()==true){
+            user.add_charge(new Charge(user.get_last_id(), Double.parseDouble(addValue.getText()), addTitle.getText(), formatDate(addDate.getText()), listChargeCategory.get(selectCategory.getSelectedIndex())));
+        }
+        else{
+             user.add_revenue(new Revenue(user.get_last_id(), Double.parseDouble(addValue.getText()), addTitle.getText(), formatDate(addDate.getText()), listRevenueCategory.get(selectCategory.getSelectedIndex())));
+        }
         balanceUpdate();
         updateList();
         addValue.setText(null);
@@ -887,9 +890,10 @@ public class GUIHome extends javax.swing.JFrame {
      * 
      * @return Date
      */
-    public Date formatDate(){
-        DateFormat format = DateFormat.getDateInstance();
-        String textDate = addDate.getText();
+    public Date formatDate(String dateString){
+ 
+        SimpleDateFormat format = new SimpleDateFormat("dd/MM/yyyy");
+        String textDate = dateString;
         Date date = null ;
         try {  
             date = format.parse(textDate);
@@ -920,7 +924,7 @@ public class GUIHome extends javax.swing.JFrame {
         Revenue revenue;
         Charge charge;
         listChargeCategory = new ArrayList();    
-        listChargeCategory.add(new ChargeCategory(1,"Supermecado"));
+        listChargeCategory.add(new ChargeCategory(1,"Supermercado"));
         listChargeCategory.add(new ChargeCategory(2,"Aluguel"));
         listChargeCategory.add(new ChargeCategory(3,"Luz"));
         listChargeCategory.add(new ChargeCategory(4,"Água"));
@@ -934,6 +938,9 @@ public class GUIHome extends javax.swing.JFrame {
         listRevenueCategory.add(new RevenueCategory(9,"Bolsa"));
         listRevenueCategory.add(new RevenueCategory(10,"Freelance"));
         listRevenueCategory.add(new RevenueCategory(11,"Outros"));
+        
+        this.listRevenueCategoryString=getlistRevenueCategory();
+        this.listChargeCategoryString=getlistChargeCategory();
     }
     
     /**
@@ -990,7 +997,7 @@ public class GUIHome extends javax.swing.JFrame {
             String textDatefrom = texDateFromExtFilt.getText();
             String textDateUntil = texDateUntilExtFilt.getText();
             try {
-                DateFormat format = DateFormat.getDateInstance();
+                SimpleDateFormat format = new SimpleDateFormat("dd/MM/yyyy");
                 Date datefrom;
                 datefrom = format.parse(textDatefrom);
                 Date dateUntil;
@@ -998,16 +1005,16 @@ public class GUIHome extends javax.swing.JFrame {
             } catch (ParseException ex) {
                 JOptionPane.showMessageDialog(null,"Informe a data corretamente!");
             }
-            //
+         
             List<Operation> listFiltred = user.getFiltredList(textDatefrom, textDateUntil, false, true);
             String[] add = new String[4];
-            Charge op;
+            Charge operation;
             limparTabela();
             for(int index=0; index<listFiltred.size();index++){
-                op = (Charge) listFiltred.get(index);
+                operation = (Charge) listFiltred.get(index);
                 add[0]=listFiltred.get(index).getTitle();
-                System.out.print(op.getCategory().getName());
-                add[1]=op.getCategory().getName();
+                System.out.print(operation.getCategory().getName());
+                add[1]=operation.getCategory().getName();
                 String dateString = formatDate(listFiltred.get(index).getDatetime());
                 add[2] = dateString;
                 add[3]=String.valueOf(listFiltred.get(index).getValue());
@@ -1027,7 +1034,7 @@ public class GUIHome extends javax.swing.JFrame {
     public void filterExtractCharge() throws ParseException{
         List<Operation> listFiltred = user.getFiltredList("01/01/1900", "01/01/2999", false, true);
         String[] add = new String[4];
-        Charge op;
+        Charge operation;
         limparTabela();
         add(listFiltred,add);
         buttonGroupFiltExt.clearSelection();
@@ -1054,7 +1061,7 @@ public class GUIHome extends javax.swing.JFrame {
         if(date.getYear()>=100)year = String.valueOf((date.getYear())-100);
         else year = String.valueOf(date.getYear());
         
-        if(date.getDate()<10)day = "0"+String.valueOf(date.getDate()-1);
+        if(date.getDate()<10)day = "0"+String.valueOf(date.getDate());
         else day = String.valueOf(date.getDate());
         
         if(date.getMonth()<9)month = "0"+String.valueOf(date.getMonth()+1);
@@ -1077,7 +1084,7 @@ public class GUIHome extends javax.swing.JFrame {
             String textDateUntil = texDateUntilExtFilt.getText();
             List<Operation> listFiltred = user.getFiltredList(textDatefrom, textDateUntil, true, false);
             String[] add = new String[4];
-            Charge op;
+            Charge operation;
             limparTabela();
             add(listFiltred,add);
             buttonGroupFiltExt.clearSelection();
@@ -1091,11 +1098,11 @@ public class GUIHome extends javax.swing.JFrame {
         for(int index=0; index<listFiltred.size();index++){
             System.out.print(user.get_operation_by_id(listFiltred.get(index).getId()).getType());
         if(listFiltred.get(index).getType()==1){
-                Revenue op = (Revenue) listFiltred.get(index);
-                add[1]=op.getCategory().getName();}
+                Revenue operation = (Revenue) listFiltred.get(index);
+                add[1]=operation.getCategory().getName();}
         else{
-            Charge op=(Charge) listFiltred.get(index);
-                add[1]=op.getCategory().getName();}
+            Charge operation=(Charge) listFiltred.get(index);
+                add[1]=operation.getCategory().getName();}
                 add[0]=listFiltred.get(index).getTitle();
                 String dateString = formatDate(listFiltred.get(index).getDatetime());
                 add[2] = dateString;
@@ -1110,7 +1117,7 @@ public class GUIHome extends javax.swing.JFrame {
         //
         List<Operation> listFiltred = user.getFiltredList("01/01/1900", "01/01/2999", true, false);
         String[] add = new String[4];
-        Revenue op; 
+        Revenue operation; 
         limparTabela();
         add(listFiltred,add);
         buttonGroupFiltExt.clearSelection();
@@ -1149,13 +1156,13 @@ public class GUIHome extends javax.swing.JFrame {
         }else{
             limparTabela();
             try {
-                DateFormat format = DateFormat.getDateInstance();
+//                SimpleDateFormat format = new SimpleDateFormat("dd/MM/yyyy");
                 String textDatefrom = texDateFromGraFilt.getText();
-                Date datefrom;
-                datefrom = format.parse(textDatefrom);
+//                Date datefrom;
+//                datefrom = format.parse(textDatefrom);
                 String textDateUntil = texDateUntilGraFilt.getText();
-                Date dateUntil;
-                dateUntil = format.parse(textDateUntil);
+//                Date dateUntil;
+//                dateUntil = format.parse(textDateUntil);
                 double[] data=user.return_pizza_data(textDatefrom, textDateUntil, false, true);
                 double[][] daydata=user.return_day_data(textDatefrom, textDateUntil, false, true);
                 buildDailyChart(daydata);
@@ -1212,13 +1219,13 @@ public class GUIHome extends javax.swing.JFrame {
             JOptionPane.showMessageDialog(null, "Preencha o campo de data!");
         }else{
             try {
-                DateFormat format = DateFormat.getDateInstance();
+//                SimpleDateFormat format = new SimpleDateFormat("dd/MM/yyyy");
                 String textDatefrom = texDateFromGraFilt.getText();
-                Date datefrom;
-                datefrom = format.parse(textDatefrom);
+//                Date datefrom;
+//                datefrom = format.parse(textDatefrom);
                 String textDateUntil = texDateUntilGraFilt.getText();
-                Date dateUntil;
-                dateUntil = format.parse(textDateUntil);
+//                Date dateUntil;
+//                dateUntil = format.parse(textDateUntil);
                 double[] data=user.return_pizza_data(textDatefrom, textDateUntil, true, false);
                 buildPieChart(data);
                 double daydata[][]= user.return_day_data(textDatefrom, textDateUntil, true, false);
@@ -1259,13 +1266,13 @@ public class GUIHome extends javax.swing.JFrame {
             JOptionPane.showMessageDialog(null, "Preencha o campo de data!");
         }else{
             try {
-                DateFormat format = DateFormat.getDateInstance();
+//                SimpleDateFormat format = new SimpleDateFormat("dd/MM/yyyy");
                 String textDatefrom = texDateFromGraFilt.getText();
-                Date datefrom;
-                datefrom = format.parse(textDatefrom);
+//                Date datefrom;
+//                datefrom = format.parse(textDatefrom);
                 String textDateUntil = texDateUntilGraFilt.getText();
-                Date dateUntil;
-                dateUntil = format.parse(textDateUntil);
+//                Date dateUntil;
+//                dateUntil = format.parse(textDateUntil);
                 double[] data=user.return_pizza_data(textDatefrom, textDateUntil, true, true);
                 double[][] daydata=user.return_day_data(textDatefrom, textDateUntil, true, true);
                 buildPieChart(data);
@@ -1416,8 +1423,11 @@ public class GUIHome extends javax.swing.JFrame {
     
     private DefaultListModel listModel;
     private User user;
+    private OperationsApp op;
     private double balance;
     int id;
+    List<String>listRevenueCategoryString;
+    List<String>listChargeCategoryString;
     List<RevenueCategory> listRevenueCategory;
     List<ChargeCategory> listChargeCategory;
     // Variables declaration - do not modify//GEN-BEGIN:variables
@@ -1429,6 +1439,7 @@ public class GUIHome extends javax.swing.JFrame {
     private javax.swing.JTextField addValue;
     private javax.swing.JButton buttonAdd;
     private javax.swing.JButton buttonClearFilter;
+    private javax.swing.JButton buttonClearFilterGraphics;
     private javax.swing.JButton buttonExp;
     private javax.swing.ButtonGroup buttonGroupAdd;
     private javax.swing.ButtonGroup buttonGroupFiltExt;
