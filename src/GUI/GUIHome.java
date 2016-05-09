@@ -362,6 +362,14 @@ public class GUIHome extends javax.swing.JFrame {
                 return canEdit [columnIndex];
             }
         });
+        tableExtract.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                tableExtractMouseClicked(evt);
+            }
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                tableExtractMouseEntered(evt);
+            }
+        });
         jScrollPane1.setViewportView(tableExtract);
         tableExtract.getColumnModel().getColumn(0).setPreferredWidth(200);
         tableExtract.getColumnModel().getColumn(1).setPreferredWidth(200);
@@ -654,13 +662,13 @@ public class GUIHome extends javax.swing.JFrame {
                 .addContainerGap()
                 .addComponent(jSeparator1, javax.swing.GroupLayout.PREFERRED_SIZE, 713, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-            .addGroup(panelReportLayout.createSequentialGroup()
-                .addComponent(panelAnualGraph, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 0, Short.MAX_VALUE))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panelReportLayout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, 714, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(155, 155, 155))
+            .addGroup(panelReportLayout.createSequentialGroup()
+                .addComponent(panelAnualGraph, javax.swing.GroupLayout.PREFERRED_SIZE, 690, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 0, Short.MAX_VALUE))
         );
         panelReportLayout.setVerticalGroup(
             panelReportLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -670,8 +678,8 @@ public class GUIHome extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jSeparator1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(panelAnualGraph, javax.swing.GroupLayout.PREFERRED_SIZE, 163, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(66, Short.MAX_VALUE))
+                .addComponent(panelAnualGraph, javax.swing.GroupLayout.PREFERRED_SIZE, 144, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(85, Short.MAX_VALUE))
         );
 
         panelInf.addTab("Graficos", panelReport);
@@ -832,7 +840,7 @@ public class GUIHome extends javax.swing.JFrame {
 
         buttonExp.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                JOptionPane.showMessageDialog(null, "Arquivo salvo em: ");
+                JOptionPane.showMessageDialog(null, "Arquivo exportado para o diretório do programa.");
             }
         });
 
@@ -916,6 +924,19 @@ public class GUIHome extends javax.swing.JFrame {
     private void panelPieGraphMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_panelPieGraphMouseClicked
         // TODO add your handling code here:
     }//GEN-LAST:event_panelPieGraphMouseClicked
+
+    private void tableExtractMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tableExtractMouseEntered
+        // TODO add your handling code here:
+        
+            user.del_operation_by_id(tableExtract.getSelectedRow());
+            updateList();
+    }//GEN-LAST:event_tableExtractMouseEntered
+
+    private void tableExtractMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tableExtractMouseClicked
+        // TODO add your handling code here:
+            user.del_operation_by_id(tableExtract.getSelectedRow());
+            updateList();
+    }//GEN-LAST:event_tableExtractMouseClicked
 
     /**
      * Definição das categorias
