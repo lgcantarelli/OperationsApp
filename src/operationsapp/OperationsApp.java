@@ -5,6 +5,7 @@
  */
 package operationsapp;
 
+import GUIv2.GUI;
 import GUI.GUIHome;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -122,7 +123,10 @@ public class OperationsApp {
      //   List<String>getlistChargeCategory =op.getlistChargeCategory();
                 
      //   GUIHome gui = new GUIHome(user,op.getlistChargeCategory(),op.getlistRevenueCategory());
-        GUIHome gui = new GUIHome(user,op);
+     //   GUIHome gui = new GUIHome(user,op);
+     //   gui.setVisible(true);
+        
+        GUI gui = new GUI(user,op);
         gui.setVisible(true);
     }
     
