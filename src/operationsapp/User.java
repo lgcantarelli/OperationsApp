@@ -207,7 +207,7 @@ public class User {
         Charge charge=new Charge(last_id,value,description,datetime,category);
         add_charge(charge);
     }
-    
+
     /**
      * Return the csv file to the user.
      * @return file, a file to be handled by the GUI.
@@ -546,7 +546,7 @@ public class User {
             date  = formatter.parse(from);
         }
         if(to.length()>0){
-            date1 = formatter.parse(to);
+            date1 = formatter.parse(to+1);
         }
         
         for(int i = 0; i < operations.size();i++){
@@ -556,4 +556,5 @@ public class User {
             }
         return list;
      }
+   
 }

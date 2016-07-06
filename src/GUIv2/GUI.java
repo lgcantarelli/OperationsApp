@@ -67,10 +67,11 @@ public class GUI extends javax.swing.JFrame {
         panelShowSelect = new javax.swing.JPanel();
         panelInformationsSelected = new javax.swing.JPanel();
         textTitleEdit = new javax.swing.JTextField();
-        boxOperationsEdit = new javax.swing.JComboBox<>();
         boxCategoryEdit = new javax.swing.JComboBox<>();
         textDateEdit = new javax.swing.JTextField();
         textValueEdit = new javax.swing.JTextField();
+        jRadioButtonCharge = new javax.swing.JRadioButton();
+        jRadioButtonRevenue = new javax.swing.JRadioButton();
         panelButtonSelected = new javax.swing.JPanel();
         buttonSaveEdit = new javax.swing.JButton();
         buttonCancelEdit = new javax.swing.JButton();
@@ -82,6 +83,7 @@ public class GUI extends javax.swing.JFrame {
         textMembers = new javax.swing.JTextArea();
         panelButtonOkInformationSystem = new javax.swing.JPanel();
         buttonOkInformationSystem = new javax.swing.JButton();
+        buttonGroupEdit = new javax.swing.ButtonGroup();
         panelAdd = new javax.swing.JPanel();
         labelTitle = new javax.swing.JLabel();
         textAddTitle = new javax.swing.JTextField();
@@ -151,13 +153,32 @@ public class GUI extends javax.swing.JFrame {
 
         textTitleEdit.setText("jTextField1");
 
-        boxOperationsEdit.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
-
         boxCategoryEdit.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        boxCategoryEdit.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                boxCategoryEditActionPerformed(evt);
+            }
+        });
 
         textDateEdit.setText("jTextField1");
+        textDateEdit.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                textDateEditActionPerformed(evt);
+            }
+        });
 
         textValueEdit.setText("jTextField1");
+
+        buttonGroupEdit.add(jRadioButtonCharge);
+        jRadioButtonCharge.setText("Despesa");
+        jRadioButtonCharge.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jRadioButtonChargeActionPerformed(evt);
+            }
+        });
+
+        buttonGroupEdit.add(jRadioButtonRevenue);
+        jRadioButtonRevenue.setText("Receita");
 
         javax.swing.GroupLayout panelInformationsSelectedLayout = new javax.swing.GroupLayout(panelInformationsSelected);
         panelInformationsSelected.setLayout(panelInformationsSelectedLayout);
@@ -165,17 +186,19 @@ public class GUI extends javax.swing.JFrame {
             panelInformationsSelectedLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(panelInformationsSelectedLayout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(panelInformationsSelectedLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                .addGroup(panelInformationsSelectedLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(textTitleEdit)
-                    .addGroup(panelInformationsSelectedLayout.createSequentialGroup()
-                        .addGroup(panelInformationsSelectedLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                            .addComponent(textDateEdit, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 108, Short.MAX_VALUE)
-                            .addComponent(boxOperationsEdit, javax.swing.GroupLayout.Alignment.LEADING, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panelInformationsSelectedLayout.createSequentialGroup()
+                        .addComponent(jRadioButtonCharge)
+                        .addGap(18, 18, 18)
+                        .addComponent(jRadioButtonRevenue)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 18, Short.MAX_VALUE)
+                        .addComponent(boxCategoryEdit, javax.swing.GroupLayout.PREFERRED_SIZE, 155, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panelInformationsSelectedLayout.createSequentialGroup()
+                        .addComponent(textDateEdit)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addGroup(panelInformationsSelectedLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(textValueEdit, javax.swing.GroupLayout.DEFAULT_SIZE, 155, Short.MAX_VALUE)
-                            .addComponent(boxCategoryEdit, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addComponent(textValueEdit, javax.swing.GroupLayout.PREFERRED_SIZE, 155, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap())
         );
         panelInformationsSelectedLayout.setVerticalGroup(
             panelInformationsSelectedLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -184,14 +207,34 @@ public class GUI extends javax.swing.JFrame {
                 .addComponent(textTitleEdit, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(panelInformationsSelectedLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(boxOperationsEdit, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(boxCategoryEdit, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(boxCategoryEdit, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jRadioButtonCharge)
+                    .addComponent(jRadioButtonRevenue))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(panelInformationsSelectedLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(textDateEdit, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(textValueEdit, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
+
+        jRadioButtonCharge.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                boxCategoryEdit.removeAllItems();
+                for(int i=0;i<listChargeCategory.size();i++){
+                    boxCategoryEdit.addItem(listChargeCategory.get(i).getName());
+                }
+                boxCategoryEdit.setEnabled(true);
+            }
+        });
+        jRadioButtonRevenue.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                boxCategoryEdit.removeAllItems();
+                for(int i=0;i<listRevenueCategory.size();i++){
+                    boxCategoryEdit.addItem(listRevenueCategory.get(i).getName());
+                }
+                boxCategoryEdit.setEnabled(true);
+            }
+        });
 
         buttonSaveEdit.setText("Salvar");
 
@@ -206,7 +249,7 @@ public class GUI extends javax.swing.JFrame {
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panelButtonSelectedLayout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(buttonRemoveSelectedIten)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 50, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(buttonCancelEdit)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(buttonSaveEdit)
@@ -225,6 +268,11 @@ public class GUI extends javax.swing.JFrame {
 
         buttonSaveEdit.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
+                DateOperations dto = new DateOperations();
+                user.edit_operation(reservInt, Double.parseDouble(textValueEdit.getText()), textTitleEdit.getText(), dto.formatDate(textDateEdit.getText()),listRevenueCategory.get(boxCategoryEdit.getSelectedIndex()),listChargeCategory.get(boxCategoryEdit.getSelectedIndex()));
+                dialogSelectRow.setVisible(false);
+                update();
+                tableExtract.clearSelection();
             }
         });
         buttonCancelEdit.addActionListener(new java.awt.event.ActionListener() {
@@ -255,32 +303,31 @@ public class GUI extends javax.swing.JFrame {
         panelShowSelectLayout.setVerticalGroup(
             panelShowSelectLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(panelShowSelectLayout.createSequentialGroup()
-                .addContainerGap()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(panelInformationsSelected, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(panelButtonSelected, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addComponent(panelButtonSelected, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
 
         javax.swing.GroupLayout dialogSelectRowLayout = new javax.swing.GroupLayout(dialogSelectRow.getContentPane());
         dialogSelectRow.getContentPane().setLayout(dialogSelectRowLayout);
         dialogSelectRowLayout.setHorizontalGroup(
             dialogSelectRowLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 309, Short.MAX_VALUE)
+            .addGap(0, 379, Short.MAX_VALUE)
             .addGroup(dialogSelectRowLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addGroup(dialogSelectRowLayout.createSequentialGroup()
-                    .addGap(0, 0, Short.MAX_VALUE)
-                    .addComponent(panelShowSelect, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addGap(0, 0, Short.MAX_VALUE)))
+                    .addContainerGap()
+                    .addComponent(panelShowSelect, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addContainerGap()))
         );
         dialogSelectRowLayout.setVerticalGroup(
             dialogSelectRowLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 167, Short.MAX_VALUE)
+            .addGap(0, 178, Short.MAX_VALUE)
             .addGroup(dialogSelectRowLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addGroup(dialogSelectRowLayout.createSequentialGroup()
-                    .addGap(0, 0, Short.MAX_VALUE)
+                    .addContainerGap()
                     .addComponent(panelShowSelect, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addGap(0, 0, Short.MAX_VALUE)))
+                    .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
         );
 
         dialogAbout.setResizable(false);
@@ -978,18 +1025,66 @@ public class GUI extends javax.swing.JFrame {
         MouseEvent m = (MouseEvent) evt;
             if (m.getClickCount() >= 2) {
                 int selectRow = tableExtract.getSelectedRow();
-                textTitleEdit.setText(tableExtract.getValueAt(selectRow, 0).toString());
+                
+                textTitleEdit.setText(user.get_operation(selectRow).getTitle());
                 textDateEdit.setText(tableExtract.getValueAt(selectRow, 2).toString());
                 textValueEdit.setText(tableExtract.getValueAt(selectRow, 3).toString());
+                this.reservInt=user.get_operation(selectRow).getId();                
+                boxCategoryEdit.removeAllItems();
+                if (user.get_operation(selectRow).getType() == 1){
+                    jRadioButtonRevenue.setSelected(true);                    
+                    for(int i=0;i<listRevenueCategory.size();i++){
+                        boxCategoryEdit.addItem(listRevenueCategory.get(i).getName());
+                    }
+                    Revenue r = (Revenue) user.get_operation(selectRow);
+                    boxCategoryEdit.setSelectedIndex(positionBox(r.getCategory().getId()));
+                }
+                else{
+                    jRadioButtonCharge.setSelected(true);
+                    for(int i=0;i<listChargeCategory.size();i++){
+                        boxCategoryEdit.addItem(listChargeCategory.get(i).getName());
+                    }
+                    Charge c = (Charge) user.get_operation(selectRow);
+                    boxCategoryEdit.setSelectedIndex(positionBox(c.getCategory().getId()));
+                }
                 dialogSelectRow.setLocationRelativeTo(null);  
                 dialogSelectRow.setSize(dialogSelectRow.getPreferredSize());
                 dialogSelectRow.setVisible(true);
             }
     }//GEN-LAST:event_tableExtractMouseClicked
-
+    
+    public int positionBox(int id){
+        int position = 0;
+        if(id==1){position = 0;}
+        if(id==2){position = 1;}
+        if(id==3){position = 2;}
+        if(id==4){position = 3;}
+        if(id==5){position = 4;}
+        if(id==6){position = 5;}
+        if(id==7){position = 6;}
+        if(id==8){position = 0;}
+        if(id==9){position = 1;}
+        if(id==10){position = 2;}
+        if(id==11){position = 3;}
+        if(id==12){position = 7;}
+        return position;
+    }
+    
     private void formComponentResized(java.awt.event.ComponentEvent evt) {//GEN-FIRST:event_formComponentResized
-     //   update();
+        update();
     }//GEN-LAST:event_formComponentResized
+
+    private void textDateEditActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_textDateEditActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_textDateEditActionPerformed
+
+    private void boxCategoryEditActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_boxCategoryEditActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_boxCategoryEditActionPerformed
+
+    private void jRadioButtonChargeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jRadioButtonChargeActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jRadioButtonChargeActionPerformed
 
     /**
      * @param args the command line arguments
@@ -1030,10 +1125,10 @@ public class GUI extends javax.swing.JFrame {
     private javax.swing.JComboBox<String> boxAddCategory;
     private javax.swing.JComboBox<String> boxCategoryEdit;
     private javax.swing.JComboBox<String> boxFilterOperation;
-    private javax.swing.JComboBox<String> boxOperationsEdit;
     private javax.swing.JButton buttonAdd;
     private javax.swing.JButton buttonCancelEdit;
     private javax.swing.JButton buttonClearFilter;
+    private javax.swing.ButtonGroup buttonGroupEdit;
     private javax.swing.JMenuItem buttonMenuAbout;
     private javax.swing.JMenuItem buttonMenuOpenFile;
     private javax.swing.JMenuItem buttonMenuSaveAs;
@@ -1046,6 +1141,8 @@ public class GUI extends javax.swing.JFrame {
     private javax.swing.JCheckBox checkBoxFilterOperation;
     private javax.swing.JDialog dialogAbout;
     private javax.swing.JDialog dialogSelectRow;
+    private javax.swing.JRadioButton jRadioButtonCharge;
+    private javax.swing.JRadioButton jRadioButtonRevenue;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JScrollPane jScrollPane3;
     private javax.swing.JLabel labelBalance;
@@ -1099,6 +1196,7 @@ public class GUI extends javax.swing.JFrame {
     GUIGraphicsMethods graphics;
     List<RevenueCategory> listRevenueCategory;
     List<ChargeCategory> listChargeCategory;
+    int reservInt;
     
     private void addButton(){
         DateOperations dto = new DateOperations();

@@ -7,6 +7,7 @@ package GUIv2;
 
 import GUI.*;
 import java.awt.BorderLayout;
+import java.awt.Color;
 import java.awt.Dimension;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -20,6 +21,8 @@ import org.jfree.chart.ChartFactory;
 import org.jfree.chart.ChartFrame;
 import org.jfree.chart.JFreeChart;
 import org.jfree.chart.plot.PlotOrientation;
+import org.jfree.chart.plot.CategoryPlot;
+import org.jfree.chart.renderer.category.LineAndShapeRenderer;
 import org.jfree.data.category.DefaultCategoryDataset;
 import org.jfree.data.general.DefaultPieDataset;
 
@@ -91,8 +94,15 @@ public class GUIGraphicsMethods {
             true, // tooltips?
             false // URLs?
         );
-
         ChartFrame frame = new ChartFrame("My chart", chart);
+        
+        CategoryPlot plot = chart.getCategoryPlot();
+        LineAndShapeRenderer renderer = new LineAndShapeRenderer();
+        renderer.setSeriesPaint(0, Color.green);
+        renderer.setSeriesPaint(1, Color.red);
+        renderer.setSeriesPaint(2, Color.blue);
+        plot.setRenderer(renderer);
+        
         frame.pack();
         frame.setSize(panel.getSize());
         panel.removeAll();
@@ -134,10 +144,10 @@ public class GUIGraphicsMethods {
             dataset.setValue("Freelance",data[10]);
         }
         if(data[11]!=0){
-            dataset.setValue("Outro",data[11]);
+            dataset.setValue("Outra Despesa",data[11]);
         }
         if(data[12]!=0){
-            dataset.setValue("Outro",data[12]);
+            dataset.setValue("Outra Receita",data[12]);
         }
     
         JFreeChart chart = ChartFactory.createPieChart(

@@ -28,12 +28,12 @@ public class OperationsApp {
         chargeCategories.add(new ChargeCategory(5,"Telefone"));
         chargeCategories.add(new ChargeCategory(6,"Internet"));
         chargeCategories.add(new ChargeCategory(7,"Celular"));
-        chargeCategories.add(new ChargeCategory(12,"Outros"));
+        chargeCategories.add(new ChargeCategory(12,"Outra Despesa"));
         
         revenueCategories.add(new RevenueCategory(8,"Salário"));
         revenueCategories.add(new RevenueCategory(9,"Bolsa"));
         revenueCategories.add(new RevenueCategory(10,"Freelance"));
-        revenueCategories.add(new RevenueCategory(11,"Outros"));
+        revenueCategories.add(new RevenueCategory(11,"Outra Receita"));
     }
     
     public static ChargeCategory getChargeCategory(int id){

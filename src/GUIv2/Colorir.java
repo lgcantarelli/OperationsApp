@@ -20,12 +20,12 @@ class Colorir extends JLabel implements	TableCellRenderer{
                 category.equals("Telefone")||
                 category.equals("Internet")||
                 category.equals("Celular")||
-                category.equals("Outro")) 
+                category.equals("Outra Despesa")) 
             setForeground(Color.RED);
          else if(category.equals("Bolsa")||
                 category.equals("Freelance")||
                 category.equals("Salário")||
-                category.equals("Outros")) {
+                category.equals("Outra Receita")) {
             setForeground(Color.GREEN);		
         }//table.
         setText(value.toString());
